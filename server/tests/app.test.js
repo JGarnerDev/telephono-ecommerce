@@ -3,7 +3,7 @@ var request = require("supertest");
 var mongoose = require("mongoose");
 var mongoDB = "mongodb://127.0.0.1/test_db";
 
-mongoose.connect(mongoDB);
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 describe("App test", () => {
   describe("Sanity Tests", () => {
@@ -30,6 +30,7 @@ describe("App test", () => {
       done();
     });
   });
+
   // Testing of 'sitename.com/products' endpoint and all endpoints that are extensions thereafter
   describe("Product routes", () => {
     it(" '/products' responds with code 200 (OK) ", async (done) => {
