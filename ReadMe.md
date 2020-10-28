@@ -18,6 +18,8 @@ Phones are a ubiquitous and visually interesting product, so I will pick them as
 
 - Construct a React client that will provide an interface for users to sign up, log in, view products, and purchase products through our API. This will be a good opportunity to practice React Hooks.
 
+- Once a first version is completed, add to the primary features
+
 ## Primary features
 
 As a user, I would like to...
@@ -36,6 +38,8 @@ As a user, I would like to...
 ## Testing
 
 In general, I will use the Jest library for testing, with Sinon brought in for mocking and observing data.
+
+Furthermore, the structure of things leans towards a preference of unit over intergration testing. Each test file will have an introductory commentary to state exactly what is being tested, and the sum of all these commentaries hopefully will describe the breadth of the app's functionality (i.e. that this entire application will have all its faculties tested to an extent).
 
 **Tests in the server directory will assume that you have MongoDB Database Server locally installed!**
 
