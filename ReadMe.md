@@ -31,6 +31,24 @@ As a user, I would like to...
   - be alerted of new inventory
   - can confirm the details of my purchase once made
 
+## Testing
+
+In general, I will use the Jest library for testing, with Sinon brought in for mocking and observing data.
+
+### Testing Commands
+
+Test packages are separated between server and client. To run all tests pertaining to the back end or the front end, first use the console to change directories...
+
+> cd ./server
+
+or
+
+> cd ./client
+
+Then run this command
+
+> npm test
+
 ## Todo List
 
 1. Setting up the server
