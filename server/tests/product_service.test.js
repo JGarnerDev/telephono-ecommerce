@@ -12,7 +12,7 @@ describe("Product service", () => {
         find: sinon.spy(),
       };
       const productService = ProductService(mockProductModel);
-      productService.listUsers();
+      productService.listProducts();
       const functionWasCalledOnce = mockProductModel.find.calledOnce;
       expect(functionWasCalledOnce).toBeTruthy();
     });

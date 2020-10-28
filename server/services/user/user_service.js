@@ -1,5 +1,7 @@
+const { isNameValid } = require("../../utils");
+
 const createUser = (User) => (name) => {
-  if (!name) {
+  if (!isNameValid(name)) {
     throw new Error(`Name: ${name}`);
   }
   const user = new User({ name });

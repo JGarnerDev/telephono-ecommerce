@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "test:app": "jest --watch app",
+    "test:utils": "jest --watch utils",
     "test:user_model": "jest --watch user_model",
     "test:user_service": "jest --watch user_service",
     "test:product_model": "jest --watch product_model",
@@ -15,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.10.11",
