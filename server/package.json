@@ -8,6 +8,8 @@
     "test:server": "jest --watch app",
     "test:user_model": "jest --watch user_model",
     "test:user_service": "jest --watch user_service",
+    "test:product_model": "jest --watch product_model",
+    "test:product_service": "jest --watch product_service",
     "start": "nodemon server.js"
   },
   "author": "",
