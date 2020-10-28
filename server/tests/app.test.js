@@ -3,6 +3,8 @@ var request = require("supertest");
 var mongoose = require("mongoose");
 var mongoDB = "mongodb://127.0.0.1/test_db";
 
+mongoose.connect(mongoDB);
+
 describe("App test", () => {
   describe("Sanity Tests", () => {
     it("has a module", () => {
@@ -17,19 +19,22 @@ describe("App test", () => {
   });
 
   afterAll((done) => {
+    mongoose.connection.close();
     server.close(done);
   });
 
+  // Testing of 'sitename.com/users' endpoint and all endpoints that are extensions thereafter
   describe("User routes", () => {
-    it("brings a single user by querying id", async () => {
-      const id = Math.random();
-      await request(server).get(`/users/${id}`).expect(200);
+    it(" '/users' responds with code 200 (OK) ", async (done) => {
+      await request(server).get(`/users`).expect(200);
+      done();
     });
   });
+  // Testing of 'sitename.com/products' endpoint and all endpoints that are extensions thereafter
   describe("Product routes", () => {
-    it("brings a single user by querying id", async () => {
-      const id = Math.random();
-      await request(server).get(`/products/${id}`).expect(200);
+    it(" '/products' responds with code 200 (OK) ", async (done) => {
+      await request(server).get(`/products`).expect(200);
+      done();
     });
   });
 });
