@@ -6,13 +6,15 @@ An original app, a popular concept. HUA!
 
 To show how far along I've come with learning, it's time to create a complete e-commerce project with the MERN stack. Mongo, Express, React, and Node are all familiar territory for me, so the challenges with pulling it all together will be refreshing feather in my cap.
 
+I firmly beleive that test-driven development - while not always a viable option for companies - is a great means for ensuring a stable product. It's in my interest as a developer to implement it, despite it being time consuming. It will be used during this project for both the Node and Express server, as well as the React front end.
+
 Phones are a ubiquitous and visually interesting product, so I will pick them as a subject matter.
 
 ## Objectives
 
 - Implement TDD with Jest and Jest-Enzyme to ensure a solid codebase with broad test coverage.
 
-- Construct an API using Node and Express that will handle CRUD operations for users and products with our MongoDB database. User validation will be done with JSON Web Tokens.
+- Construct an API using Node and Express that will handle CRUD operations for users and products with our MongoDB database. Use Mongoose for Schematization. User validation will be done with JSON Web Tokens.
 
 - Construct a React client that will provide an interface for users to sign up, log in, view products, and purchase products through our API. This will be a good opportunity to practice React Hooks.
 
@@ -35,6 +37,8 @@ As a user, I would like to...
 
 In general, I will use the Jest library for testing, with Sinon brought in for mocking and observing data.
 
+**Tests in the server directory will assume that you have MongoDB Database Server locally installed!**
+
 ### Testing Commands
 
 Test packages are separated between server and client. To run all tests pertaining to the back end or the front end, first use the console to change directories...
@@ -49,6 +53,17 @@ Then run this command
 
 > npm test
 
+For easier development, I've made custom commands to initiate Jest in watch mode for particular modules. You can see them made explicitly in the package.json of either client or server directory, and here's an example of the format:
+
+To test the express app endpoints:
+
+> cd ./server
+> npm run test:app
+
+To test the user model CRUD operations (in the same directory):
+
+> npm run test:user_model
+
 ## Todo List
 
 1. Setting up the server
@@ -56,6 +71,10 @@ Then run this command
    - ~~Create a new MongoDB database~~
    - ~~Create a baseline server for testing purposes~~
    - ~~Install Jest, conduct a sanity test on the express app and both users and products routes~~
+   - ~~Using TDD, create the user model using mongoose and ensure that CRUD operations work properly~~
+   - Using TDD, create the user services
+   - ~~Using TDD, create the product model using mongoose and ensure that CRUD operations work properly~~
+   - Using TDD, create the product services
 
    - Sketch out primary features of application as they relate to the database and server
    - Plan user and product models according to functionality of the project

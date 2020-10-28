@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "test:server": "jest --watch app",
+    "test:app": "jest --watch app",
     "test:user_model": "jest --watch user_model",
     "test:user_service": "jest --watch user_service",
     "test:product_model": "jest --watch product_model",
