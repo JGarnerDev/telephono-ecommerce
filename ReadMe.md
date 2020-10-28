@@ -55,7 +55,10 @@ I used nodemon for development, which is initiated by the following command:
 
     1. Create a file named '.env' in the server directory
     2. Write in this file 'PORT=<some number>' ex: PORT=3210
-    3. Make a remote database on www.mongodb.com, and retain the user name and password for your collection
+    3. Make a remote database on www.mongodb.com, and retain the user name and password for your collection for steps 4 and 5
+    4. In the .env file, write 'DB_USER=<username>'  ex: DB_USER=FooBar
+    5. In the .env file, write 'DB_PASS=<password>'  ex: DB_USER=sWJSRkdhX92ctOTD
+    6. Good to go!
 
 ## Testing
 
