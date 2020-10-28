@@ -35,6 +35,28 @@ As a user, I would like to...
   - be alerted of new inventory
   - can confirm the details of my purchase once made
 
+## Installation
+
+### Server
+
+To get the server up and running after pulling the root directory, change directories to the server by the client command:
+
+> cd ./server
+
+Then install the required modules:
+
+> npm install
+
+I used nodemon for development, which is initiated by the following command:
+
+> npm start
+
+**Note**: Since it's good practice to hide your API keys and sensitive data, my personal .env file is excluded from the repository. It is necessary to create your own to have it run locally. To do so, follow these steps:
+
+    1. Create a file named '.env' in the server directory
+    2. Write in this file 'PORT=<some number>' ex: PORT=3210
+    3. Make a remote database on www.mongodb.com, and retain the user name and password for your collection
+
 ## Testing
 
 In general, I will use the Jest library for testing, with Sinon brought in for mocking and observing data.
