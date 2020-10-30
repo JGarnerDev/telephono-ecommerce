@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var mongoDB = "mongodb://127.0.0.1/test_db";
+var bcrypt = require("bcryptjs");
 
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -44,17 +45,28 @@ describe("User model", () => {
   });
 
   describe("Saving a user object", () => {
+    let savedUser;
     it("saves a user object to the database", async () => {
       // We retain some information before making a user
       const name = acceptableUserData.name;
       // Make a new user
       const user = new User(acceptableUserData);
       // Save it to our test database
-      const savedUser = await user.save();
+      savedUser = await user.save();
       // Delcare a new value based on the saved object
       const actual = savedUser.name;
       // Expect them to be the same
       expect(actual).toEqual(name);
+    });
+    it("has a properly encrypted password (sha1)", () => {
+      // We make sure that the password set in the acceptableUserData is not the password retained in the database
+      const originalPassword = acceptableUserData.password;
+      const encryptedPassword = savedUser.password;
+      expect(encryptedPassword === originalPassword).toBeFalsy();
+      // We use bcrypt's compare method to make sure that this password is the hashed version of the original password
+      bcrypt.compare(originalPassword, encryptedPassword, (error, match) => {
+        expect(match).toBeTruthy();
+      });
     });
   });
 
@@ -67,9 +79,9 @@ describe("User model", () => {
       // Save it to our test database
       await user.save();
       // Attempt to find it by a retained property
-      const found = await User.findOne({ name });
+      const foundUser = await User.findOne({ name });
       // Delcare a new value based on the retrieved object
-      const actual = found.name;
+      const actual = foundUser.name;
       // Expect them to be the same
       expect(actual).toEqual(name);
     });
@@ -90,8 +102,10 @@ describe("User model", () => {
       // Attempt to find user by original name, expecting nothing to be found
       const userWithOldProperties = await User.findOne({ name });
       expect(userWithOldProperties).toBeNull();
+
       // Attempt to find user by updated name, expecting the user to be found
       const updatedUser = await User.findOne({ name: updatedName });
+
       const userName = updatedUser.name;
       // Compare values to confirm
       expect(userName).toEqual(updatedName);
