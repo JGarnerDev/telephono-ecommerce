@@ -99,16 +99,19 @@ To test the user model CRUD operations (in the same directory):
 
    - ~~Create a new MongoDB database~~
    - ~~Create a baseline server for testing purposes~~
+   - ~~Sketch out primary features of application as they relate to the database and server~~
    - ~~Install Jest, conduct a sanity test on the express app and both users and products routes~~
-   - ~~Using TDD, create the user model using mongoose and ensure that CRUD operations work properly~~
-   - Using TDD, create the user services
-   - ~~Using TDD, create the product model using mongoose and ensure that CRUD operations work properly~~
-   - Using TDD, create the product services
+   - Code the user model using mongoose and ensure that CRUD operations work properly
+     - ~~Add typed properties (name, email, etc) to the model that will ensure that user objects, when saved to the db, will be consistent.~~
+     - Add methods to the user model so that sensitive data is encripted and that user can be authenticated.
+     - Use sha1 for now, test sha256 later
+   - Code the user services (create new user, list users, find a user, etc.)
+   - ~~Code the product model using mongoose and ensure that CRUD operations work properly~~
+   - Code the product services
 
-   - Sketch out primary features of application as they relate to the database and server
    - Plan user and product models according to functionality of the project
-   - Create tests for user and product models with criteria established in plan
+   - Code tests for user and product models with criteria established in plan
    - Code user and product models until they pass tests
    - Plan user and product service functions according to functionality of the project
-   - Create tests for user and product service functions with criteria established in plan
+   - Code tests for user and product service functions with criteria established in plan
    - Code user and product service functions until they pass tests

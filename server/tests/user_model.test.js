@@ -5,6 +5,9 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const User = require("../services/user/user_model");
 
+// We declare a variable for acceptable user data, which will be re-defined before every test
+let acceptableUserData;
+
 describe("User model", () => {
   beforeAll(async () => {
     // Since each test involves the making of a single user, we exercise caution by deleting a user object (if it exists) before every test...
@@ -12,6 +15,16 @@ describe("User model", () => {
     // ...and confirm the database to have no user objects
     const anyUser = await User.findOne({});
     expect(anyUser).toBeNull();
+    //
+    User.encrypt = jest.fn().mockResolvedValue();
+  });
+
+  beforeEach(() => {
+    acceptableUserData = {
+      name: "TestName",
+      email: "test@test.com",
+      password: "TestPassword",
+    };
   });
 
   afterEach(async () => {
@@ -32,10 +45,10 @@ describe("User model", () => {
 
   describe("Saving a user object", () => {
     it("saves a user object to the database", async () => {
-      // Declare user properties and retain them
-      const name = "save-test";
+      // We retain some information before making a user
+      const name = acceptableUserData.name;
       // Make a new user
-      const user = new User({ name });
+      const user = new User(acceptableUserData);
       // Save it to our test database
       const savedUser = await user.save();
       // Delcare a new value based on the saved object
@@ -47,10 +60,10 @@ describe("User model", () => {
 
   describe("Getting a user object", () => {
     it("retrieves an existing user object from the database", async () => {
-      // Declare user properties and retain them
-      const name = "get-test";
+      // We retain some information before making a user
+      const name = acceptableUserData.name;
       // Make a new user
-      const user = new User({ name });
+      const user = new User(acceptableUserData);
       // Save it to our test database
       await user.save();
       // Attempt to find it by a retained property
@@ -64,11 +77,11 @@ describe("User model", () => {
 
   describe("Updating a user object", () => {
     it("updates an existing user object in the database", async () => {
-      // Declare user properties and retain them
-      const name = "update-test";
+      // We retain some information before making a user
+      const name = acceptableUserData.name;
       const updatedName = "I've been updated!";
       // Make a new user
-      const user = new User({ name });
+      const user = new User(acceptableUserData);
       // Save it to our test database
       await user.save();
       // Attempt to update the user object
@@ -87,10 +100,10 @@ describe("User model", () => {
 
   describe("Deleting a user object", () => {
     it("deletes an existing user object in the database", async () => {
-      // Declare user properties and retain them
-      const name = "delete-test";
+      // We retain some information before making a user
+      const name = acceptableUserData.name;
       // Make a new user
-      const user = new User({ name });
+      const user = new User(acceptableUserData);
       // Save it to our test database
       await user.save();
       // Attempt to delete in by name query

@@ -1,5 +1,4 @@
 const UserService = require("../services/user/user_service");
-const User = require("../services/user/user_model");
 const sinon = require("sinon");
 
 describe("User service", () => {

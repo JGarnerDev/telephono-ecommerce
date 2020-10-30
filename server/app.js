@@ -9,7 +9,7 @@ app.use("/users", usersRoute);
 
 app.use("/products", productsRoute);
 
-// If route is not found, send the literal string
+// If route is not found, respond with the literal string
 app.use((req, res, next) => {
   res.status(404).json({ error: "Not found" });
 });

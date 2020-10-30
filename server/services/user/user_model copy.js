@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 const { v1: uuidv1 } = require("uuid");
 const Schema = mongoose.Schema;
@@ -19,7 +18,7 @@ const UserModel = new Schema(
       unique: true,
       maxlength: 32,
     },
-    password: {
+    hashed_password: {
       type: String,
       required: true,
     },
@@ -46,25 +45,17 @@ const UserModel = new Schema(
   { timestamps: true }
 );
 
-UserModel.pre("save", function (next) {
-  if (!this.isModified("password")) return next();
-  bcrypt.hash(this.password, 10, (err, hashedPassword) => {
-    if (err) {
-      return next(err);
-    }
-    this.password = hashedPassword;
-    next();
+UserModel.pre('save', async function(next){
+  if (!)
+})
+UserModel.virtual("password")
+  .set((password) => {
+    this._password = password;
+    this.salt = uuidv1();
+    this.hashed_password = this.encrypt(password);
+  })
+  .get(function () {
+    return this._password;
   });
-});
-
-UserModel.methods.comparePasswordToHash = function (password, cb) {
-  bcrypt.compare(password, this.password, (err, match) => {
-    if (err) {
-      return cb(err);
-    } else {
-      return match ? cb(null, this) : cb(null, match);
-    }
-  });
-};
 
 module.exports = mongoose.model("User", UserModel);
