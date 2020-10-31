@@ -1,6 +1,12 @@
 const UserService = require("../services/user/user_service");
 const sinon = require("sinon");
 
+const acceptableUserData = {
+  name: "TestName",
+  email: "test@test.com",
+  password: "TestPassword",
+};
+
 describe("User service", () => {
   it("has a module", () => {
     expect(UserService).toBeDefined();
@@ -21,7 +27,6 @@ describe("User service", () => {
   describe("createUser method", () => {
     it("is called when evoked", () => {
       const save = sinon.spy();
-      let name;
 
       const MockModel = function (data) {
         name = data.name;
@@ -33,7 +38,7 @@ describe("User service", () => {
 
       const userService = UserService(MockModel);
 
-      userService.createUser("Test");
+      userService.createUser(acceptableUserData);
 
       const functionWasCalledOnce = save.calledOnce;
       expect(functionWasCalledOnce).toBeTruthy();

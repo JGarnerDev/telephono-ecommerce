@@ -1,11 +1,10 @@
-const { isNameValid } = require("../../utils");
-
-const createUser = (User) => (name) => {
-  if (!isNameValid(name)) {
-    throw new Error(`Name: ${name}`);
-  }
-  const user = new User({ name });
+const createUser = (User) => (userData) => {
+  const user = new User(userData);
   return user.save();
+};
+
+const findUser = (User) => (email) => {
+  return User.findOne({ email });
 };
 
 const listUsers = (User) => () => {
@@ -15,6 +14,7 @@ const listUsers = (User) => () => {
 module.exports = (User) => {
   return {
     createUser: createUser(User),
+    findUser: findUser(User),
     listUsers: listUsers(User),
   };
 };

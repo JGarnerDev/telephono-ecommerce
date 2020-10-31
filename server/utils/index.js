@@ -1,8 +1,8 @@
 // From user_model:
 // name: { type: String, trim: true, required: true, maxlength: 32 }
 
-const isNameValid = (name) => {
-  if (!name || typeof name !== "string" || name.length > 32) {
+const isStringValid = (string) => {
+  if (!string || typeof string !== "string" || string.length > 32) {
     return false;
   }
   return true;
@@ -19,4 +19,4 @@ const isEmailValid = (email) => {
   return true;
 };
 
-module.exports = { isNameValid, isEmailValid };
+module.exports = { isStringValid, isEmailValid };

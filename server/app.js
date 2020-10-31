@@ -1,6 +1,18 @@
 // Our server application is an instance of express
 const app = require("express")();
 
+// Middleware
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const validator = require("express-validator");
+// ... morgan, for development
+const morgan = require("morgan");
+
+app.use(bodyParser.json());
+app.use(cookieParser());
+
+app.use(morgan("dev"));
+
 // Routes, held in the 'routes' directory
 const usersRoute = require("./routes/users");
 const productsRoute = require("./routes/products");

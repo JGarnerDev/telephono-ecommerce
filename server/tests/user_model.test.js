@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
-var mongoDB = "mongodb://127.0.0.1/test_db";
-var bcrypt = require("bcryptjs");
+const mongoose = require("mongoose");
+const mongoDB = "mongodb://127.0.0.1/test_db";
+const bcrypt = require("bcryptjs");
 
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 

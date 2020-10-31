@@ -15,7 +15,7 @@ describe("App test", () => {
   let server;
 
   beforeAll(() => {
-    server = app.listen(3001);
+    server = app.listen(8888);
   });
 
   afterAll((done) => {
@@ -25,7 +25,7 @@ describe("App test", () => {
 
   // Testing of 'sitename.com/users' endpoint and all endpoints that are extensions thereafter
   describe("User routes", () => {
-    it(" '/users' responds with code 200 (OK) ", async (done) => {
+    it(" responds with code 200 (OK) at '/users' ", async (done) => {
       await request(server).get(`/users`).expect(200);
       done();
     });
@@ -33,7 +33,7 @@ describe("App test", () => {
 
   // Testing of 'sitename.com/products' endpoint and all endpoints that are extensions thereafter
   describe("Product routes", () => {
-    it(" '/products' responds with code 200 (OK) ", async (done) => {
+    it(" responds with code 200 (OK) at '/products' ", async (done) => {
       await request(server).get(`/products`).expect(200);
       done();
     });

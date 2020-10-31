@@ -55,14 +55,4 @@ UserModel.pre("save", function (next) {
   });
 });
 
-UserModel.methods.comparePasswordToHash = function (password, cb) {
-  bcrypt.compare(password, this.password, (err, match) => {
-    if (err) {
-      return cb(err);
-    } else {
-      return match ? cb(null, this) : cb(null, match);
-    }
-  });
-};
-
 module.exports = mongoose.model("User", UserModel);
