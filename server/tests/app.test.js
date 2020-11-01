@@ -25,8 +25,24 @@ describe("App test", () => {
 
   // Testing of 'sitename.com/users' endpoint and all endpoints that are extensions thereafter
   describe("User routes", () => {
-    it(" responds with code 200 (OK) at '/users' ", async (done) => {
-      await request(server).get(`/users`).expect(200);
+    it(" responds with code 500 (server internal error) at '/users' when not given a password ", async (done) => {
+      await request(server)
+        .post(`/users`)
+        .send({ pw: "wrong password" })
+        .expect((res) => {
+          expect(res.status).toBe(500);
+        });
+      done();
+    });
+    it(" responds with code 200 (OK) at '/users' when given a password ", async (done) => {
+      await request(server)
+        .post(`/users`)
+        .send({ pw: process.env.DB_PASS })
+        .expect((res) => {
+          expect(res.status).toBe(200);
+          const listOfUsers = res.body;
+          expect(Array.isArray(listOfUsers)).toBeTruthy();
+        });
       done();
     });
   });

@@ -8,13 +8,17 @@ const { isStringValid, isEmailValid } = require("../utils");
 const UserService = require("../services/user");
 
 // GET endpoint for 'sitename.com/users', retrieves all users or forwards an error
-router.route("/").get(async (req, res, next) => {
+router.route("/").post(async (req, res, next) => {
   try {
+    if (req.body.pw !== process.env.DB_PASS) {
+      throw new SyntaxError(
+        `Users list from the database is private material!`
+      );
+    }
     const users = await UserService.listUsers();
     res.json(users);
   } catch (error) {
-    // next() is as defined in app.js for handling status codes 404 and 500
-    next(error);
+    next(error.message);
   }
 });
 
