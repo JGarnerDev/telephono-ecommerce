@@ -7,8 +7,10 @@ const { isStringValid, isEmailValid } = require("../utils");
 
 const UserService = require("../services/user");
 
-// GET endpoint for 'sitename.com/users', retrieves all users or forwards an error
-router.route("/").post(async (req, res, next) => {
+// GET endpoint for 'sitename.com/users',
+//    First checks for a password, then responds with the users in the database.
+//    Retrieves all users or forwards an error
+router.route("/").get(async (req, res, next) => {
   try {
     if (req.body.pw !== process.env.DB_PASS) {
       throw new SyntaxError(
@@ -22,8 +24,10 @@ router.route("/").post(async (req, res, next) => {
   }
 });
 
-// POST endpoint for 'sitename.com/users/signup', creates and returns the saved user object or forwards an error
-router.route("/signup").post(async (req, res, next) => {
+// POST endpoint for 'sitename.com/users/signup'
+//   First checks if the user data is valid, then creates a user object in the database
+//   Creates and returns the saved user object or forwards an error
+router.route("/signup").get(async (req, res, next) => {
   const userData = req.body;
   const { name, password, email } = userData;
 
@@ -48,6 +52,9 @@ router.route("/signup").post(async (req, res, next) => {
   }
 });
 
+// GET endpoint for 'sitename.com/users/login'.
+//    First looks for a user object, then compares password against encrypted version.
+//    Happy case responds a cookie bearing the JWT, sad case forwards an internal server error
 router.route("/login").get(async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -57,16 +64,29 @@ router.route("/login").get(async (req, res, next) => {
       throw new SyntaxError(`No account was found!`);
     }
 
-    const match = await bcrypt.compare(password, user.password);
+    const passwordMatch = await bcrypt.compare(password, user.password);
 
-    if (!match) {
+    if (!passwordMatch) {
       throw new SyntaxError(`Wrong password!`);
     }
 
     const token = jwt.sign({ _id: user._id }, process.env.JWT);
-    res.cookie("jwt", token, { expire: new Date() + 10000 });
+    res.cookie("jwt", token);
 
     res.json({ token, user });
+  } catch (error) {
+    next(error.message);
+  }
+});
+
+// GET endpoint for 'sitename.com/users/logout'.
+//    Simply deletes the means of accessing private routes (JWT token in cookie)
+//    Happy case responds a success message, sad case forwards an internal server error
+
+router.route("/logout").get(async (req, res, next) => {
+  try {
+    res.clearCookie("jwt");
+    res.json({ message: "Logout successful!" });
   } catch (error) {
     next(error.message);
   }

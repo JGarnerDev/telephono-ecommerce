@@ -4,7 +4,12 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 
 const dbURL = `mongodb+srv://commerceApp:${process.env.DB_PASS}@cluster0.5f7z9.mongodb.net/${process.env.DB_USER}?retryWrites=true&w=majority`;
-mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(dbURL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  autoIndex: true,
+  useCreateIndex: true,
+});
 
 const app = require("./app");
 

@@ -36,10 +36,6 @@ const UserModel = new Schema(
       type: Array,
       default: [],
     },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
   },
   { timestamps: true }
 );

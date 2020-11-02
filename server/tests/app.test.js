@@ -25,32 +25,65 @@ describe("App test", () => {
 
   // Testing of 'sitename.com/users' endpoint and all endpoints that are extensions thereafter
   describe("User routes", () => {
-    it(" responds with code 500 (server internal error) at '/users' when not given a password ", async (done) => {
-      await request(server)
-        .post(`/users`)
-        .send({ pw: "wrong password" })
-        .expect((res) => {
-          expect(res.status).toBe(500);
-        });
-      done();
+    describe('"/users" endpoint', () => {
+      it(" responds with code 500 (server internal error) when not given a password ", async (done) => {
+        await request(server)
+          .get(`api/auth`)
+          .send({ pw: "wrong password" })
+          .expect((res) => {
+            expect(res.status).toBe(500);
+          });
+        done();
+      });
+      it(" responds with code 200 (OK) when given a password ", async (done) => {
+        await request(server)
+          .get(`api/auth`)
+          .send({ pw: process.env.DB_PASS })
+          .expect((res) => {
+            expect(res.status).toBe(200);
+          });
+        done();
+      });
     });
-    it(" responds with code 200 (OK) at '/users' when given a password ", async (done) => {
-      await request(server)
-        .post(`/users`)
-        .send({ pw: process.env.DB_PASS })
-        .expect((res) => {
-          expect(res.status).toBe(200);
-          const listOfUsers = res.body;
-          expect(Array.isArray(listOfUsers)).toBeTruthy();
-        });
-      done();
+
+    describe('"/auth/signup" endpoint ', () => {
+      it(" responds with code 500 (server internal error) when no data is given", async (done) => {
+        await request(server)
+          .get(`api/auth/signup`)
+          .expect((res) => {
+            expect(res.status).toBe(500);
+          });
+        done();
+      });
+    });
+
+    describe('"/auth/login" endpoint ', () => {
+      it(" responds with code 500 (server internal error) when no data is given", async (done) => {
+        await request(server)
+          .get(`api/auth/login`)
+          .expect((res) => {
+            expect(res.status).toBe(500);
+          });
+        done();
+      });
+    });
+
+    describe('"/auth/logout" endpoint ', () => {
+      it(" responds with code 200 (server internal error) when no data is given", async (done) => {
+        await request(server)
+          .get(`api/auth/logout`)
+          .expect((res) => {
+            expect(res.status).toBe(200);
+          });
+        done();
+      });
     });
   });
 
   // Testing of 'sitename.com/products' endpoint and all endpoints that are extensions thereafter
   describe("Product routes", () => {
     it(" responds with code 200 (OK) at '/products' ", async (done) => {
-      await request(server).get(`/products`).expect(200);
+      await request(server).get(`api/products`).expect(200);
       done();
     });
   });
