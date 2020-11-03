@@ -26,6 +26,40 @@ router.route("/").get(async (req, res, next) => {
   }
 });
 
+router.route("/:productId").get(async (req, res, next) => {
+  try {
+    const _id = req.params.productId;
+    const product = await ProductService.findProductByID(_id);
+    res.json(product);
+  } catch (error) {
+    error.message = "We couldn't find the product :(";
+    next(error.message);
+  }
+});
+
+router
+  .route("/:productId/:userId")
+  .delete(requireWebToken, isAuth, isAdmin, async (req, res, next) => {
+    try {
+      const _id = req.params.productId;
+      await ProductService.deleteProductById(_id);
+      res.json({ message: "Product deleted successfully" });
+    } catch (error) {
+      next(error.message);
+    }
+  });
+
+router.route("/:productId/img").get(async (req, res, next) => {
+  try {
+    const _id = req.params.productId;
+    const img = await ProductService.findProductImageByID(_id);
+    res.json(img);
+  } catch (error) {
+    error.message = "No product image available";
+    next(error.message);
+  }
+});
+
 router
   .route("/new/:userId")
   .post(requireWebToken, isAuth, isAdmin, async (req, res, next) => {
