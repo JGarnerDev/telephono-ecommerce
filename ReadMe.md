@@ -116,5 +116,11 @@ To test the user model CRUD operations (in the same directory):
      - ~~User name and password (must be string, 0 < length < 32)~~
      - ~~Email (use regex to get a loose pattern (ex: a@a.com is acceptable))~~
 
+2. Endpoints
+
    - ~~ Create and test protected users list endpoint ~~
-   - Create and test user sign up, sign in, and sign out endpoints
+   - ~~ Create and test user sign up, sign in, and sign out endpoints~~
+   - Create and test authentication middleware 
+     - ~~Manual tests to confirm authentication through JWT cookie is working~~
+     - Intergration test to confirm authentication and sign in is working  
+   - Create and test protected routes

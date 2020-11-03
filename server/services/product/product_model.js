@@ -39,7 +39,7 @@ const ProductModel = new Schema(
       default: false,
     },
     img: {
-      type: Buffer,
+      data: Buffer,
       contentType: String,
     },
   },

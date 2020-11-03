@@ -26,13 +26,31 @@ router.route("/").get(async (req, res, next) => {
 
 router
   .route("/new/:userId")
-  .get(requireWebToken, isAuth, isAdmin, async (req, res, next) => {
-    const productData = req;
-
+  .post(requireWebToken, isAuth, isAdmin, async (req, res, next) => {
     try {
-      const product = await ProductService.createProduct(productData);
+      let form = new formidable.IncomingForm();
+      form.keepExtensions = true;
+      form.parse(req, (error, fields, files) => {
+        if (error) {
+          throw new SyntaxError(
+            `Files couldn't be upoloaded - please try again later!`
+          );
+        }
+        let product = ProductService.createProduct(fields);
 
-      res.json(product);
+        if (files.img) {
+          product.img.data = fs.readFileSync(files.img.path);
+          product.img.contentType = files.img.type;
+        }
+        product.save((error, product) => {
+          if (error) {
+            throw new SyntaxError(
+              `Product couldn't be saved to database - please try again later!`
+            );
+          }
+          res.json(product);
+        });
+      });
     } catch (error) {
       next(error.message);
     }
