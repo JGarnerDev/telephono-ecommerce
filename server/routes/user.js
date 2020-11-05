@@ -1,12 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const {
-  requireWebToken,
-  confirmUser,
-  isAuth,
-  isAdmin,
-} = require("../middleware");
+const { requireWebToken, confirmUser, isAuth } = require("../middleware");
 
 router.route("/:userId").get(requireWebToken, isAuth, (req, res) => {
   res.json({

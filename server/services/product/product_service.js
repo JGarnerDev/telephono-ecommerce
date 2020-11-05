@@ -7,6 +7,9 @@ const createAndSaveProduct = (Product) => (productData) => {
 };
 
 const findProductByID = (Product) => (_id) => {
+  return Product.findOne({ _id });
+};
+const findProductInfoByID = (Product) => (_id) => {
   return Product.find({ _id }).select(["-img"]);
 };
 
@@ -27,6 +30,7 @@ module.exports = (Product) => {
     createProduct: createProduct(Product),
     createAndSaveProduct: createAndSaveProduct(Product),
     findProductByID: findProductByID(Product),
+    findProductInfoByID: findProductInfoByID(Product),
     findProductImageByID: findProductImageByID(Product),
     deleteProductById: deleteProductById(Product),
     listProducts: listProducts(Product),

@@ -1,9 +1,11 @@
 const express = require("express");
 let router = express.Router();
 
+const { isAdmin } = require("../middleware");
+
 const ProductCategoryService = require("../services/productCategory");
 
-router.route("/new").get(async (req, res, next) => {
+router.route("/new").post(async (req, res, next) => {
   const categoryData = req.body;
   const { name } = categoryData;
   if (!name) {
@@ -13,9 +15,48 @@ router.route("/new").get(async (req, res, next) => {
     const newProductCategory = await ProductCategoryService.createProductCategory(
       categoryData
     );
-    res.json({ newProductCategory });
+    res.json(newProductCategory);
   } catch (error) {
     next(error);
+  }
+});
+
+router.route("/:categoryId").get(async (req, res, next) => {
+  try {
+    const _id = req.params.categoryId;
+
+    const category = await ProductCategoryService.findCategoryById(_id);
+
+    res.json(category);
+  } catch (error) {
+    next(error.message);
+  }
+});
+router.route("/:categoryId/update").post(async (req, res, next) => {
+  try {
+    const _id = req.params.categoryId;
+    const updateData = req.body;
+    const updatedCategory = await ProductCategoryService.updateCategoryById(
+      _id,
+      updateData
+    );
+
+    res.json(updatedCategory);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.route("/:categoryId").delete(async (req, res, next) => {
+  try {
+    const _id = req.params.categoryId;
+    const deletedCategory = await ProductCategoryService.deleteCategoryById(
+      _id
+    );
+
+    res.json(deletedCategory);
+  } catch (error) {
+    next(error.message);
   }
 });
 

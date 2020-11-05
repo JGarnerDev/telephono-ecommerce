@@ -40,28 +40,8 @@ const isAdmin = (req, res, next) => {
   next();
 };
 
-const getProductByID = (req, res, next, _id) => {
-  findProductByID(_id).exec((error, product) => {
-    if (error || !product) {
-      return res.status(500).json({
-        error: "Product not found",
-      });
-    }
-    console.log(product);
-    req.product = product;
-    next();
-  });
-};
-
-const readProductData = (req, res) => {
-  req.product.img = undefined;
-  return res.json(req.product);
-};
-
 module.exports = {
   requireWebToken,
-  getProductByID,
-  readProductData,
   confirmUser,
   isAuth,
   isAdmin,
