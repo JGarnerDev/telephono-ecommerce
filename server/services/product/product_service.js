@@ -21,8 +21,49 @@ const deleteProductById = (Product) => (_id) => {
   return Product.deleteOne({ _id });
 };
 
-const listProducts = (Product) => () => {
-  return Product.find({});
+const listProducts = (Product) => (order, sortBy, limit) => {
+  return Product.find({})
+    .select(["-img"])
+    .populate("Category")
+    .sort([[sortBy, order]])
+    .limit(limit);
+};
+const listRelatedProducts = (Product) => (_id, category, limit) => {
+  return Product.find({ _id: { $ne: _id }, category })
+    .limit(limit)
+    .populate("Category", "_id name");
+};
+
+const listBySearchString = (Product) => (
+  order,
+  sortBy,
+  limit,
+  skip,
+  filters
+) => {
+  let searchParams = {};
+  for (let key in filters) {
+    if (filters[key].length > 0) {
+      if (key === "price") {
+        searchParams[key] = {
+          $gte: filters[key][0],
+          $lte: filters[key][1],
+        };
+      } else {
+        searchParams[key] = filters[key];
+      }
+    }
+  }
+  return Product.find(searchParams)
+    .select(["-img"])
+    .populate("Category")
+    .sort([sortBy, order])
+    .skip(skip)
+    .limit(limit);
+};
+
+const listProductCategories = (Product) => () => {
+  return Product.distinct("Category", {});
 };
 
 module.exports = (Product) => {
@@ -34,5 +75,8 @@ module.exports = (Product) => {
     findProductImageByID: findProductImageByID(Product),
     deleteProductById: deleteProductById(Product),
     listProducts: listProducts(Product),
+    listRelatedProducts: listRelatedProducts(Product),
+    listProductCategories: listProductCategories(Product),
+    listBySearchString: listBySearchString(Product),
   };
 };

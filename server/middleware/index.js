@@ -1,7 +1,6 @@
 const expressJWT = require("express-jwt");
 
 const { findUserByID } = require("../services/user");
-const { findProductByID } = require("../services/product");
 
 const requireWebToken = expressJWT({
   secret: process.env.JWT,

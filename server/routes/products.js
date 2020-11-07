@@ -16,22 +16,76 @@ const {
 
 const { MB } = require("../constants");
 
-// Endpoint for 'sitename.com/products', retrieves all products
+//
 router.route("/").get(async (req, res, next) => {
   try {
-    const products = await ProductService.listProducts();
+    const sortBy = req.query.sortBy ? req.query.sortBy : "_id";
+    const order = req.query.order ? req.query.order : "asc";
+    const limit = req.query.limit ? parseInt(req.query.limit) : 3;
+
+    const products = await ProductService.listProducts(order, sortBy, limit);
     res.json(products);
   } catch (error) {
-    next(error);
+    next(error.message);
   }
 });
 
-// Endpoint for 'sitename.com/products/:productId', retrieves a product (without photo) from database
+//
 router.route("/:productId").get(async (req, res, next) => {
   try {
     const _id = req.params.productId;
     const product = await ProductService.findProductInfoByID(_id);
     res.json(product);
+  } catch (error) {
+    error.message = "We couldn't find the product :(";
+    next(error.message);
+  }
+});
+//
+router.route("/categories").get(async (req, res, next) => {
+  try {
+    const products = await ProductService.listProductCategories();
+    res.json(products);
+  } catch (error) {
+    error.message = "We couldn't find the product :(";
+    next(error.message);
+  }
+});
+
+router.route("/search").post(async (req, res, next) => {
+  try {
+    const sortBy = req.query.sortBy ? req.query.sortBy : "_id";
+    const order = req.query.order ? req.query.order : "asc";
+    const limit = req.query.limit ? parseInt(req.query.limit) : 3;
+    const skip = parseInt(req.body.skip);
+    const filters = req.body.filters;
+
+    const products = await ProductService.listBySearchString(
+      order,
+      sortBy,
+      limit,
+      skip,
+      filters
+    );
+    res.json({ listLength: products.length, products });
+  } catch (error) {
+    error.message = "We couldn't find the product :(";
+    next(error.message);
+  }
+});
+
+//
+router.route("/related/:productId").get(async (req, res, next) => {
+  try {
+    const _id = req.params.productId;
+    const limit = req.query.limit ? parseInt(req.query.limit) : 3;
+    const product = await ProductService.findProductByID(_id);
+    const products = await ProductService.listRelatedProducts(
+      _id,
+      product.category,
+      limit
+    );
+    res.json(products);
   } catch (error) {
     error.message = "We couldn't find the product :(";
     next(error.message);
@@ -152,8 +206,13 @@ router
 router.route("/:productId/img").get(async (req, res, next) => {
   try {
     const _id = req.params.productId;
-    const img = await ProductService.findProductImageByID(_id);
-    res.json(img);
+    const imgData = await ProductService.findProductImageByID(_id);
+    const img = imgData[0].img;
+    if (img.data) {
+      res.set("Content-Type", img.contentType);
+      return res.send(img.data);
+    }
+    next();
   } catch (error) {
     error.message = "No product image available";
     next(error.message);

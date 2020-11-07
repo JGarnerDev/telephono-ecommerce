@@ -4,10 +4,19 @@ let router = express.Router();
 const { isAdmin } = require("../middleware");
 
 const ProductCategoryService = require("../services/productCategory");
+const ProductService = require("../services/product");
+
+router.route("/").get(async (req, res, next) => {
+  try {
+    const categories = await ProductService.listProductCategories();
+    res.json(categories);
+  } catch (error) {
+    next(error.message);
+  }
+});
 
 router.route("/new").post(async (req, res, next) => {
-  const categoryData = req.body;
-  const { name } = categoryData;
+  const name = req.body.name;
   if (!name) {
     res.status(500).json({ error: "New product categories require a name" });
   }
@@ -32,6 +41,7 @@ router.route("/:categoryId").get(async (req, res, next) => {
     next(error.message);
   }
 });
+
 router.route("/:categoryId/update").post(async (req, res, next) => {
   try {
     const _id = req.params.categoryId;

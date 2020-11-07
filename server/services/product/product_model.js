@@ -12,7 +12,7 @@ const ProductModel = new Schema(
     },
     category: {
       type: ObjectId,
-      ref: "Category",
+      ref: "category",
       trim: true,
       maxlength: 32,
     },
@@ -33,6 +33,12 @@ const ProductModel = new Schema(
       required: true,
       default: 1,
       maxlength: 32,
+    },
+    sales: {
+      type: Number,
+      required: true,
+      default: 0,
+      maxlength: 10,
     },
     shipping: {
       type: Boolean,

@@ -24,7 +24,7 @@ router.route("/").get(async (req, res, next) => {
   }
 });
 
-// POST endpoint for 'sitename.com/users/signup'
+// POST endpoint for 'sitename.com/auth/signup'
 //   First checks if the user data is valid, then creates a user object in the database
 //   Creates and returns the saved user object or forwards an error
 router.route("/signup").get(async (req, res, next) => {
@@ -46,13 +46,13 @@ router.route("/signup").get(async (req, res, next) => {
       throw new SyntaxError(`Must submit a vail email!`);
     }
     const newUser = await UserService.createUser(userData);
-    res.json({ newUser });
+    res.json(newUser);
   } catch (error) {
     next(error.message);
   }
 });
 
-// GET endpoint for 'sitename.com/users/login'.
+// GET endpoint for 'sitename.com/auth/login'.
 //    First looks for a user object, then compares password against encrypted version.
 //    Happy case responds a cookie bearing the JWT, sad case forwards an internal server error
 router.route("/login").get(async (req, res, next) => {
@@ -79,7 +79,7 @@ router.route("/login").get(async (req, res, next) => {
   }
 });
 
-// GET endpoint for 'sitename.com/users/logout'.
+// GET endpoint for 'sitename.com/auth/logout'.
 //    Simply deletes the means of accessing private routes (JWT token in cookie)
 //    Happy case responds a success message, sad case forwards an internal server error
 

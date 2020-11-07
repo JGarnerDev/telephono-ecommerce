@@ -16,7 +16,7 @@ const deleteCategoryById = (ProductCategory) => (_id) => {
 };
 //
 const listProductCategories = (ProductCategory) => () => {
-  return Product.find({});
+  return ProductCategory.find({});
 };
 
 module.exports = (ProductCategory) => {
@@ -25,5 +25,6 @@ module.exports = (ProductCategory) => {
     findCategoryById: findCategoryById(ProductCategory),
     updateCategoryById: updateCategoryById(ProductCategory),
     deleteCategoryById: deleteCategoryById(ProductCategory),
+    listProductCategories: listProductCategories(ProductCategory),
   };
 };
