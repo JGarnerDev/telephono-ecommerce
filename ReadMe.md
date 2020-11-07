@@ -12,7 +12,7 @@ Phones are a ubiquitous and visually interesting product, so I will pick them as
 
 ## Objectives
 
-- Implement TDD with Jest and Jest-Enzyme to ensure a solid codebase with broad test coverage.
+- Try as best as possible to use TDD. When you're not sure how something can be properly tested, but manual testing returns green, put it in the todos list.
 
 - Construct an API using Node and Express that will handle CRUD operations for users and products with our MongoDB database. Use Mongoose for Schematization. User validation will be done with JSON Web Tokens.
 
@@ -93,34 +93,8 @@ To test the user model CRUD operations (in the same directory):
 
 > npm run test:user_model
 
-## Todo List
+## Todos:
 
-1. Setting up the server
-
-   - ~~Create a new MongoDB database~~
-   - ~~Create a baseline server for testing purposes~~
-   - ~~Sketch out primary features of application as they relate to the database and server~~
-   - ~~Install Jest, conduct a sanity test on the express app and both users and products routes~~
-
-   - ~~ Code the user model using mongoose and ensure that CRUD operations work properly ~~
-
-     - ~~Add typed properties (name, email, etc) to the model that will ensure that user objects, when saved to the db, will be consistent.~~
-     - ~~Add methods to the user model so that sensitive data is encripted and that user can be authenticated. ( use sha1 for now, test sha256 later)~~
-
-   - Code the product model using mongoose and ensure that CRUD operations work properly
-
-     - ~~Basic shape of the user model~~
-
-   - ~~Code and test utility functions for server-side validation of...~~
-
-     - ~~User name and password (must be string, 0 < length < 32)~~
-     - ~~Email (use regex to get a loose pattern (ex: a@a.com is acceptable))~~
-
-2. Endpoints
-
-   - ~~ Create and test protected users list endpoint ~~
-   - ~~ Create and test user sign up, sign in, and sign out endpoints~~
-   - Create and test authentication middleware 
-     - ~~Manual tests to confirm authentication through JWT cookie is working~~
-     - Intergration test to confirm authentication and sign in is working  
-   - Create and test protected routes
+- Broaden current services tests
+- Broaden endpoint tests
+- Routes, though working, feel a bit messy / non-uniform. Refactor after test coverage.

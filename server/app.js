@@ -4,12 +4,14 @@ const app = require("express")();
 // Middleware
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
-// ... morgan, for development
+// ... morgan, for development of routes
 const morgan = require("morgan");
 
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(cors());
 
 app.use(morgan("dev"));
 
