@@ -93,8 +93,10 @@ To test the user model CRUD operations (in the same directory):
 
 > npm run test:user_model
 
-## Todos:
+## Todos (server):
 
 - Broaden current services tests
 - Broaden endpoint tests
 - Routes, though working, feel a bit messy / non-uniform. Refactor after test coverage.
+
+## Todos (client):
