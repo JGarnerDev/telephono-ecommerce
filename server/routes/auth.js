@@ -27,7 +27,7 @@ router.route("/").get(async (req, res, next) => {
 // POST endpoint for 'sitename.com/auth/signup'
 //   First checks if the user data is valid, then creates a user object in the database
 //   Creates and returns the saved user object or forwards an error
-router.route("/signup").get(async (req, res, next) => {
+router.route("/signup").post(async (req, res, next) => {
   const userData = req.body;
   const { name, password, email } = userData;
 
@@ -46,7 +46,10 @@ router.route("/signup").get(async (req, res, next) => {
       throw new SyntaxError(`Must submit a vail email!`);
     }
     const newUser = await UserService.createUser(userData);
-    res.json(newUser);
+    const token = jwt.sign({ _id: newUser._id }, process.env.JWT);
+    res.cookie("jwt", token);
+    newUser.password = "";
+    res.json({ token, newUser });
   } catch (error) {
     next(error.message);
   }
@@ -72,7 +75,7 @@ router.route("/login").get(async (req, res, next) => {
 
     const token = jwt.sign({ _id: user._id }, process.env.JWT);
     res.cookie("jwt", token);
-
+    user.password = "";
     res.json({ token, user });
   } catch (error) {
     next(error.message);

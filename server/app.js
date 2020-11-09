@@ -38,6 +38,7 @@ app.use((req, res, next) => {
 
 // If there is an internal server error, respond with the error in detail
 app.use((error, req, res, next) => {
+  console.log(error);
   res.status(500).json({ error });
 });
 
