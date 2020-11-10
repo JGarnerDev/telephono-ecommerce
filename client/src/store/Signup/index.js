@@ -3,6 +3,7 @@ export const signupInitialState = {
   Email: "",
   Password: "",
   "Confirm password": "",
+  Admin: false,
   Error: "",
   RenderError: false,
   Loading: false,
@@ -13,6 +14,8 @@ export function signupReducer(state, action) {
   switch (action.type) {
     case "fieldChange":
       return { ...state, [action.field]: action.value };
+    case "admin":
+      return { ...state, Admin: !state.Admin };
     case "error":
       return { ...state, RenderError: true, Error: action.value };
     case "clearError":

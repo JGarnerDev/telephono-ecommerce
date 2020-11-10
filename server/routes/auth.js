@@ -45,11 +45,11 @@ router.route("/signup").post(async (req, res, next) => {
     if (!isEmailValid(email)) {
       throw new SyntaxError(`Must submit a vail email!`);
     }
-    const newUser = await UserService.createUser(userData);
-    const token = jwt.sign({ _id: newUser._id }, process.env.JWT);
+    const user = await UserService.createUser(userData);
+    const token = jwt.sign({ _id: user._id }, process.env.JWT);
     res.cookie("jwt", token);
-    newUser.password = "";
-    res.json({ token, newUser });
+    user.password = "";
+    res.json({ token, user });
   } catch (error) {
     next(error.message);
   }

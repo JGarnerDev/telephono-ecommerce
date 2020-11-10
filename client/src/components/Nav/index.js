@@ -1,7 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { isAuth, logOut } from "../../auth";
+import { isAuth, isAdmin, logOut } from "../../auth";
+
+import {
+  SIGNUP_URL,
+  LOGIN_URL,
+  CLIENT_CART_URL,
+  CLIENT_ACCOUNT_URL,
+  ADMIN_ACCOUNT_URL,
+} from "../../config";
 
 import {
   Button,
@@ -17,7 +25,10 @@ import {
   PersonAdd,
   ExitToApp,
   MeetingRoom,
-  Storefront,
+  AccountCircle,
+  ShoppingBasket,
+  ViewCarousel,
+  Build,
 } from "@material-ui/icons";
 
 import "./Nav.scss";
@@ -28,14 +39,21 @@ const Nav = React.memo(() => {
   let links;
 
   isAuth()
-    ? (links = [
-        [<Home />, "/", "Home"],
-        [<MeetingRoom />, "/", "Log out"],
-      ])
+    ? isAdmin()
+      ? (links = [
+          [<Home />, "/", "Home"],
+          [<Build />, ADMIN_ACCOUNT_URL, "My account (Admin)"],
+          [<MeetingRoom />, "/", "Log out"],
+        ])
+      : (links = [
+          [<Home />, "/", "Home"],
+          [<AccountCircle />, CLIENT_ACCOUNT_URL, "My account"],
+          [<MeetingRoom />, "/", "Log out"],
+        ])
     : (links = [
         [<Home />, "/", "Home"],
-        [<PersonAdd />, "/signup", "Sign up"],
-        [<ExitToApp />, "/login", "Log in"],
+        [<PersonAdd />, SIGNUP_URL, "Sign up"],
+        [<ExitToApp />, LOGIN_URL, "Log in"],
       ]);
 
   const renderList = () =>
@@ -66,7 +84,12 @@ const Nav = React.memo(() => {
 
   return (
     <nav id="Nav">
-      <Link to="/products">Products</Link>
+      <Link to="/products">
+        <ViewCarousel />
+      </Link>
+      <Link to={CLIENT_CART_URL}>
+        <ShoppingBasket />
+      </Link>
       <Button
         onClick={() => {
           setOpenNav(!openNav);

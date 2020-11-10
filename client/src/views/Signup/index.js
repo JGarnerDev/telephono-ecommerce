@@ -10,7 +10,8 @@ import Layout from "../../hoc/Layout";
 import FormField from "../../components/FormField";
 import UIMessage from "../../components/UIMessage";
 
-import { Button } from "@material-ui/core";
+import { Button, FormControlLabel, Checkbox } from "@material-ui/core";
+import { Build, BuildOutlined } from "@material-ui/icons";
 
 const Signup = () => {
   const [state, dispatch] = useReducer(signupReducer, signupInitialState);
@@ -20,6 +21,7 @@ const Signup = () => {
     Email,
     Password,
     ["Confirm password"]: confirmPassword,
+    Admin,
     Error,
     RenderError,
     Loading,
@@ -30,9 +32,9 @@ const Signup = () => {
     return <Redirect to="/" />;
   }
 
-  const attemptSignup = async (name, email, password) => {
-    await axios
-      .post(`${USER_SIGNUP_ROUTE}`, { name, password, email })
+  const attemptSignup = (name, email, password, role) => {
+    axios
+      .post(`${USER_SIGNUP_ROUTE}`, { name, password, email, role })
       .then(({ data }) => {
         authenticateUser(data, () => {
           dispatch({ type: "success" });
@@ -61,7 +63,9 @@ const Signup = () => {
       });
     }
     dispatch({ type: "loading" });
-    await attemptSignup(Name, Email, Password);
+    let role = +Admin;
+    console.log(role);
+    await attemptSignup(Name, Email, Password, role);
     dispatch({ type: "loadComplete" });
     timeout = setTimeout(() => {
       dispatch({ type: "clearError" });
@@ -93,6 +97,19 @@ const Signup = () => {
             />
           );
         })}
+        <FormControlLabel
+          control={
+            <Checkbox
+              icon={<BuildOutlined />}
+              checkedIcon={<Build />}
+              onChange={(e) => {
+                e.preventDefault();
+                dispatch({ type: "admin" });
+              }}
+            />
+          }
+          label="Administrative? "
+        />
         <Button variant="contained" color="primary" onClick={submit}>
           Submit
         </Button>
