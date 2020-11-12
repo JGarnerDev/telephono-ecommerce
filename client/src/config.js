@@ -25,6 +25,9 @@ export const ADMIN_DELETE_CATEGORY_URL = "/Administrator/categories/delete";
 
 //// Server routes
 export const API_URL = process.env.REACT_APP_API_ROOT_URL;
+// Auth
 export const USER_SIGNUP_ROUTE = API_URL + "/auth/signup";
 export const USER_LOGIN_ROUTE = API_URL + "/auth/login";
 export const USER_LOGOUT_ROUTE = API_URL + "/auth/logout";
+// Product Categories
+export const ADD_CATEGORY_ROUTE = API_URL + "/categories/new";

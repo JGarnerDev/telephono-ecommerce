@@ -22,7 +22,7 @@ router.route("/new").post(async (req, res, next) => {
   }
   try {
     const newProductCategory = await ProductCategoryService.createProductCategory(
-      categoryData
+      { name }
     );
     res.json(newProductCategory);
   } catch (error) {
