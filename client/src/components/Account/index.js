@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
 
+import {
+  ADMIN_CATEGORY_MANAGEMENT_URL,
+  ADMIN_PRODUCT_MANAGEMENT_URL,
+} from "../../config";
+
 export const Details = ({ name, email, _id, createdAt }) => {
   return (
     <div>
@@ -25,11 +30,11 @@ export const History = ({}) => {
   );
 };
 
-export const AdminLinks = ({}) => {
+export const AdminLinks = () => {
   return (
     <div>
-      <Link to="">Add a product category</Link>
-      <Link>Add a product </Link>
+      <Link to={ADMIN_CATEGORY_MANAGEMENT_URL}>Update product categories</Link>
+      <Link to={ADMIN_PRODUCT_MANAGEMENT_URL}>Update products </Link>
     </div>
   );
 };
