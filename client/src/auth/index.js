@@ -18,6 +18,7 @@ export const isAuth = () => {
   }
   return false;
 };
+
 export const isAdmin = () => {
   if (typeof window !== "undefined" && localStorage.getItem("jwt")) {
     const userData = JSON.parse(localStorage.getItem("jwt"));

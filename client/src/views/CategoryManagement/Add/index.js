@@ -27,18 +27,18 @@ const AddCategory = () => {
     return <Redirect to="/" />;
   }
 
-  let timeout;
-
   const attemptNewCategory = (name) => {
     axios
       .post(`${ADD_CATEGORY_ROUTE}`, { name })
-      .then((data) => {
+      .then(() => {
         dispatch({ type: "success" });
       })
       .catch((error) => {
         dispatch({ type: "error", value: error.response.data.error });
       });
   };
+
+  let timeout;
 
   const submit = async (e) => {
     e.preventDefault();

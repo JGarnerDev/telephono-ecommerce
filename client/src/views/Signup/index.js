@@ -64,7 +64,6 @@ const Signup = () => {
     }
     dispatch({ type: "loading" });
     let role = +Admin;
-    console.log(role);
     await attemptSignup(Name, Email, Password, role);
     dispatch({ type: "loadComplete" });
     timeout = setTimeout(() => {

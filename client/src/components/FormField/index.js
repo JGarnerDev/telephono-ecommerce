@@ -6,8 +6,10 @@ const FormField = ({ label, value, changeHandler, required }) => {
   let type;
   if (label.toLowerCase().indexOf("password") !== -1) {
     type = "password";
-  } else if (label === "Email") {
+  } else if (label === "email") {
     type = "email";
+  } else if (label === "price" || label === "quantity") {
+    type = "number";
   } else {
     type = "text";
   }

@@ -24,8 +24,6 @@ import UpdateProduct from "./views/ProductManagement/Update";
 // Product Categories
 import CategoryManagement from "./views/CategoryManagement";
 import AddCategory from "./views/CategoryManagement/Add";
-import DeleteCategory from "./views/CategoryManagement/Delete";
-import UpdateCategory from "./views/CategoryManagement/Update";
 
 import {
   // Auth
@@ -46,8 +44,6 @@ import {
   // Categories
   ADMIN_CATEGORY_MANAGEMENT_URL,
   ADMIN_ADD_CATEGORY_URL,
-  ADMIN_DELETE_CATEGORY_URL,
-  ADMIN_UPDATE_CATEGORY_URL,
 } from "./config";
 
 const Routes = () => {
@@ -128,20 +124,6 @@ const Routes = () => {
           path={ADMIN_ADD_CATEGORY_URL}
           exact
           component={AddCategory}
-        />
-
-        {/* Delete Product Category */}
-        <AdministrativeRoute
-          path={ADMIN_DELETE_CATEGORY_URL}
-          exact
-          component={DeleteCategory}
-        />
-
-        {/* Update Product Category */}
-        <AdministrativeRoute
-          path={ADMIN_UPDATE_CATEGORY_URL}
-          exact
-          component={UpdateCategory}
         />
       </Switch>
     </Router>

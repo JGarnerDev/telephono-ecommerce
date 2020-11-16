@@ -101,18 +101,17 @@ router
       form.keepExtensions = true;
       form.parse(req, (error, fields, files) => {
         if (error) {
-          throw new SyntaxError(
-            `Files couldn't be upoloaded - please try again later!`
-          );
+          return res.status(500).json({ error: "Product form incomplete!" });
         }
-        let product = ProductService.createProduct(fields);
-
         const { name, description, price } = fields;
         [name, description, price].forEach((value) => {
-          if (!value) {
+          if (!value || value.length === 0) {
+            console.log("!!");
             return res.status(500).json({ error: "Product form incomplete!" });
           }
         });
+
+        let product = ProductService.createProduct(fields);
 
         if (files.img) {
           if (files.img.size > MB) {
@@ -125,9 +124,9 @@ router
         }
         product.save((error, result) => {
           if (error) {
-            throw new SyntaxError(
-              `Product couldn't be saved to database - please try again later!`
-            );
+            return res
+              .status(500)
+              .json({ error: "Image file size must be less than 1 MB!" });
           }
 
           res.json(result.id);
