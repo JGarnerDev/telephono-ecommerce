@@ -8,7 +8,7 @@ const ProductService = require("../services/product");
 
 router.route("/").get(async (req, res, next) => {
   try {
-    const categories = await ProductService.listProductCategories();
+    const categories = await ProductCategoryService.listProductCategories();
     res.json(categories);
   } catch (error) {
     next(error.message);

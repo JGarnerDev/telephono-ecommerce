@@ -12,7 +12,7 @@ const ProductModel = new Schema(
     },
     category: {
       type: ObjectId,
-      ref: "category",
+      ref: "ProductCategory",
       trim: true,
       maxlength: 32,
     },

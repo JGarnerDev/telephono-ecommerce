@@ -24,14 +24,15 @@ const deleteProductById = (Product) => (_id) => {
 const listProducts = (Product) => (order, sortBy, limit) => {
   return Product.find({})
     .select(["-img"])
-    .populate("Category")
+    .populate("category")
     .sort([[sortBy, order]])
     .limit(limit);
 };
+
 const listRelatedProducts = (Product) => (_id, category, limit) => {
   return Product.find({ _id: { $ne: _id }, category })
     .limit(limit)
-    .populate("Category", "_id name");
+    .populate("category", "_id name");
 };
 
 const listBySearchString = (Product) => (
@@ -56,14 +57,14 @@ const listBySearchString = (Product) => (
   }
   return Product.find(searchParams)
     .select(["-img"])
-    .populate("Category")
+    .populate("category")
     .sort([sortBy, order])
     .skip(skip)
     .limit(limit);
 };
 
 const listProductCategories = (Product) => () => {
-  return Product.distinct("Category", {});
+  return Product.distinct("category", {});
 };
 
 module.exports = (Product) => {

@@ -1,9 +1,7 @@
 export const addProductInitialState = {
   product: {
     name: "",
-
     category: "",
-
     description: "",
     price: 0,
     quantity: 0,
@@ -11,10 +9,10 @@ export const addProductInitialState = {
     img: "",
   },
   categories: [],
-  Error: "",
-  RenderError: "",
-  Loading: false,
-  Success: false,
+  error: "",
+  renderError: "",
+  loading: false,
+  success: false,
 };
 
 export function addProductReducer(state, action) {
@@ -24,16 +22,20 @@ export function addProductReducer(state, action) {
         ...state,
         product: { ...state.product, [action.field]: action.value },
       };
+
+    case "categories":
+      return { ...state, categories: action.value };
+
     case "error":
-      return { ...state, RenderError: true, Error: action.value };
+      return { ...state, renderError: true, error: action.value };
     case "clearError":
-      return { ...state, RenderError: false, Error: "" };
+      return { ...state, renderError: false, error: "" };
     case "loading":
-      return { ...state, Loading: true };
+      return { ...state, loading: true };
     case "loadComplete":
-      return { ...state, Loading: false };
+      return { ...state, loading: false };
     case "success":
-      return { ...state, Success: true };
+      return { ...state, success: action.value };
 
     default:
       break;

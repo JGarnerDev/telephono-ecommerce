@@ -1,5 +1,4 @@
-import React, { useReducer } from "react";
-import { Redirect } from "react-router-dom";
+import React, { useReducer, useEffect } from "react";
 import axios from "axios";
 
 import {
@@ -9,7 +8,7 @@ import {
 
 import { isAuth } from "../../../auth";
 
-import { ADD_PRODUCT_ROUTE } from "../../../config";
+import { GET_CATEGORIES_ROUTE, ADD_PRODUCT_ROUTE } from "../../../config";
 
 import Layout from "../../../hoc/Layout";
 import FormField from "../../../components/FormField";
@@ -17,44 +16,66 @@ import UIMessage from "../../../components/UIMessage";
 
 import { Button } from "@material-ui/core";
 
-const ProductManagement = () => {
+const AddProduct = () => {
   const [state, dispatch] = useReducer(
     addProductReducer,
     addProductInitialState
   );
 
-  const { error, renderError, loading, success } = state;
-
-  if (success) {
-    return <Redirect to="/" />;
-  }
-
+  const { categories, error, renderError, loading, success } = state;
   const { user, token } = isAuth();
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
+
+  useEffect(() => {
+    init();
+  }, []);
+
+  const init = () => {
+    axios.get(GET_CATEGORIES_ROUTE).then((res) => {
+      dispatch({ type: "categories", value: res.data });
+    });
   };
+
   const attemptNewProduct = (product) => {
     // Create a formData object
     const formData = new FormData();
     // Append all values to the formData
-    delete product.category;
+    if (product.category.length === 0) {
+      delete product.category;
+    }
     Object.keys(product).forEach((productKey) => {
       formData.append(productKey, product[productKey]);
     });
 
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
     axios
       .post(`${ADD_PRODUCT_ROUTE + "/" + user._id}`, formData, config)
       .then(() => {
-        dispatch({ type: "success" });
+        dispatch({ type: "success", value: "Product successfully added!" });
       })
       .catch((error) => {
         dispatch({ type: "error", value: error });
       });
   };
 
+  let timeout;
+
   const submit = async (e) => {
-    console.log(state.product);
-    attemptNewProduct(state.product);
+    e.preventDefault();
+    dispatch({ type: "clearError" });
+
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+
+    dispatch({ type: "loading" });
+    await attemptNewProduct(state.product);
+    dispatch({ type: "loadComplete" });
+    timeout = setTimeout(() => {
+      dispatch({ type: "clearError" });
+    }, 2000);
   };
 
   const renderForm = () => {
@@ -65,7 +86,6 @@ const ProductManagement = () => {
       price,
       quantity,
       shipping,
-      img,
     } = state.product;
 
     return (
@@ -105,9 +125,6 @@ const ProductManagement = () => {
           );
         })}
 
-        <Button variant="contained" color="primary" onClick={submit}>
-          Submit
-        </Button>
         <select
           name="category"
           value={category}
@@ -119,10 +136,14 @@ const ProductManagement = () => {
             });
           }}
         >
-          <option value={undefined}>No</option>
-          <option value="YYYY">YYYY</option>
-          <option value="YYYY">YYYY</option>
-          <option value="YYYY">YYYY</option>
+          <option value="">None</option>
+          {categories.map((category, i) => {
+            return (
+              <option value={category._id} key={i}>
+                {category.name}
+              </option>
+            );
+          })}
         </select>
         <select
           name="shipping"
@@ -138,6 +159,10 @@ const ProductManagement = () => {
           <option value={1}>Yes</option>
           <option value={0}>No</option>
         </select>
+
+        <Button variant="contained" color="primary" onClick={submit}>
+          Submit
+        </Button>
         {loading ? <p>FICK</p> : null}
         {renderError ? <UIMessage message={error} type="error" /> : null}
         {success ? <UIMessage message={success} type="success" /> : null}
@@ -148,4 +173,4 @@ const ProductManagement = () => {
   return <Layout title="Add a Product">{renderForm()}</Layout>;
 };
 
-export default ProductManagement;
+export default AddProduct;

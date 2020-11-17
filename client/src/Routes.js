@@ -16,16 +16,17 @@ import UserAcccount from "./views/UserAccount";
 import UpdateAccount from "./views/UpdateAccount";
 
 // Products
+import Products from "./views/Products";
 import ProductManagement from "./views/ProductManagement";
 import AddProduct from "./views/ProductManagement/Add";
-import DeleteProduct from "./views/ProductManagement/Delete";
-import UpdateProduct from "./views/ProductManagement/Update";
 
 // Product Categories
 import CategoryManagement from "./views/CategoryManagement";
 import AddCategory from "./views/CategoryManagement/Add";
 
 import {
+  // Public
+  PRODUCTS_URL,
   // Auth
   SIGNUP_URL,
   LOGIN_URL,
@@ -39,8 +40,6 @@ import {
   // Products
   ADMIN_PRODUCT_MANAGEMENT_URL,
   ADMIN_ADD_PRODUCT_URL,
-  ADMIN_DELETE_PRODUCT_URL,
-  ADMIN_UPDATE_PRODUCT_URL,
   // Categories
   ADMIN_CATEGORY_MANAGEMENT_URL,
   ADMIN_ADD_CATEGORY_URL,
@@ -51,9 +50,12 @@ const Routes = () => {
     <Router>
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path={PRODUCTS_URL} exact component={Products} />
         <Route path={SIGNUP_URL} exact component={Signup} />
         <Route path={LOGIN_URL} exact component={Login} />
-        {/*  */}
+
+        {/* //////// Client Routes //////// */}
+
         <PrivateRoute path={CLIENT_CART_URL} exact component={Cart} />
         <PrivateRoute
           path={CLIENT_ACCOUNT_URL}
@@ -96,20 +98,6 @@ const Routes = () => {
           path={ADMIN_ADD_PRODUCT_URL}
           exact
           component={AddProduct}
-        />
-
-        {/* Delete Product */}
-        <AdministrativeRoute
-          path={ADMIN_DELETE_PRODUCT_URL}
-          exact
-          component={DeleteProduct}
-        />
-
-        {/* Update Product */}
-        <AdministrativeRoute
-          path={ADMIN_UPDATE_PRODUCT_URL}
-          exact
-          component={UpdateProduct}
         />
 
         {/* //// Manage Product Categories //// */}
