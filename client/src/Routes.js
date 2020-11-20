@@ -16,7 +16,7 @@ import UserAcccount from "./views/UserAccount";
 import UpdateAccount from "./views/UpdateAccount";
 
 // Products
-import Products from "./views/Products";
+import Shop from "./views/Shop";
 import ProductManagement from "./views/ProductManagement";
 import AddProduct from "./views/ProductManagement/Add";
 
@@ -26,7 +26,7 @@ import AddCategory from "./views/CategoryManagement/Add";
 
 import {
   // Public
-  PRODUCTS_URL,
+  SHOP_URL,
   // Auth
   SIGNUP_URL,
   LOGIN_URL,
@@ -50,7 +50,7 @@ const Routes = () => {
     <Router>
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path={PRODUCTS_URL} exact component={Products} />
+        <Route path={SHOP_URL} exact component={Shop} />
         <Route path={SIGNUP_URL} exact component={Signup} />
         <Route path={LOGIN_URL} exact component={Login} />
 

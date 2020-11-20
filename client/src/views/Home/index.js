@@ -37,15 +37,23 @@ const Home = () => {
   };
 
   const renderPopularProducts = () => {
-    return productsBySales.map((product, i) => {
-      return <ProductCard product={product} key={i} />;
-    });
+    return (
+      <div>
+        {productsBySales.map((product, i) => {
+          return <ProductCard product={product} key={i} />;
+        })}
+      </div>
+    );
   };
 
   const renderNewestProducts = () => {
-    return productsByDate.map((product, i) => {
-      return <ProductCard product={product} key={i} />;
-    });
+    return (
+      <div>
+        {productsByDate.map((product, i) => {
+          return <ProductCard product={product} key={i} />;
+        })}
+      </div>
+    );
   };
 
   return (

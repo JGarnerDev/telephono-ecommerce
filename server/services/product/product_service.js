@@ -35,13 +35,7 @@ const listRelatedProducts = (Product) => (_id, category, limit) => {
     .populate("category", "_id name");
 };
 
-const listBySearchString = (Product) => (
-  order,
-  sortBy,
-  limit,
-  skip,
-  filters
-) => {
+const listBySearchString = (Product) => (sorting, limit, skip, filters) => {
   let searchParams = {};
   for (let key in filters) {
     if (filters[key].length > 0) {
@@ -58,7 +52,7 @@ const listBySearchString = (Product) => (
   return Product.find(searchParams)
     .select(["-img"])
     .populate("category")
-    .sort([sortBy, order])
+    .sort(sorting)
     .skip(skip)
     .limit(limit);
 };

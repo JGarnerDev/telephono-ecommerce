@@ -54,19 +54,20 @@ router.route("/categories").get(async (req, res, next) => {
 
 router.route("/search").post(async (req, res, next) => {
   try {
-    const sortBy = req.query.sortBy ? req.query.sortBy : "_id";
-    const order = req.query.order ? req.query.order : "asc";
-    const limit = req.query.limit ? parseInt(req.query.limit) : 3;
-    const skip = parseInt(req.body.skip);
+    const sortBy = req.query.sortBy || "_id";
+    const order = req.query.order || "";
+    const limit = parseInt(req.query.limit) || 6;
+    const skip = parseInt(req.body.skip) || 0;
     const filters = req.body.filters;
 
+    const sorting = order + sortBy;
     const products = await ProductService.listBySearchString(
-      order,
-      sortBy,
+      sorting,
       limit,
       skip,
       filters
     );
+
     res.json({ listLength: products.length, products });
   } catch (error) {
     error.message = "We couldn't find the product :(";

@@ -1,5 +1,18 @@
+//////// Price Settings
+
+export const priceRanges = [
+  { _id: 0, name: "All", range: [0, 1000000] },
+  { _id: 1, name: "$0 to $9", range: [0, 9] },
+  { _id: 2, name: "$10 to $19", range: [10, 19] },
+  { _id: 3, name: "$20 to $29", range: [20, 29] },
+  { _id: 4, name: "$30 to $39", range: [30, 39] },
+  { _id: 5, name: "$40+", range: [40, 1000000] },
+];
+
+//////// Navigation and Routes
+
 //// Open routes
-export const PRODUCTS_URL = "/products";
+export const SHOP_URL = "/shop";
 
 // Auth
 export const SIGNUP_URL = "/signup";
@@ -17,13 +30,13 @@ export const ADMIN_ACCOUNT_URL = "/Administrator/account";
 export const ADMIN_ACCOUNT_UPDATE_URL = "/Administrator/account/update";
 
 // Product Management
-export const ADMIN_PRODUCT_MANAGEMENT_URL = "/Administrator/products/";
+export const ADMIN_PRODUCT_MANAGEMENT_URL = "/Administrator/products";
 export const ADMIN_ADD_PRODUCT_URL = "/Administrator/products/add";
 export const ADMIN_UPDATE_PRODUCT_URL = "/Administrator/products/update";
 export const ADMIN_DELETE_PRODUCT_URL = "/Administrator/products/delete";
 
 // Product Category Management
-export const ADMIN_CATEGORY_MANAGEMENT_URL = "/Administrator/categories/";
+export const ADMIN_CATEGORY_MANAGEMENT_URL = "/Administrator/categories";
 export const ADMIN_ADD_CATEGORY_URL = "/Administrator/categories/add";
 
 //// Server routes
@@ -35,9 +48,11 @@ export const USER_LOGIN_ROUTE = API_URL + "/auth/login";
 export const USER_LOGOUT_ROUTE = API_URL + "/auth/logout";
 
 // Product Categories
-export const GET_CATEGORIES_ROUTE = API_URL + "/categories/";
+export const GET_CATEGORIES_ROUTE = API_URL + "/categories";
 export const ADD_CATEGORY_ROUTE = API_URL + "/categories/new";
 
 // Products
 export const GET_PRODUCTS_ROUTE = API_URL + "/products";
+export const SEARCH_PRODUCTS_ROUTE = API_URL + "/products/search";
+
 export const ADD_PRODUCT_ROUTE = API_URL + "/products/new";
