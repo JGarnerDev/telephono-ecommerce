@@ -30,7 +30,25 @@ router.route("/").get(async (req, res, next) => {
   }
 });
 
-//
+router.route("/search").get(async (req, res, next) => {
+  try {
+    const query = {};
+    let products;
+    if (req.query.search) {
+      query.name = { $regex: req.query.search, $options: "i" };
+      if (req.query.category && req.query.category != "All") {
+        query.category = req.query.category;
+      }
+
+      products = await ProductService.listBySearchString(query);
+    }
+    res.json(products);
+  } catch (error) {
+    error.message = "We couldn't find the product :(";
+    next(error.message);
+  }
+});
+
 router.route("/:productId").get(async (req, res, next) => {
   try {
     const _id = req.params.productId;
@@ -52,7 +70,7 @@ router.route("/categories").get(async (req, res, next) => {
   }
 });
 
-router.route("/search").post(async (req, res, next) => {
+router.route("/filter").post(async (req, res, next) => {
   try {
     const sortBy = req.query.sortBy || "_id";
     const order = req.query.order || "";
@@ -61,7 +79,7 @@ router.route("/search").post(async (req, res, next) => {
     const filters = req.body.filters;
 
     const sorting = order + sortBy;
-    const products = await ProductService.listBySearchString(
+    const products = await ProductService.listByFilter(
       sorting,
       limit,
       skip,

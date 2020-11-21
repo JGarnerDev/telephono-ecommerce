@@ -13,6 +13,7 @@ export const priceRanges = [
 
 //// Open routes
 export const SHOP_URL = "/shop";
+export const PRODUCT_URL = "/product/:productId";
 
 // Auth
 export const SIGNUP_URL = "/signup";
@@ -53,6 +54,9 @@ export const ADD_CATEGORY_ROUTE = API_URL + "/categories/new";
 
 // Products
 export const GET_PRODUCTS_ROUTE = API_URL + "/products";
+export const RELATED_PRODUCTS_ROUTE = API_URL + "/products/related";
+
 export const SEARCH_PRODUCTS_ROUTE = API_URL + "/products/search";
+export const FILTER_PRODUCTS_ROUTE = API_URL + "/products/filter";
 
 export const ADD_PRODUCT_ROUTE = API_URL + "/products/new";

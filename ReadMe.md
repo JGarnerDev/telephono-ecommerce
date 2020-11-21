@@ -100,3 +100,6 @@ To test the user model CRUD operations (in the same directory):
 - Routes, though working, feel a bit messy / non-uniform. Refactor after test coverage.
 
 ## Todos (client):
+
+- Make sure the 'load more' feature is working correctly with 7+ products
+- Refactor product rendering at Home view and Search component

@@ -35,7 +35,7 @@ const listRelatedProducts = (Product) => (_id, category, limit) => {
     .populate("category", "_id name");
 };
 
-const listBySearchString = (Product) => (sorting, limit, skip, filters) => {
+const listByFilter = (Product) => (sorting, limit, skip, filters) => {
   let searchParams = {};
   for (let key in filters) {
     if (filters[key].length > 0) {
@@ -57,6 +57,10 @@ const listBySearchString = (Product) => (sorting, limit, skip, filters) => {
     .limit(limit);
 };
 
+const listBySearchString = (Product) => (query) => {
+  return Product.find(query).select(["-img"]);
+};
+
 const listProductCategories = (Product) => () => {
   return Product.distinct("category", {});
 };
@@ -72,6 +76,7 @@ module.exports = (Product) => {
     listProducts: listProducts(Product),
     listRelatedProducts: listRelatedProducts(Product),
     listProductCategories: listProductCategories(Product),
+    listByFilter: listByFilter(Product),
     listBySearchString: listBySearchString(Product),
   };
 };

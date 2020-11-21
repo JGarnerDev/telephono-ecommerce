@@ -6,6 +6,7 @@ import { homeReducer, homeInitialState } from "../../store/Home";
 import { GET_PRODUCTS_ROUTE } from "../../config";
 
 import Layout from "../../hoc/Layout";
+import Search from "../../components/Search";
 import { ProductCard } from "../../components/Product";
 
 const Home = () => {
@@ -58,6 +59,7 @@ const Home = () => {
 
   return (
     <Layout title="Home">
+      <Search />
       <h2>Popular Products</h2>
       {renderPopularProducts()}
       <hr />

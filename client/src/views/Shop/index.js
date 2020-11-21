@@ -5,7 +5,7 @@ import { shopReducer, shopInitialState } from "../../store/Shop";
 
 import {
   priceRanges,
-  SEARCH_PRODUCTS_ROUTE,
+  FILTER_PRODUCTS_ROUTE,
   GET_CATEGORIES_ROUTE,
 } from "../../config";
 
@@ -59,7 +59,7 @@ const Shop = () => {
     const category = activeCategories;
     const price = priceRange;
     const filters = { category, price };
-    axios.post(SEARCH_PRODUCTS_ROUTE, { skip, limit, filters }).then((res) => {
+    axios.post(FILTER_PRODUCTS_ROUTE, { skip, limit, filters }).then((res) => {
       dispatch({ type: "setProducts", value: res.data.products });
       dispatch({ type: "setListLength", value: res.data.listLength });
     });
@@ -70,7 +70,7 @@ const Shop = () => {
     const price = priceRange;
     const filters = { category, price };
     dispatch({ type: "setQuerySkip", value: skip + limit });
-    axios.post(SEARCH_PRODUCTS_ROUTE, { skip, limit, filters }).then((res) => {
+    axios.post(FILTER_PRODUCTS_ROUTE, { skip, limit, filters }).then((res) => {
       dispatch({
         type: "loadMoreProducts",
         value: res.data.products,
