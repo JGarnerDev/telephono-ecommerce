@@ -103,3 +103,6 @@ To test the user model CRUD operations (in the same directory):
 
 - Make sure the 'load more' feature is working correctly with 7+ products
 - Refactor product rendering at Home view and Search component
+- Code update user account view
+- Code single product full display component
+- Test coverage

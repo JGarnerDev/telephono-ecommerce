@@ -1,8 +1,8 @@
-import { Description } from "@material-ui/icons";
 import React from "react";
 import { Link } from "react-router-dom";
 
 import { GET_PRODUCTS_ROUTE } from "../../config";
+import { addProduct } from "../../views/Cart/utils";
 
 import "./Product.scss";
 
@@ -22,7 +22,13 @@ export const ProductImage = ({ _id }) => {
   );
 };
 
-export const ProductCard = ({ product: { name, price, description, _id } }) => {
+export const ProductCard = ({ product }) => {
+  const addProductToCart = () => {
+    addProduct(product);
+  };
+
+  const { name, price, description, _id } = product;
+
   return (
     <div className="productCard">
       <h3>{name}</h3>
@@ -30,6 +36,8 @@ export const ProductCard = ({ product: { name, price, description, _id } }) => {
       <p>{description}</p>
       <p>${price}</p>
       <Link to={`/product/${_id}`}>View</Link>
+      <hr />
+      <button onClick={addProductToCart}>Add to cart</button>
     </div>
   );
 };

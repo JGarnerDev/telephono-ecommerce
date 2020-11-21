@@ -15,8 +15,8 @@ const UpdateAccount = () => {
     : (description = `${name} (Client)`);
 
   return (
-    <Layout title={"Update Account Information"} description={description}>
-      <div className="">ASS</div>
+    <Layout title="Update Account Information" description={description}>
+      <div className=""></div>
     </Layout>
   );
 };
