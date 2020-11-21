@@ -11,6 +11,8 @@ import {
   ADMIN_ACCOUNT_URL,
 } from "../../config";
 
+import { countCartItems } from "../../views/Cart/utils";
+
 import {
   Button,
   SwipeableDrawer,
@@ -87,6 +89,7 @@ const Nav = React.memo(() => {
       <Link to="/products">
         <ViewCarousel />
       </Link>
+      <p>{countCartItems()}</p>
       <Link to={CLIENT_CART_URL}>
         <ShoppingBasket />
       </Link>
