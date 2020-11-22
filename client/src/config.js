@@ -60,3 +60,8 @@ export const SEARCH_PRODUCTS_ROUTE = API_URL + "/products/search";
 export const FILTER_PRODUCTS_ROUTE = API_URL + "/products/filter";
 
 export const ADD_PRODUCT_ROUTE = API_URL + "/products/new";
+
+// Purchasing
+
+export const GET_PURCHASE_TOKEN_ROUTE = API_URL + "/checkout/paymenttoken";
+export const PROCESS_PURCHASE_ROUTE = API_URL + "/checkout";

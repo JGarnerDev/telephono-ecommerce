@@ -11,7 +11,7 @@ import {
   ADMIN_ACCOUNT_URL,
 } from "../../config";
 
-import { countCartItems } from "../../views/Cart/utils";
+import { countProductsInCart } from "../../views/Cart/utils";
 
 import {
   Button,
@@ -89,7 +89,7 @@ const Nav = React.memo(() => {
       <Link to="/products">
         <ViewCarousel />
       </Link>
-      <p>{countCartItems()}</p>
+      <p>{countProductsInCart()}</p>
       <Link to={CLIENT_CART_URL}>
         <ShoppingBasket />
       </Link>

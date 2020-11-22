@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
-// ... morgan, for development of routes
+// Morgan, for development of routes
 const morgan = require("morgan");
 
 app.use(bodyParser.json());
@@ -21,6 +21,7 @@ const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
 const productsRoute = require("./routes/products");
 const categoriesRoute = require("./routes/productCategories");
+const paymentRoute = require("./routes/payment");
 
 // For listing users, sign up, logging in, and logging out
 app.use("/api/auth", authRoute);
@@ -30,6 +31,8 @@ app.use("/api/user", userRoute);
 app.use("/api/categories", categoriesRoute);
 // For listing products and other CRUD
 app.use("/api/products", productsRoute);
+// For listing products and other CRUD
+app.use("/api/checkout", paymentRoute);
 
 // If route is not found, respond with the literal string
 app.use((req, res, next) => {
