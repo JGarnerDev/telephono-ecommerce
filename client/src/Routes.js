@@ -25,6 +25,10 @@ import AddProduct from "./views/ProductManagement/Add";
 import CategoryManagement from "./views/CategoryManagement";
 import AddCategory from "./views/CategoryManagement/Add";
 
+// Orders
+
+import Orders from "./views/Orders";
+
 import {
   // Public
   SHOP_URL,
@@ -32,11 +36,11 @@ import {
   // Auth
   SIGNUP_URL,
   LOGIN_URL,
-  // Client
+  //// Client
   CLIENT_CART_URL,
   CLIENT_ACCOUNT_URL,
   CLIENT_ACCOUNT_UPDATE_URL,
-  // Admin
+  //// Admin
   ADMIN_ACCOUNT_URL,
   ADMIN_ACCOUNT_UPDATE_URL,
   // Products
@@ -45,6 +49,8 @@ import {
   // Categories
   ADMIN_CATEGORY_MANAGEMENT_URL,
   ADMIN_ADD_CATEGORY_URL,
+  // Orders
+  ADMIN_VIEW_ORDERS_URL,
 } from "./config";
 
 const Routes = () => {
@@ -115,6 +121,12 @@ const Routes = () => {
           path={ADMIN_ADD_CATEGORY_URL}
           exact
           component={AddCategory}
+        />
+        {/* View Orders */}
+        <AdministrativeRoute
+          path={ADMIN_VIEW_ORDERS_URL}
+          exact
+          component={Orders}
         />
       </Switch>
     </Router>

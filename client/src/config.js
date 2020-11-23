@@ -40,6 +40,9 @@ export const ADMIN_DELETE_PRODUCT_URL = "/Administrator/products/delete";
 export const ADMIN_CATEGORY_MANAGEMENT_URL = "/Administrator/categories";
 export const ADMIN_ADD_CATEGORY_URL = "/Administrator/categories/add";
 
+// Product Category Management
+export const ADMIN_VIEW_ORDERS_URL = "/Administrator/orders";
+
 //// Server routes
 export const API_URL = process.env.REACT_APP_API_ROOT_URL;
 
@@ -66,3 +69,7 @@ export const ADD_PRODUCT_ROUTE = API_URL + "/products/new";
 export const GET_PURCHASE_TOKEN_ROUTE = API_URL + "/checkout/paymenttoken";
 export const PROCESS_PURCHASE_ROUTE = API_URL + "/checkout";
 export const SAVE_ORDER_DATA_ROUTE = API_URL + "/orders/create";
+export const GET_ORDERS_ROUTE = API_URL + "/orders";
+export const GET_SHIPPING_STATUS_VALUES_ROUTE =
+  API_URL + "/orders/shipmentvalues";
+export const UPDATE_SHIPPING_STATUS_ROUTE = API_URL + "/orders/updatestatus";

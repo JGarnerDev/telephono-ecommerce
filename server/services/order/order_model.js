@@ -18,8 +18,8 @@ const OrderModel = new Schema(
   {
     products: [ProductPurchaseModel],
     transaction_id: {},
-    amount: { type: Number },
-    address: String,
+    amount: Number,
+    address: { type: String, required: true },
     status: {
       type: String,
       default: "Not processed",
@@ -31,6 +31,7 @@ const OrderModel = new Schema(
         "Cancelled",
       ],
     },
+    clientData: Object,
     updated: Date,
     user: { type: ObjectId, ref: "User" },
   },

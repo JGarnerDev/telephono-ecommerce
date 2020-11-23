@@ -24,7 +24,7 @@ const deleteProductById = (Product) => (_id) => {
 const decreaseProductQuantity = (Product) => (_id, deduction) => {
   return Product.updateOne(
     { _id },
-    { $inc: { quantity: -deduction, sold: +deduction } }
+    { $inc: { quantity: -deduction, sales: +deduction } }
   );
 };
 

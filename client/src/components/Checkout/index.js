@@ -17,13 +17,10 @@ const Checkout = ({ products, emptyCart }) => {
     address: "",
   });
 
-  const {
-    user: { _id },
-    token,
-  } = isAuth();
+  const { user, token } = isAuth();
 
   const init = () => {
-    getPaymentToken(_id, token).then((res) => {
+    getPaymentToken(user._id, token).then((res) => {
       if (res.error) {
         setData({ ...data, error: res.error });
       } else {
@@ -50,7 +47,7 @@ const Checkout = ({ products, emptyCart }) => {
           paymentMethodNonce: nonce,
           amount: totalCostOfCart(),
         };
-        processPayment(_id, token, paymentData)
+        processPayment(user._id, token, paymentData)
           .then((res) => {
             const orderData = {
               //
@@ -58,9 +55,10 @@ const Checkout = ({ products, emptyCart }) => {
               amount: res.transaction.amount,
               products: products,
               address: data.address,
+              clientData: user,
             };
 
-            saveOrderData(_id, token, orderData);
+            saveOrderData(user._id, token, orderData);
 
             setData({ ...data, success: res.success });
             emptyCart(() => {
@@ -102,7 +100,7 @@ const Checkout = ({ products, emptyCart }) => {
   };
 
   const enableCheckout = () => {
-    return _id ? (
+    return user ? (
       renderDropIn()
     ) : (
       <Link to="/signup">Register to confirm purchase</Link>

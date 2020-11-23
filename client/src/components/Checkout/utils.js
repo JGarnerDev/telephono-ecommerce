@@ -31,12 +31,9 @@ export const saveOrderData = (userId, token, orderData) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  console.log(orderData.products);
   return axios
     .post(SAVE_ORDER_DATA_ROUTE + `/${userId}`, orderData, config)
     .then((res) => {
       return res.data;
     });
 };
-
-export const addOrderToUserHistory = (userId) => {};

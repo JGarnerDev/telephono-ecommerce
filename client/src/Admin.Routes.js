@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 
 import { isAdmin } from "./auth";
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const AdminRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
@@ -16,4 +16,4 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-export default PrivateRoute;
+export default AdminRoute;
