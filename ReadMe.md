@@ -108,3 +108,4 @@ To test the user model CRUD operations (in the same directory):
 - Code update user account view
 - Code single product full display component
 - Test coverage
+- Product filter doesn't do the do when there's an empty string input

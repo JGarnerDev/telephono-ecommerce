@@ -6,7 +6,7 @@ import BrainTreeDropIn from "braintree-web-drop-in-react";
 import UIMessage from "../UIMessage";
 
 import { isAuth } from "../../auth";
-import { getPaymentToken, processPayment } from "./utils";
+import { getPaymentToken, processPayment, saveOrderData } from "./utils";
 
 const Checkout = ({ products, emptyCart }) => {
   const [data, setData] = useState({
@@ -36,22 +36,35 @@ const Checkout = ({ products, emptyCart }) => {
     init();
   }, []);
 
+  const handleAddress = (event) => {
+    setData({ ...data, address: event.target.value });
+  };
+
   const confirmPurchase = () => {
     let nonce;
     let getNonce = data.instance
       .requestPaymentMethod()
-      .then((data) => {
-        nonce = data.nonce;
+      .then((confirmationData) => {
+        nonce = confirmationData.nonce;
         const paymentData = {
           paymentMethodNonce: nonce,
           amount: totalCostOfCart(),
         };
         processPayment(_id, token, paymentData)
           .then((res) => {
-            console.log(res);
+            const orderData = {
+              //
+              transaction_id: res.transaction._id,
+              amount: res.transaction.amount,
+              products: products,
+              address: data.address,
+            };
+
+            saveOrderData(_id, token, orderData);
+
             setData({ ...data, success: res.success });
             emptyCart(() => {
-              window.location.reload();
+              // window.location.reload();
             });
           })
           .catch((error) => {
@@ -66,6 +79,14 @@ const Checkout = ({ products, emptyCart }) => {
   const renderDropIn = () => {
     return data.paymentToken && products.length ? (
       <div onBlur={() => setData({ ...data, error: "" })}>
+        <div>
+          <label></label>
+          <textarea
+            onChange={handleAddress}
+            value={data.address}
+            placeholder="Shipping address"
+          ></textarea>
+        </div>
         <BrainTreeDropIn
           options={{
             authorization: data.paymentToken,

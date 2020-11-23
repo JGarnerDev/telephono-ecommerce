@@ -65,3 +65,4 @@ export const ADD_PRODUCT_ROUTE = API_URL + "/products/new";
 
 export const GET_PURCHASE_TOKEN_ROUTE = API_URL + "/checkout/paymenttoken";
 export const PROCESS_PURCHASE_ROUTE = API_URL + "/checkout";
+export const SAVE_ORDER_DATA_ROUTE = API_URL + "/orders/create";

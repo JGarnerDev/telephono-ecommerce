@@ -22,6 +22,7 @@ const userRoute = require("./routes/user");
 const productsRoute = require("./routes/products");
 const categoriesRoute = require("./routes/productCategories");
 const paymentRoute = require("./routes/payment");
+const ordersRoute = require("./routes/orders");
 
 // For listing users, sign up, logging in, and logging out
 app.use("/api/auth", authRoute);
@@ -31,8 +32,10 @@ app.use("/api/user", userRoute);
 app.use("/api/categories", categoriesRoute);
 // For listing products and other CRUD
 app.use("/api/products", productsRoute);
-// For listing products and other CRUD
+//
 app.use("/api/checkout", paymentRoute);
+//
+app.use("/api/orders", ordersRoute);
 
 // If route is not found, respond with the literal string
 app.use((req, res, next) => {
