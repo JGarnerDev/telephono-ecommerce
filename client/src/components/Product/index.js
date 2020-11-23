@@ -33,7 +33,6 @@ export const ProductCard = ({
   update = undefined,
 }) => {
   const [quantity, setQuantity] = useState(product.quantity);
-
   const addProductToCart = () => {
     addProduct(product);
   };
@@ -42,12 +41,21 @@ export const ProductCard = ({
     removeProduct(_id);
   };
 
-  const handleChange = (productId) => (event) => {
+  const handleChange = (productId, maxQuantity) => (event) => {
     setUpdate(!update);
-    setQuantity(event.target.value < 1 ? 1 : event.target.value);
-    if (event.target.value >= 1) {
-      updateProductQuantity(productId, event.target.value);
-    }
+
+    const setAcceptableQuantity = (value) => {
+      if (value < 1) {
+        value = 1;
+      } else if (value >= maxQuantity) {
+        value = maxQuantity;
+      }
+      console.log(value);
+      setQuantity(value);
+      updateProductQuantity(productId, value);
+    };
+
+    setAcceptableQuantity(event.target.value);
   };
 
   const renderBasicProductInfo = ({ name, price, description, _id }) => {
@@ -62,10 +70,15 @@ export const ProductCard = ({
     );
   };
 
-  const renderInCartOptions = ({ _id }) => {
+  const renderInCartOptions = ({ _id, maxQuantity }) => {
     return (
       <>
-        <input type="number" value={quantity} onChange={handleChange(_id)} />
+        <p>Units available: {maxQuantity}</p>
+        <input
+          type="number"
+          value={quantity}
+          onChange={handleChange(_id, maxQuantity)}
+        />
         <button
           onClick={() => {
             removeProductFromCart(_id);

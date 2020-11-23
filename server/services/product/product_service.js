@@ -21,6 +21,13 @@ const deleteProductById = (Product) => (_id) => {
   return Product.deleteOne({ _id });
 };
 
+const decreaseProductQuantity = (Product) => (_id, deduction) => {
+  return Product.updateOne(
+    { _id },
+    { $inc: { quantity: -deduction, sold: +deduction } }
+  );
+};
+
 const listProducts = (Product) => (order, sortBy, limit) => {
   return Product.find({})
     .select(["-img"])
@@ -78,5 +85,6 @@ module.exports = (Product) => {
     listProductCategories: listProductCategories(Product),
     listByFilter: listByFilter(Product),
     listBySearchString: listBySearchString(Product),
+    decreaseProductQuantity: decreaseProductQuantity(Product),
   };
 };

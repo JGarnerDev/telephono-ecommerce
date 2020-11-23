@@ -7,6 +7,7 @@ export const addProduct = (product) => {
     cart.push({
       ...product,
       quantity: 1,
+      maxQuantity: product.quantity,
     });
 
     cart = Array.from(new Set(cart.map((product) => product._id))).map(

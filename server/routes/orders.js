@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const OrderService = require("../services/order");
 const UserService = require("../services/user");
+const ProductService = require("../services/product");
 
 const { requireWebToken, isAuth, confirmUser } = require("../middleware");
 
@@ -17,6 +18,10 @@ router
       await UserService.addOrderToUserHistory(req.body.user._id, order);
 
       res.json(order);
+
+      order.products.forEach(async ({ _id, quantity }) => {
+        await ProductService.decreaseProductQuantity(_id, quantity);
+      });
     } catch (error) {
       next(error.message);
     }
