@@ -98,6 +98,8 @@ To test the user model CRUD operations (in the same directory):
 - Broaden current services tests
 - Broaden endpoint tests
 - Routes, though working, feel a bit messy / non-uniform. Refactor after test coverage.
+- Error Handling
+  - Response to duplicate email when signing up is directly from Mongo. Stop that, clean it up
 
 ## Todos (client):
 
@@ -109,3 +111,8 @@ To test the user model CRUD operations (in the same directory):
 - Code single product full display component
 - Test coverage
 - Product filter doesn't do the do when there's an empty string input
+- When authorization and user data is required for a view, have the data ready in initialization of the component
+- Make adress manditory in validation for checkout
+- Make an order component for order history
+- Utility function for those brutal timestrings
+- Product management view can really just be one component. The biggest difference is between adding and updating, which can be managed with conditional rendering.

@@ -19,7 +19,7 @@ import UpdateAccount from "./views/UpdateAccount";
 import Shop from "./views/Shop";
 import Product from "./views/Product";
 import ProductManagement from "./views/ProductManagement";
-import AddProduct from "./views/ProductManagement/Add";
+import ProductEditor from "./views/ProductEditor";
 
 // Product Categories
 import CategoryManagement from "./views/CategoryManagement";
@@ -27,7 +27,8 @@ import AddCategory from "./views/CategoryManagement/Add";
 
 // Orders
 
-import Orders from "./views/Orders";
+import AllOrders from "./views/AllOrders";
+import UserOrders from "./views/UserOrders";
 
 import {
   // Public
@@ -40,12 +41,15 @@ import {
   CLIENT_CART_URL,
   CLIENT_ACCOUNT_URL,
   CLIENT_ACCOUNT_UPDATE_URL,
+  CLIENT_ORDER_HISTORY_URL,
   //// Admin
   ADMIN_ACCOUNT_URL,
   ADMIN_ACCOUNT_UPDATE_URL,
   // Products
   ADMIN_PRODUCT_MANAGEMENT_URL,
+  ADMIN_VIEW_PRODUCTS_URL,
   ADMIN_ADD_PRODUCT_URL,
+  ADMIN_UPDATE_PRODUCT_URL,
   // Categories
   ADMIN_CATEGORY_MANAGEMENT_URL,
   ADMIN_ADD_CATEGORY_URL,
@@ -59,7 +63,7 @@ const Routes = () => {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path={SHOP_URL} exact component={Shop} />
-        <Route path={PRODUCT_URL} exact component={Product} />
+        <Route path={PRODUCT_URL + "/:productId"} exact component={Product} />
         <Route path={SIGNUP_URL} exact component={Signup} />
         <Route path={LOGIN_URL} exact component={Login} />
 
@@ -75,6 +79,11 @@ const Routes = () => {
           path={CLIENT_ACCOUNT_UPDATE_URL}
           exact
           component={UpdateAccount}
+        />
+        <PrivateRoute
+          path={CLIENT_ORDER_HISTORY_URL}
+          exact
+          component={UserOrders}
         />
 
         {/* //////// Admin Routes //////// */}
@@ -106,7 +115,14 @@ const Routes = () => {
         <AdministrativeRoute
           path={ADMIN_ADD_PRODUCT_URL}
           exact
-          component={AddProduct}
+          component={() => <ProductEditor mode={"Add"} />}
+        />
+
+        {/* Update Product */}
+        <AdministrativeRoute
+          path={ADMIN_UPDATE_PRODUCT_URL + "/:productId"}
+          exact
+          component={() => <ProductEditor mode={"Update"} />}
         />
 
         {/* //// Manage Product Categories //// */}
@@ -122,12 +138,14 @@ const Routes = () => {
           exact
           component={AddCategory}
         />
+
         {/* View Orders */}
         <AdministrativeRoute
           path={ADMIN_VIEW_ORDERS_URL}
           exact
-          component={Orders}
+          component={AllOrders}
         />
+
       </Switch>
     </Router>
   );

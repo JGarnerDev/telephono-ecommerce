@@ -9,6 +9,8 @@ import {
   CLIENT_CART_URL,
   CLIENT_ACCOUNT_URL,
   ADMIN_ACCOUNT_URL,
+  ADMIN_VIEW_ORDERS_URL,
+  CLIENT_ORDER_HISTORY_URL,
 } from "../../config";
 
 import { countProductsInCart } from "../../views/Cart/utils";
@@ -31,6 +33,7 @@ import {
   ShoppingBasket,
   ViewCarousel,
   Build,
+  LocalShipping,
 } from "@material-ui/icons";
 
 import "./Nav.scss";
@@ -45,6 +48,8 @@ const Nav = React.memo(() => {
       ? (links = [
           [<Home />, "/", "Home"],
           [<Build />, ADMIN_ACCOUNT_URL, "My account (Admin)"],
+          [<LocalShipping />, ADMIN_VIEW_ORDERS_URL, "All orders"],
+          [<LocalShipping />, CLIENT_ORDER_HISTORY_URL, "My orders"],
           [<MeetingRoom />, "/", "Log out"],
         ])
       : (links = [
@@ -86,7 +91,7 @@ const Nav = React.memo(() => {
 
   return (
     <nav id="Nav">
-      <Link to="/products">
+      <Link to="/shop">
         <ViewCarousel />
       </Link>
       <p>{countProductsInCart()}</p>

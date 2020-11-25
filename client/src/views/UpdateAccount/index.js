@@ -1,14 +1,96 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-import { isAuth } from "../../auth";
+import { isAuth, updateUserJWT } from "../../auth";
+
+import { UPDATE_USER_ACCOUNT_ROUTE } from "../../config";
 
 import Layout from "../../hoc/Layout";
+import FormField from "../../components/FormField";
+
+import { FormControlLabel, Checkbox } from "@material-ui/core";
+import { Build, BuildOutlined } from "@material-ui/icons";
 
 const UpdateAccount = () => {
-  const {
-    user: { role, history, email, name, _id, createdAt },
-  } = isAuth();
+  const [userProfile, setUserProfile] = useState(isAuth().user);
+  const [token, setToken] = useState(isAuth().token);
+
+  const submit = (e) => {
+    e.preventDefault();
+    let config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    axios
+      .post(
+        UPDATE_USER_ACCOUNT_ROUTE + "/" + userProfile._id,
+        { userProfile },
+        config
+      )
+      .then((res) => {
+        updateUserJWT(res.data);
+      });
+  };
+
+  const { name, email, password, role, _id } = userProfile;
+
+  const handleInfoChange = (event, key) => {
+    event.preventDefault();
+    if (key === "role") {
+      if (role) {
+        return setUserProfile({ ...userProfile, role: 0 });
+      }
+      return setUserProfile({ ...userProfile, role: 1 });
+    }
+    setUserProfile({ ...userProfile, [key]: event.target.value });
+  };
+
+  const formFieldOptions = [{ name }, { email }, { password }];
+
+  const renderFormFieldOptions = () =>
+    formFieldOptions.map((formValue, i) => (
+      <FormField
+        label={Object.keys(formFieldOptions[i])[0]}
+        value={userProfile[formValue]}
+        changeHandler={(event) =>
+          handleInfoChange(event, Object.keys(formFieldOptions[i])[0])
+        }
+      />
+    ));
+
+  const renderAdminToggle = () => (
+    <FormControlLabel
+      control={
+        <Checkbox
+          icon={<BuildOutlined />}
+          checkedIcon={<Build />}
+          onChange={(event) => {
+            event.preventDefault();
+            handleInfoChange(event, "role");
+          }}
+          value={role}
+          checked={!!role}
+        />
+      }
+      label="Administrative? "
+    />
+  );
+
+  const renderUserUpdateForm = () => (
+    <form>
+      {renderFormFieldOptions()}
+      {renderAdminToggle()}
+      <button
+        onClick={(e) => {
+          submit(e);
+        }}
+      >
+        Submit
+      </button>
+    </form>
+  );
+
   let description;
   role
     ? (description = `${name} (Administrator)`)
@@ -16,7 +98,7 @@ const UpdateAccount = () => {
 
   return (
     <Layout title="Update Account Information" description={description}>
-      <div className=""></div>
+      <div className="">{userProfile && renderUserUpdateForm()}</div>
     </Layout>
   );
 };

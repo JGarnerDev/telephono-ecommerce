@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
 
 const { requireWebToken, confirmUser, isAuth } = require("../middleware");
 
@@ -10,7 +11,6 @@ router
   .get(requireWebToken, isAuth, async (req, res, next) => {
     try {
       const user = req.profile;
-      user.password = "";
       res.json({
         user,
       });
@@ -20,16 +20,16 @@ router
   });
 
 router
-  .route("/:userId/update")
+  .route("/update/:userId")
   .post(requireWebToken, isAuth, async (req, res, next) => {
     try {
       const user = req.profile;
-      const newUserData = req.body.newUserData;
+      const newUserData = req.body.userProfile;
       const updatedUser = await UserService.updateUser(user._id, newUserData);
-      user.password = "";
-      res.json({
-        updatedUser,
-      });
+
+      const token = jwt.sign({ _id: user._id }, process.env.JWT);
+      res.cookie("jwt", token);
+      res.json({ token, user: updatedUser });
     } catch (error) {
       next(error.message);
     }

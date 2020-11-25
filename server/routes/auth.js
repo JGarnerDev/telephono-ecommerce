@@ -48,7 +48,7 @@ router.route("/signup").post(async (req, res, next) => {
     const user = await UserService.createUser(userData);
     const token = jwt.sign({ _id: user._id }, process.env.JWT);
     res.cookie("jwt", token);
-    user.password = "";
+
     res.json({ token, user });
   } catch (error) {
     next(error.message);
@@ -58,24 +58,23 @@ router.route("/signup").post(async (req, res, next) => {
 // GET endpoint for 'sitename.com/auth/login'.
 //    First looks for a user object, then compares password against encrypted version.
 //    Happy case responds a cookie bearing the JWT, sad case forwards an internal server error
-router.route("/login").get(async (req, res, next) => {
+router.route("/login").post(async (req, res, next) => {
   try {
-    const { email, password } = req.body;
-    const user = await UserService.findUser(email);
-
+    const { Email, Password } = req.body;
+    const user = await UserService.findUser(Email);
     if (!user) {
       throw new SyntaxError(`No account was found!`);
     }
 
-    const passwordMatch = await bcrypt.compare(password, user.password);
+    const passwordMatch = await bcrypt.compare(Password, user.password);
 
     if (!passwordMatch) {
       throw new SyntaxError(`Wrong password!`);
     }
 
     const token = jwt.sign({ _id: user._id }, process.env.JWT);
+
     res.cookie("jwt", token);
-    user.password = "";
     res.json({ token, user });
   } catch (error) {
     next(error.message);

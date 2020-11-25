@@ -125,7 +125,6 @@ router
         const { name, description, price } = fields;
         [name, description, price].forEach((value) => {
           if (!value || value.length === 0) {
-            console.log("!!");
             return res.status(500).json({ error: "Product form incomplete!" });
           }
         });
@@ -156,9 +155,8 @@ router
     }
   });
 
-// Endpoint for 'sitename.com/products/:productId/:userId', deletes a product from database, provided that the user is authorized, is an admin
 router
-  .route("/:productId/:userId")
+  .route("/update/:productId/:userId")
   .post(requireWebToken, isAuth, isAdmin, async (req, res, next) => {
     try {
       const productId = req.params.productId;

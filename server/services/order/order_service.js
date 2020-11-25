@@ -12,6 +12,9 @@ const getShipmentStatusValues = (Order) => () => {
 const updateShipmentStatus = (Order) => (_id, newStatus) => {
   return Order.findOneAndUpdate({ _id }, { status: newStatus });
 };
+const listUserOrderHistory = (Order) => (_id) => {
+  return Order.find({ user: _id }).sort([['_id', "desc"]]);
+};
 
 module.exports = (Order) => {
   return {
@@ -19,5 +22,6 @@ module.exports = (Order) => {
     listOrders: listOrders(Order),
     getShipmentStatusValues: getShipmentStatusValues(Order),
     updateShipmentStatus: updateShipmentStatus(Order),
+    listUserOrderHistory: listUserOrderHistory(Order),
   };
 };

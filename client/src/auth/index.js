@@ -3,17 +3,21 @@ import { Redirect } from "react-router-dom";
 
 import { USER_LOGOUT_ROUTE } from "../config";
 
-export const authenticateUser = (data, next) => {
+export const authenticateUser = (data, next = {}) => {
   if (typeof window !== "undefined") {
     localStorage.setItem("jwt", JSON.stringify(data));
     next();
+  }
+};
+export const updateUserJWT = (data) => {
+  if (typeof window !== "undefined") {
+    localStorage.setItem("jwt", JSON.stringify(data));
   }
 };
 
 export const isAuth = () => {
   if (typeof window !== "undefined" && localStorage.getItem("jwt")) {
     const userData = JSON.parse(localStorage.getItem("jwt"));
-
     return userData;
   }
   return false;

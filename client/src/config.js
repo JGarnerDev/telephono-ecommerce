@@ -13,7 +13,7 @@ export const priceRanges = [
 
 //// Open routes
 export const SHOP_URL = "/shop";
-export const PRODUCT_URL = "/product/:productId";
+export const PRODUCT_URL = "/product";
 
 // Auth
 export const SIGNUP_URL = "/signup";
@@ -23,6 +23,7 @@ export const LOGIN_URL = "/login";
 export const CLIENT_CART_URL = "/Client/cart";
 export const CLIENT_ACCOUNT_URL = "/Client/account";
 export const CLIENT_ACCOUNT_UPDATE_URL = "/Client/account/update";
+export const CLIENT_ORDER_HISTORY_URL = "/Client/account/orders";
 
 ////  Admin
 
@@ -33,14 +34,14 @@ export const ADMIN_ACCOUNT_UPDATE_URL = "/Administrator/account/update";
 // Product Management
 export const ADMIN_PRODUCT_MANAGEMENT_URL = "/Administrator/products";
 export const ADMIN_ADD_PRODUCT_URL = "/Administrator/products/add";
+export const ADMIN_VIEW_PRODUCTS_URL = "/Administrator/products/all";
 export const ADMIN_UPDATE_PRODUCT_URL = "/Administrator/products/update";
-export const ADMIN_DELETE_PRODUCT_URL = "/Administrator/products/delete";
 
 // Product Category Management
 export const ADMIN_CATEGORY_MANAGEMENT_URL = "/Administrator/categories";
 export const ADMIN_ADD_CATEGORY_URL = "/Administrator/categories/add";
 
-// Product Category Management
+// Orders
 export const ADMIN_VIEW_ORDERS_URL = "/Administrator/orders";
 
 //// Server routes
@@ -50,6 +51,11 @@ export const API_URL = process.env.REACT_APP_API_ROOT_URL;
 export const USER_SIGNUP_ROUTE = API_URL + "/auth/signup";
 export const USER_LOGIN_ROUTE = API_URL + "/auth/login";
 export const USER_LOGOUT_ROUTE = API_URL + "/auth/logout";
+
+// Users
+export const GET_USER_INFO_ROUTE = API_URL + "/user";
+export const UPDATE_USER_ACCOUNT_ROUTE = API_URL + "/user/update";
+export const GET_USER_ORDERS_ROUTE = API_URL + "/orders/history";
 
 // Product Categories
 export const GET_CATEGORIES_ROUTE = API_URL + "/categories";
@@ -63,6 +69,7 @@ export const SEARCH_PRODUCTS_ROUTE = API_URL + "/products/search";
 export const FILTER_PRODUCTS_ROUTE = API_URL + "/products/filter";
 
 export const ADD_PRODUCT_ROUTE = API_URL + "/products/new";
+export const UPDATE_PRODUCT_ROUTE = API_URL + "/products/update";
 
 // Purchasing
 

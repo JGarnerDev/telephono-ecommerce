@@ -25,6 +25,18 @@ router
   });
 
 router
+  .route("/history/:userId")
+  .get(requireWebToken, isAuth, async (req, res, next) => {
+    try {
+      const _id = req.params.userId;
+      const orders = await OrderService.listUserOrderHistory(_id);
+      res.json(orders);
+    } catch (error) {
+      next(error.message);
+    }
+  });
+
+router
   .route("/create/:userId")
   .post(requireWebToken, isAuth, async (req, res, next) => {
     try {
@@ -62,7 +74,8 @@ router
       const _id = req.params.orderId;
       const newStatus = req.body.newStatus;
 
-      await OrderService.updateShipmentStatus(_id, newStatus);
+      const updated = await OrderService.updateShipmentStatus(_id, newStatus);
+      res.json(updated);
     } catch (error) {
       next(error.message);
     }

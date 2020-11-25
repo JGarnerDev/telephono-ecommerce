@@ -41,7 +41,7 @@ const UserModel = new Schema(
 );
 
 UserModel.pre("save", function (next) {
-  if (!this.isModified("password")) return next();
+  // if (!this.isModified("password")) return next();
 
   bcrypt.hash(this.password, 10, (err, hashedPassword) => {
     if (err) {

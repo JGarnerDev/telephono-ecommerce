@@ -21,15 +21,17 @@ const Login = () => {
   }
 
   const attemptLogin = (Email, Password) => {
+    const log = { Email, Password };
     axios
-      .get(`${USER_LOGIN_ROUTE}`, { Email, Password })
-      .then((data) => {
-        authenticateUser(data, () => {
+      .post(`${USER_LOGIN_ROUTE}`, log)
+      .then((res) => {
+        console.log(res);
+        authenticateUser(res.data, () => {
           dispatch({ type: "success" });
         });
       })
       .catch((error) => {
-        dispatch({ type: "error", value: error.response.data.error });
+        dispatch({ type: "error", value: error });
       });
   };
 

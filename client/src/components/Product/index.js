@@ -10,15 +10,20 @@ import {
 
 import "./Product.scss";
 
-export const ProductImage = ({ _id }) => {
-  return (
+export const ProductImage = ({ _id, isPreview, image }) => {
+  return isPreview ? (
+    <img src={image} className="productCard__image"></img>
+  ) : (
     <object
       data={GET_PRODUCTS_ROUTE + `/${_id}/img`}
       type="image/png"
       className="productCard__image"
     >
       <img
-        src="https://www.och-lco.ca/wp-content/uploads/2015/07/unavailable-image.jpg"
+        src={
+          image ||
+          "https://www.och-lco.ca/wp-content/uploads/2015/07/unavailable-image.jpg"
+        }
         alt="Image not available"
         className="productCard__image"
       ></img>

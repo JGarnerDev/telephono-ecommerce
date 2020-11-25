@@ -2,7 +2,13 @@ import React from "react";
 
 import TextField from "@material-ui/core/TextField";
 
-const FormField = ({ label, value, changeHandler, required }) => {
+const FormField = ({
+  label,
+  value,
+  changeHandler,
+  required = false,
+  placeholder,
+}) => {
   let type;
   if (label.toLowerCase().indexOf("password") !== -1) {
     type = "password";
@@ -13,6 +19,8 @@ const FormField = ({ label, value, changeHandler, required }) => {
   } else {
     type = "text";
   }
+
+  placeholder = "" + placeholder;
   return (
     <TextField
       type={type}
@@ -20,6 +28,7 @@ const FormField = ({ label, value, changeHandler, required }) => {
       value={value}
       required={required}
       onChange={changeHandler}
+      placeholder={placeholder}
     />
   );
 };

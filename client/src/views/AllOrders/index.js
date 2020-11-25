@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import Layout from "../../hoc/Layout";
 
@@ -11,9 +12,13 @@ import {
   UPDATE_SHIPPING_STATUS_ROUTE,
 } from "../../config";
 
-const Orders = () => {
+const AllOrders = () => {
   const [orders, setOrders] = useState([]);
-  const [shippingStatusValues, setshippingStatusValues] = useState([]);
+  const [shippingStatusOptions, setShippingStatusOptions] = useState([]);
+  const [
+    currentShippingStatusValues,
+    setCurrentShippingStatusValues,
+  ] = useState({});
 
   const {
     user: { _id },
@@ -25,12 +30,18 @@ const Orders = () => {
 
   useEffect(() => {
     axios.get(GET_ORDERS_ROUTE + `/${_id}`, config).then((res) => {
-      setOrders(res.data);
+      const orders = res.data;
+      setOrders(orders);
+      const currentShippingValues = {};
+      orders.forEach((order) => {
+        currentShippingValues[order._id] = order.status;
+      });
+      setCurrentShippingStatusValues(currentShippingValues);
     });
     axios
       .get(GET_SHIPPING_STATUS_VALUES_ROUTE + `/${_id}`, config)
       .then((res) => {
-        setshippingStatusValues(res.data);
+        setShippingStatusOptions(res.data);
       });
   }, []);
 
@@ -38,7 +49,9 @@ const Orders = () => {
   const renderProductsInTransaction = (products) =>
     products.map(({ _id, name, quantity, description, price }) => (
       <div>
-        <h3>{name}</h3>
+        <Link to={`/product/${_id}`}>
+          <h3>{name}</h3>
+        </Link>
         <div>Product description: {description}</div>
         <div>Price per unit: ${price}</div>
         <div>Quantity sold: {quantity}</div>
@@ -58,8 +71,10 @@ const Orders = () => {
 
   const handleShippingStatusChange = (event, orderId) => {
     const newStatus = event.target.value;
-
-    console.log(event.target.value);
+    setCurrentShippingStatusValues({
+      ...currentShippingStatusValues,
+      [orderId]: newStatus,
+    });
     axios.post(
       UPDATE_SHIPPING_STATUS_ROUTE + `/${_id}/${orderId}`,
       { newStatus },
@@ -68,30 +83,31 @@ const Orders = () => {
   };
 
   const renderOrders = () =>
-    orders.map(
-      ({ address, status, _id, products, createdAt, amount, clientData }) => (
-        <div>
-          {renderClientInfo(clientData)}
-          <h2>Order</h2>
-          <div>Shipping address: {address}</div>
-          <div>Order status:</div>
-          <select onChange={(event) => handleShippingStatusChange(event, _id)}>
-            {shippingStatusValues.map((status) => (
-              <option value={status}>{status}</option>
-            ))}
-          </select>
-          <div>Order id: {_id}</div>
-          <hr />
-          <h2>Products</h2>
-          {renderProductsInTransaction(products)}
-          <div>Time stamp: {createdAt}</div>
-          <div>Total cost: ${amount}</div>
-          <hr />
-        </div>
-      )
-    );
+    orders.map(({ address, _id, products, createdAt, amount, clientData }) => (
+      <div>
+        {renderClientInfo(clientData)}
+        <h2>Order</h2>
+        <div>Shipping address: {address}</div>
+        <div>Order status:</div>
+        <select
+          onChange={(event) => handleShippingStatusChange(event, _id)}
+          value={currentShippingStatusValues[_id]}
+        >
+          {shippingStatusOptions.map((statusOption) => {
+            return <option value={statusOption}>{statusOption}</option>;
+          })}
+        </select>
+        <div>Order id: {_id}</div>
+        <hr />
+        <h2>Products</h2>
+        {renderProductsInTransaction(products)}
+        <div>Time stamp: {createdAt}</div>
+        <div>Total cost: ${amount}</div>
+        <hr />
+      </div>
+    ));
 
   return <Layout title="Orders">{renderOrders()}</Layout>;
 };
 
-export default Orders;
+export default AllOrders;

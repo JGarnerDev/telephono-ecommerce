@@ -10,7 +10,7 @@ import {
 
 import Layout from "../../hoc/Layout";
 
-import { Details, History, AdminLinks } from "../../components/Account";
+import { Details,  AdminLinks } from "../../components/Account";
 
 const UserAccount = () => {
   const {
@@ -30,8 +30,6 @@ const UserAccount = () => {
       {role ? <AdminLinks /> : null}
       <hr />
       <Details name={name} email={email} _id={_id} createdAt={createdAt} />
-      <hr />
-      <History />
       <hr />
     </Layout>
   );
