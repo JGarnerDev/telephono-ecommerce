@@ -1,6 +1,5 @@
 import React, { useReducer, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 
 import {
   productEditorInitialState,
@@ -19,9 +18,6 @@ import {
 import Layout from "../../hoc/Layout";
 import { ProductImage } from "../../components/Product";
 import FormField from "../../components/FormField";
-import UIMessage from "../../components/UIMessage";
-
-import { Button } from "@material-ui/core";
 
 const ProductEditor = ({ mode }) => {
   const [state, dispatch] = useReducer(productEditorReducer, {

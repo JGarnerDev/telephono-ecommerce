@@ -7,7 +7,7 @@ const FormField = ({
   value,
   changeHandler,
   required = false,
-  placeholder,
+  placeholder = "",
 }) => {
   let type;
   if (label.toLowerCase().indexOf("password") !== -1) {

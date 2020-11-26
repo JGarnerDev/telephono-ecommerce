@@ -1,10 +1,14 @@
 const express = require("express");
 let router = express.Router();
 
-const { isAdmin } = require("../middleware");
+const {
+  requireWebToken,
+  isAuth,
+  isAdmin,
+  confirmUser,
+} = require("../middleware");
 
 const ProductCategoryService = require("../services/productCategory");
-const ProductService = require("../services/product");
 
 router.route("/").get(async (req, res, next) => {
   try {
@@ -42,32 +46,40 @@ router.route("/:categoryId").get(async (req, res, next) => {
   }
 });
 
-router.route("/:categoryId/update").post(async (req, res, next) => {
-  try {
-    const _id = req.params.categoryId;
-    const updateData = req.body;
-    const updatedCategory = await ProductCategoryService.updateCategoryById(
-      _id,
-      updateData
-    );
+router
+  .route("/update/:categoryId/:userId")
+  .post(requireWebToken, isAuth, isAdmin, async (req, res, next) => {
+    try {
+      const _id = req.params.categoryId;
+      const updateData = req.body;
 
-    res.json(updatedCategory);
-  } catch (error) {
-    next(error);
-  }
-});
+      console.log(updateData);
+      const updatedCategory = await ProductCategoryService.updateCategoryById(
+        _id,
+        updateData
+      );
 
-router.route("/:categoryId").delete(async (req, res, next) => {
-  try {
-    const _id = req.params.categoryId;
-    const deletedCategory = await ProductCategoryService.deleteCategoryById(
-      _id
-    );
+      res.json(updatedCategory);
+    } catch (error) {
+      next(error.message);
+    }
+  });
 
-    res.json(deletedCategory);
-  } catch (error) {
-    next(error.message);
-  }
-});
+router
+  .route("/:categoryId/:userId")
+  .delete(requireWebToken, isAuth, isAdmin, async (req, res, next) => {
+    try {
+      const _id = req.params.categoryId;
+      const deletedCategory = await ProductCategoryService.deleteCategoryById(
+        _id
+      );
+
+      res.json(deletedCategory);
+    } catch (error) {
+      next(error.message);
+    }
+  });
+
+router.param("userId", confirmUser);
 
 module.exports = router;

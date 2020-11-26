@@ -55,7 +55,7 @@ export const ProductCard = ({
       } else if (value >= maxQuantity) {
         value = maxQuantity;
       }
-      console.log(value);
+
       setQuantity(value);
       updateProductQuantity(productId, value);
     };

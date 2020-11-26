@@ -47,7 +47,6 @@ import {
   ADMIN_ACCOUNT_UPDATE_URL,
   // Products
   ADMIN_PRODUCT_MANAGEMENT_URL,
-  ADMIN_VIEW_PRODUCTS_URL,
   ADMIN_ADD_PRODUCT_URL,
   ADMIN_UPDATE_PRODUCT_URL,
   // Categories
@@ -145,7 +144,6 @@ const Routes = () => {
           exact
           component={AllOrders}
         />
-
       </Switch>
     </Router>
   );

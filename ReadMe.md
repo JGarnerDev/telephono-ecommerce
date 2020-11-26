@@ -116,3 +116,5 @@ To test the user model CRUD operations (in the same directory):
 - Make an order component for order history
 - Utility function for those brutal timestrings
 - Product management view can really just be one component. The biggest difference is between adding and updating, which can be managed with conditional rendering.
+- Refactor the drop down selections you animal
+- offer reformating for images that are too big (and etc.)

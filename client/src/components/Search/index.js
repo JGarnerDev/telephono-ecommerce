@@ -37,7 +37,6 @@ const Search = () => {
     axios.get(SEARCH_PRODUCTS_ROUTE + `?${query}`, {}).then((res) => {
       setData({ ...data, products: res.data });
     });
-    console.log(products);
   };
 
   const submit = (event) => {

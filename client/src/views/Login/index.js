@@ -25,7 +25,6 @@ const Login = () => {
     axios
       .post(`${USER_LOGIN_ROUTE}`, log)
       .then((res) => {
-        console.log(res);
         authenticateUser(res.data, () => {
           dispatch({ type: "success" });
         });

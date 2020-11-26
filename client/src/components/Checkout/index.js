@@ -65,9 +65,7 @@ const Checkout = ({ products, emptyCart }) => {
               // window.location.reload();
             });
           })
-          .catch((error) => {
-            console.log(error);
-          });
+          .catch((error) => {});
       })
       .catch((error) => {
         setData({ ...data, error: error.message });

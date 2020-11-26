@@ -40,6 +40,7 @@ export const ADMIN_UPDATE_PRODUCT_URL = "/Administrator/products/update";
 // Product Category Management
 export const ADMIN_CATEGORY_MANAGEMENT_URL = "/Administrator/categories";
 export const ADMIN_ADD_CATEGORY_URL = "/Administrator/categories/add";
+export const ADMIN_UPDATE_CATEGORY_URL = "/Administrator/categories/update";
 
 // Orders
 export const ADMIN_VIEW_ORDERS_URL = "/Administrator/orders";
@@ -60,6 +61,7 @@ export const GET_USER_ORDERS_ROUTE = API_URL + "/orders/history";
 // Product Categories
 export const GET_CATEGORIES_ROUTE = API_URL + "/categories";
 export const ADD_CATEGORY_ROUTE = API_URL + "/categories/new";
+export const UPDATE_CATEGORY_ROUTE = API_URL + "/categories/update";
 
 // Products
 export const GET_PRODUCTS_ROUTE = API_URL + "/products";

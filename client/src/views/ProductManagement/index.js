@@ -5,15 +5,15 @@ import axios from "axios";
 import Layout from "../../hoc/Layout";
 
 import {
+  GET_PRODUCTS_ROUTE,
   ADMIN_ADD_PRODUCT_URL,
   ADMIN_VIEW_PRODUCTS_URL,
-  GET_PRODUCTS_ROUTE,
   ADMIN_UPDATE_PRODUCT_URL,
 } from "../../config";
 
 const ProductManagement = () => {
   const [products, setProducts] = useState([]);
-  const [sortBy, setSortBy] = useState("sales");
+  const [sortBy, setSortBy] = useState("_id");
   const [order, setOrder] = useState("desc");
 
   useEffect(() => {
