@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./Private.Routes";
 import AdministrativeRoute from "./Admin.Routes";
 
+import Nav from "./components/Nav";
+
 import Home from "./views/Home";
 
 // Auth
@@ -59,6 +61,7 @@ import {
 const Routes = () => {
   return (
     <Router>
+      <Nav />
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path={SHOP_URL} exact component={Shop} />

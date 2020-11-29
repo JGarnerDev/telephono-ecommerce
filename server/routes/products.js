@@ -34,8 +34,10 @@ router.route("/search").get(async (req, res, next) => {
   try {
     const query = {};
     let products;
+    let searchString = req.query.search || "";
+    console.log(searchString);
     if (req.query.search) {
-      query.name = { $regex: req.query.search, $options: "i" };
+      query.name = { $regex: searchString, $options: "i" };
       if (req.query.category && req.query.category != "All") {
         query.category = req.query.category;
       }

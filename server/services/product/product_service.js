@@ -65,7 +65,7 @@ const listByFilter = (Product) => (sorting, limit, skip, filters) => {
 };
 
 const listBySearchString = (Product) => (query) => {
-  return Product.find(query).select(["-img"]);
+  return Product.find(query).select(["-img"]).limit(3);
 };
 
 const listProductCategories = (Product) => () => {

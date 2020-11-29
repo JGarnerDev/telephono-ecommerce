@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Routes from "./Routes";
 
-import "./main.scss";
+import "./styles/Main.scss";
 
 ReactDOM.render(
   <React.Fragment>

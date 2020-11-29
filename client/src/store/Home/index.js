@@ -3,7 +3,7 @@ export const homeInitialState = {
   productsByDate: [],
   sort: "_id",
   order: "asc",
-  limit: 10,
+  limit: 3,
 };
 
 export function homeReducer(state, action) {

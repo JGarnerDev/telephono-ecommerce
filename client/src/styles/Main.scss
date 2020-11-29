@@ -1,0 +1,57 @@
+@import "./variables.scss";
+
+// font-family: 'Roboto', sans-serif;
+// font-family: 'Ubuntu', sans-serif;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#App {
+  width: 100%;
+  height: auto;
+}
+
+#App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page {
+  width: 100%;
+  height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  font-family: "Roboto", sans-serif;
+}
+
+h2,
+h3,
+h4 {
+  font-weight: 500;
+}
+
+h1 {
+  font-size: 4em;
+}
+
+h2 {
+}
+
+ul {
+  list-style: none;
+}
+
+.accent {
+  color: $primary-color;
+}

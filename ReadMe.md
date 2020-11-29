@@ -107,14 +107,13 @@ To test the user model CRUD operations (in the same directory):
 - Cart Product count (in the nav) doesn't rerender when cart is updated
 - Make sure the 'load more' feature is working correctly with 7+ products
 - Refactor product rendering at Home view and Search component
-- Code update user account view
-- Code single product full display component
+- ~Code update user account view~
+- ~Code single product full display component~
 - Test coverage
 - Product filter doesn't do the do when there's an empty string input
-- When authorization and user data is required for a view, have the data ready in initialization of the component
 - Make adress manditory in validation for checkout
 - Make an order component for order history
 - Utility function for those brutal timestrings
-- Product management view can really just be one component. The biggest difference is between adding and updating, which can be managed with conditional rendering.
+- ~Product management view can really just be one component. The biggest difference is between adding and updating, which can be managed with conditional rendering.~
 - Refactor the drop down selections you animal
 - offer reformating for images that are too big (and etc.)

@@ -1,4 +1,10 @@
-#page-banner {
-  background: lightblue;
-  padding: 20px;
+@import "../../styles/variables.scss";
+
+.banner {
+  display: flex;
+  h2 {
+    position: relative;
+    top: 38px;
+    left: 10px;
+  }
 }

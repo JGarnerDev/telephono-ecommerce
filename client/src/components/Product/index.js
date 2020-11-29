@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 import { GET_PRODUCTS_ROUTE } from "../../config";
 import {
@@ -14,20 +16,16 @@ export const ProductImage = ({ _id, isPreview, image }) => {
   return isPreview ? (
     <img src={image} className="productCard__image"></img>
   ) : (
-    <object
-      data={GET_PRODUCTS_ROUTE + `/${_id}/img`}
-      type="image/png"
-      className="productCard__image"
-    >
-      <img
+    <div className="img-wrapper">
+      <LazyLoadImage
+        className="productCard__image"
         src={
-          image ||
+          GET_PRODUCTS_ROUTE + `/${_id}/img` ||
           "https://www.och-lco.ca/wp-content/uploads/2015/07/unavailable-image.jpg"
         }
-        alt="Image not available"
-        className="productCard__image"
-      ></img>
-    </object>
+        effect="blur"
+      />
+    </div>
   );
 };
 
@@ -36,6 +34,7 @@ export const ProductCard = ({
   inCart,
   setUpdate = (f) => f,
   update = undefined,
+  modifierClass = "",
 }) => {
   const [quantity, setQuantity] = useState(product.quantity);
   const addProductToCart = () => {
@@ -64,13 +63,17 @@ export const ProductCard = ({
   };
 
   const renderBasicProductInfo = ({ name, price, description, _id }) => {
+    if (description.length > 75) {
+      description = description.slice(0, 75) + "...";
+    }
     return (
       <>
-        <h3>{name}</h3>
         <ProductImage _id={_id} name={name} />
-        <p>{description}</p>
-        <p>${price}</p>
-        <Link to={`/product/${_id}`}>View</Link>
+        <div className="productCard__info">
+          <h3>{name}</h3>
+          <p>{description}</p>
+          <p>${price}</p>
+        </div>
       </>
     );
   };
@@ -96,19 +99,24 @@ export const ProductCard = ({
     );
   };
 
-  const renderInShopOptions = () => {
-    return <button onClick={addProductToCart}>Add to cart</button>;
+  const renderInShopOptions = (_id) => {
+    return (
+      <div className="productCard__buttons">
+        <Link to={`/product/${_id}`}>View</Link>
+        <button onClick={addProductToCart}>Add to cart</button>
+      </div>
+    );
   };
 
   return inCart ? (
-    <div className="productCard">
+    <div className={"productCard " + " productCard" + modifierClass}>
       {renderBasicProductInfo(product)}
       {renderInCartOptions(product)}
     </div>
   ) : (
-    <div className="productCard">
+    <div className={"productCard " + "productCard" + modifierClass}>
       {renderBasicProductInfo(product)}
-      {renderInShopOptions(product)}
+      {renderInShopOptions(product._id)}
     </div>
   );
 };

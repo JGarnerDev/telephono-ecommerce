@@ -8,6 +8,8 @@ import { ProductCard } from "../../components/Product";
 
 import { Search as SearchIcon } from "@material-ui/icons";
 
+import "./Search.scss";
+
 const Search = () => {
   const [data, setData] = useState({
     categories: [],
@@ -30,10 +32,13 @@ const Search = () => {
   const { categories, category, searchString, searched, products } = data;
 
   const searchForProducts = () => {
-    const searchCriteria = { search: searchString || undefined, category };
+    const searchCriteria = {
+      search: searchString || " ",
+      category: category || "All",
+    };
 
     const query = queryString.stringify(searchCriteria);
-
+    console.log(query);
     axios.get(SEARCH_PRODUCTS_ROUTE + `?${query}`, {}).then((res) => {
       setData({ ...data, products: res.data });
     });
@@ -52,7 +57,7 @@ const Search = () => {
     return (
       <form onSubmit={submit}>
         <select onChange={handleChange("category")}>
-          <option value="Any">Any category</option>
+          <option value="All">Categories</option>
           {categories.map((categoryOption, i) => {
             return (
               <option value={categoryOption._id} key={i}>
@@ -64,7 +69,7 @@ const Search = () => {
         <input
           type="search"
           onChange={handleChange("searchString")}
-          placeholder="Looking for soemthing?"
+          placeholder="Search our models"
         />
         <button>
           <SearchIcon />
@@ -74,22 +79,21 @@ const Search = () => {
   };
 
   const renderProducts = () => {
-    return products ? (
-      <div>
+    return products.length ? (
+      <div className={products.length ? "display" : ""}>
+        <h3>Here's what we found</h3>
         {products.map((product, i) => {
           return <ProductCard product={product} key={i} />;
         })}
       </div>
-    ) : (
-      <p>No results</p>
-    );
+    ) : null;
   };
 
   return (
-    <div>
+    <section id="Search">
       {renderSearchForm()}
       {renderProducts()}
-    </div>
+    </section>
   );
 };
 

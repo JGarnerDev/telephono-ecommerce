@@ -9,6 +9,8 @@ import Layout from "../../hoc/Layout";
 import Search from "../../components/Search";
 import { ProductCard } from "../../components/Product";
 
+import "./Home.scss";
+
 const Home = () => {
   const [state, dispatch] = useReducer(homeReducer, homeInitialState);
   const { productsBySales, productsByDate, sort, order, limit } = state;
@@ -24,14 +26,14 @@ const Home = () => {
 
   const getProductsBySales = () => {
     axios
-      .get(GET_PRODUCTS_ROUTE + `?sortBy=sales&order=desc&limit=6`)
+      .get(GET_PRODUCTS_ROUTE + `?sortBy=sales&order=desc&limit=3`)
       .then((res) => {
         dispatch({ type: "productsBySales", value: res.data });
       });
   };
   const getProductsByDate = () => {
     axios
-      .get(GET_PRODUCTS_ROUTE + `?sortBy=_id&order=desc&limit=6`)
+      .get(GET_PRODUCTS_ROUTE + `?sortBy=_id&order=desc&limit=3`)
       .then((res) => {
         dispatch({ type: "productsByDate", value: res.data });
       });
@@ -39,32 +41,43 @@ const Home = () => {
 
   const renderPopularProducts = () => {
     return (
-      <div>
-        {productsBySales.map((product, i) => {
-          return <ProductCard product={product} key={i} />;
-        })}
-      </div>
+      <section id="popular_products" className="display">
+        <h3 className="display__heading">Most popular</h3>
+        <>
+          {productsBySales.map((product, i) => {
+            return <ProductCard product={product} key={i} />;
+          })}
+        </>
+      </section>
     );
   };
 
   const renderNewestProducts = () => {
     return (
-      <div>
+      <section id="newest_products" className="display">
+        <h3 className="display__heading">Most recent</h3>
         {productsByDate.map((product, i) => {
           return <ProductCard product={product} key={i} />;
         })}
-      </div>
+      </section>
     );
   };
 
   return (
-    <Layout title="Home">
+    <Layout
+      title="TelePhono"
+      page="Home"
+      description="Reach out, get connected"
+      id="Home"
+    >
+      {productsByDate[0] && (
+        <ProductCard product={productsByDate[0]} modifierClass="--showcase" />
+      )}
       <Search />
-      <h2>Popular Products</h2>
-      {renderPopularProducts()}
-      <hr />
-      <h2>Newest Additions</h2>
+
       {renderNewestProducts()}
+
+      {renderPopularProducts()}
     </Layout>
   );
 };

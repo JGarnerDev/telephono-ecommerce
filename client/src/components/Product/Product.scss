@@ -1,8 +1,70 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
 .productCard {
-  background: lightsalmon;
-  max-width: 120px;
-  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-radius: 14px;
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.3);
+
+  background: linear-gradient(
+    to top,
+    $component-background-color,
+    $secondary-color
+  );
   &__image {
-    max-width: 100px;
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 12px;
+    padding-bottom: 0;
+    height: 38%;
+    p:first-of-type {
+      padding-top: 5px;
+      flex-grow: 1;
+    }
+    p:last-of-type {
+      text-align: right;
+      font-size: 1.4em;
+    }
+  }
+
+  &__buttons {
+    width: 100%;
+    padding: 4px 10px;
+    display: flex;
+    justify-content: space-between;
+
+    & > * {
+      width: 45%;
+      height: 30px;
+      border: 1px solid black;
+      text-align: center;
+      background: white;
+    }
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      border-bottom-left-radius: 14px;
+    }
+    button {
+      border-bottom-right-radius: 14px;
+    }
+  }
+
+  .img-wrapper {
+    max-height: 50%;
   }
 }

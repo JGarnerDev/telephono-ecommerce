@@ -1,0 +1,117 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+#Home {
+  section {
+    height: auto;
+    padding: 10px;
+  }
+  section:not(#Search) {
+  }
+  section:nth-child(odd) {
+    background: $secondary-color;
+  }
+
+  &__banner {
+    height: 75vh !important;
+    min-height: 600px !important;
+    padding: 40px 10px 10px 40px !important;
+    h2 {
+      position: relative;
+      transform: translate(-105%, 6%);
+      min-width: max-content;
+      font-size: 1.28em;
+    }
+  }
+
+  .productCard {
+    width: 30vw;
+    max-width: 300px;
+    height: 40vw;
+    max-height: 400px;
+    &--showcase {
+      @include productCard;
+      position: absolute;
+      top: 240px;
+      min-height: 300px;
+      height: 45vh;
+    }
+  }
+
+  #Search {
+    padding-bottom: 40px;
+  }
+
+  .display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    .productCard {
+      flex-grow: 1;
+      max-height: 300px;
+      margin: 20px;
+    }
+    &__heading {
+      position: relative;
+      min-width: 15vw;
+    }
+  }
+
+  @media only screen and (max-width: $tablet) {
+    section:not(#Search) {
+      min-height: 480px;
+    }
+    &__banner {
+      padding: 0 !important;
+      min-height: 500px !important;
+      h1,
+      h2 {
+        transform: scale(0.8) translate(-20px, -40px);
+      }
+      h2 {
+        left: -240px;
+        top: 55px;
+      }
+    }
+    .productCard {
+      height: 300px;
+      width: 200px;
+      &--showcase {
+        top: 200px;
+
+        left: calc(50vw - 96px);
+      }
+    }
+    .display {
+      flex-direction: column;
+      .productCard {
+        min-height: 30vh;
+      }
+    }
+  }
+
+  @media only screen and (min-width: $tablet) {
+    section:not(#Search) {
+      min-height: 500px;
+    }
+    .productCard {
+      &--showcase {
+        width: 270px;
+        height: 360px;
+        right: 16vw;
+      }
+    }
+  }
+  @media only screen and (min-width: $desktop) {
+    section:not(#Search) {
+      min-height: 600px;
+    }
+    .productCard {
+      &--showcase {
+        width: 300px;
+        height: 400px;
+      }
+    }
+  }
+}
