@@ -1,6 +1,9 @@
 @mixin slide-in {
   animation: slide-in-from-left 1.5s;
 }
+@mixin slide-in-bottom {
+  animation: slide-in-from-bottom 0.5s;
+}
 
 @keyframes slide-in-from-left {
   from {
@@ -13,5 +16,13 @@
   }
 }
 
-@mixin productCard {
+@keyframes slide-in-from-bottom {
+  from {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
 }

@@ -44,6 +44,7 @@ const Home = () => {
       <section id="popular_products" className="display">
         <h3 className="display__heading">Most popular</h3>
         <>
+          <div className="stripe" />
           {productsBySales.map((product, i) => {
             return <ProductCard product={product} key={i} />;
           })}
@@ -55,10 +56,13 @@ const Home = () => {
   const renderNewestProducts = () => {
     return (
       <section id="newest_products" className="display">
-        <h3 className="display__heading">Newest</h3>
-        {productsByDate.map((product, i) => {
-          return <ProductCard product={product} key={i} />;
-        })}
+        <h3 className="display__heading">New Releases</h3>
+        <>
+          <div className="stripe" />
+          {productsByDate.map((product, i) => {
+            return <ProductCard product={product} key={i} />;
+          })}
+        </>
       </section>
     );
   };
@@ -68,7 +72,6 @@ const Home = () => {
       title="TelePhono"
       page="Home"
       description="Reach out, get connected"
-      id="Home"
     >
       <div id="oval"></div>
       {productsByDate[0] && (

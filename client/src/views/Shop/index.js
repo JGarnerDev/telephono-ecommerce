@@ -14,6 +14,8 @@ import CategorySelector from "../../components/CategorySelector";
 import PriceRangeSelector from "../../components/PriceRangeSelector";
 import { ProductCard } from "../../components/Product";
 
+import "./Shop.scss";
+
 const Shop = () => {
   const [state, dispatch] = useReducer(shopReducer, shopInitialState);
   const {
@@ -86,24 +88,31 @@ const Shop = () => {
 
   const renderProducts = () => {
     return (
-      <div>
+      <section id="Shop__products">
         {products.map((product, i) => {
           return <ProductCard product={product} key={i} />;
         })}
-      </div>
+      </section>
     );
   };
 
   return (
-    <Layout title="Shop">
-      <CategorySelector
-        availableCategories={availableCategories}
-        handleChange={handleCategoryToggle}
-      />
-      <PriceRangeSelector
-        priceRanges={priceRanges}
-        handleChange={handlePriceRangeToggle}
-      />
+    <Layout
+      title="Shop"
+      description="Find something right for you!"
+      page="Shop"
+    >
+      <section id="Shop__filter">
+        <CategorySelector
+          availableCategories={availableCategories}
+          handleChange={handleCategoryToggle}
+        />
+        <PriceRangeSelector
+          priceRanges={priceRanges}
+          handleChange={handlePriceRangeToggle}
+        />
+      </section>
+
       {renderProducts()}
       {renderLoadMoreButton()}
     </Layout>

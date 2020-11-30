@@ -1,0 +1,19 @@
+@import "../../styles/mixins.scss";
+
+.UIMessage {
+  display: flex;
+
+  width: 100%;
+  padding: 10px 10px;
+  @include slide-in-bottom;
+
+  p {
+    flex-grow: 1;
+    padding: 0 10px;
+  }
+  &.error {
+    color: rgb(206, 0, 0);
+    border: 1px solid rgb(206, 0, 0);
+    background: rgb(255, 180, 180);
+  }
+}

@@ -3,11 +3,11 @@ import React from "react";
 const CategorySelector = ({ availableCategories, handleChange }) => {
   return (
     <>
-      <h2>Product Categories </h2>
-      <ul>
+      <ul className="categories">
+        <h2>Product Categories </h2>
         {availableCategories.map((availableCategory, i) => {
           return (
-            <li key={i}>
+            <li className="categories__option" key={i}>
               <label>{availableCategory.name}</label>
               <input
                 type="checkbox"

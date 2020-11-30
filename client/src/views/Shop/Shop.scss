@@ -1,0 +1,65 @@
+@import "../../styles/variables.scss";
+#Shop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__filter {
+    display: flex;
+    width: 100%;
+    background: $neutral-color;
+  }
+  .categories,
+  .priceRanges {
+    margin: 10px;
+
+    background: white;
+    h2 {
+      margin-bottom: 10px;
+      width: 100%;
+      padding: 0 10px;
+      background: $secondary-color-light;
+    }
+    &__option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 10px;
+      font-size: 20px;
+    }
+  }
+  &__products {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 90%;
+    &::after {
+      content: "";
+      flex: auto;
+    }
+    .productCard {
+      min-width: 240px;
+      width: 240px;
+      height: 360px;
+
+      margin: 40px;
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet) {
+  #Shop {
+    &__filter {
+      .categories,
+      .priceRanges {
+        &__option {
+          font-size: 14px;
+          padding: 3px 10px;
+        }
+      }
+    }
+    &__products {
+      flex-direction: column;
+    }
+  }
+}

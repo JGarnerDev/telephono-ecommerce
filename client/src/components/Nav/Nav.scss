@@ -18,13 +18,14 @@
     justify-content: center;
     align-items: center;
     color: white;
-    margin-left: 20px;
+    margin-right: 10px;
     text-decoration: none;
     padding: 10px;
   }
   &__list {
     height: 100%;
-
+    width: 30vw;
+    min-width: 200px;
     background: $secondary-color;
     li {
       margin-bottom: 20px;

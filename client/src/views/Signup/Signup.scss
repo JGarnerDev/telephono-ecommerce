@@ -1,6 +1,6 @@
 @import "../../styles/variables.scss";
 
-#Login {
+#Signup {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,25 +15,29 @@
       display: flex;
       flex-direction: column;
       flex-grow: 1;
+      .MuiFormControlLabel-root {
+        margin: 20px 0;
+      }
       button {
-        margin: 40px 0;
+        margin-bottom: 20px;
       }
     }
     &__onboard {
       width: 20vw;
-      min-width: 160px;
+
       margin: 40px;
     }
 
     &__form,
     &__onboard {
       max-width: 400px;
+      min-width: 240px;
     }
   }
 }
 
 @media only screen and (max-width: $tablet) {
-  #Login {
+  #Signup {
     &__wrapper {
       flex-direction: column;
       align-items: center;
@@ -44,7 +48,8 @@
       }
       &__onboard {
         min-width: 70%;
-        margin: 40px;
+
+        text-align: center;
       }
     }
   }

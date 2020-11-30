@@ -13,6 +13,8 @@ import UIMessage from "../../components/UIMessage";
 import { Button, FormControlLabel, Checkbox } from "@material-ui/core";
 import { Build, BuildOutlined } from "@material-ui/icons";
 
+import "./Signup.scss";
+
 const Signup = () => {
   const [state, dispatch] = useReducer(signupReducer, signupInitialState);
 
@@ -73,7 +75,7 @@ const Signup = () => {
 
   const renderForm = () => {
     return (
-      <form action="">
+      <form id="Signup__wrapper__form">
         {[
           ["Name", Name, true],
           ["Email", Email, true],
@@ -107,10 +109,10 @@ const Signup = () => {
               }}
             />
           }
-          label="Administrative? "
+          label="Administrative control?"
         />
         <Button variant="contained" color="primary" onClick={submit}>
-          Submit
+          Sign up
         </Button>
 
         {Loading ? <p>FICK</p> : null}
@@ -119,7 +121,26 @@ const Signup = () => {
       </form>
     );
   };
-  return <Layout title="Sign up">{renderForm()}</Layout>;
+  return (
+    <Layout
+      title="Sign up"
+      description="Shop with ease and security"
+      page="Signup"
+    >
+      <div id="Signup__wrapper">
+        {renderForm()}
+        <p id="Signup__wrapper__onboard">
+          For the purposes of this project, passwords are encrypted using
+          <a href="https://en.wikipedia.org/wiki/Bcrypt"> bcrypt</a>, and email
+          adresses are retained to send order confirmations.
+          <br /> <br /> By clicking on that wrench, you'll have access to review
+          orders, be able to update shipping statuses, and add products and
+          categories. <br /> <br />
+          Enjoy, and let me know your thoughts!
+        </p>
+      </div>
+    </Layout>
+  );
 };
 
 export default Signup;

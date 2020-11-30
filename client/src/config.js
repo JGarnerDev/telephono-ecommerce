@@ -2,7 +2,7 @@
 
 export const priceRanges = [
   { _id: 0, name: "All", range: [0, 1000000] },
-  { _id: 1, name: "$0 to $9", range: [0, 9] },
+  { _id: 1, name: "$0  to $9", range: [0, 9] },
   { _id: 2, name: "$10 to $19", range: [10, 19] },
   { _id: 3, name: "$20 to $29", range: [20, 29] },
   { _id: 4, name: "$30 to $39", range: [30, 39] },

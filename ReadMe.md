@@ -103,6 +103,7 @@ To test the user model CRUD operations (in the same directory):
 
 ## Todos (client):
 
+- Error messages at Login aren't working (due to the server-side error handling)
 - Use react memo to prevent needless rerendering
 - Cart Product count (in the nav) doesn't rerender when cart is updated
 - Make sure the 'load more' feature is working correctly with 7+ products

@@ -5,11 +5,11 @@ const PriceRangeSelector = ({ priceRanges, handleChange }) => {
 
   return (
     <>
-      <h2>Price Ranges</h2>
-      <ul>
+      <ul className="priceRanges">
+        <h2>Price Ranges</h2>
         {priceRanges.map((priceRange, i) => {
           return (
-            <li key={i}>
+            <li className="priceRanges__option" key={i}>
               <label>{priceRange.name}</label>
               <input
                 type="checkbox"

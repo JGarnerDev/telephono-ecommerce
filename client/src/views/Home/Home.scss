@@ -17,6 +17,42 @@
     background: $neutral-color;
   }
 
+  #newest_products {
+    .display__heading {
+      color: $secondary-color;
+    }
+    .stripe {
+      background: $neutral-color;
+    }
+    @media only screen and (max-width: $desktop) {
+      .display__heading {
+        margin-top: 10px;
+        color: $neutral-color;
+      }
+
+      .stripe {
+        display: none;
+      }
+    }
+  }
+  #popular_products {
+    .display__heading {
+      color: $neutral-color;
+    }
+    .stripe {
+      background: $secondary-color;
+    }
+    @media only screen and (max-width: $desktop) {
+      .display__heading {
+        margin-top: 10px;
+        color: $secondary-color;
+      }
+      .stripe {
+        display: none;
+      }
+    }
+  }
+
   #oval {
     position: absolute;
 
@@ -55,10 +91,9 @@
   }
 
   .productCard {
-    width: 30vw;
-    max-width: 220px;
-    height: 30vh;
-    max-height: 400px;
+    min-width: 240px;
+    width: 240px;
+    height: 360px;
     &--showcase {
       position: absolute;
       top: 240px;
@@ -69,7 +104,7 @@
       &::before {
         position: absolute;
         background: $primary-color;
-        padding: 10px 20px;
+        padding: 10px 6px;
         border-radius: 20px;
         right: 40vw;
         width: 240px;
@@ -81,6 +116,7 @@
   }
 
   #Search {
+    padding-bottom: 30px;
     form {
       width: 60%;
     }
@@ -92,6 +128,7 @@
       background: white;
       border-radius: 20px;
       flex-direction: column;
+
       .productCard {
         min-height: 400px;
         min-width: 300px;
@@ -104,15 +141,27 @@
     justify-content: center;
     align-items: center;
     padding: 30px;
-    .productCard {
-      flex-grow: 1;
-      max-height: 360px;
-      margin: 20px;
-    }
+
     &__heading {
       position: relative;
       left: 10px;
-      min-width: 15vw;
+      padding-left: 40px;
+      min-width: 10vw;
+      font-size: 2em;
+      z-index: 1;
+    }
+    .stripe {
+      position: absolute;
+      height: 200px;
+      width: 90vw;
+      transform: translate(-20px);
+      margin-left: 5vw;
+      border-radius: 50px;
+      z-index: 0;
+    }
+    .productCard {
+      margin: 20px;
+      z-index: 1;
     }
   }
 
@@ -130,8 +179,8 @@
     }
     &__banner {
       padding: 0 !important;
-      min-height: 600px !important;
-      max-height: 500px !important;
+      min-height: 640px !important;
+
       h1,
       h2 {
         transform: scale(0.8) translate(-20px, -40px);
@@ -143,16 +192,15 @@
     }
 
     .productCard {
-      height: 300px;
-      width: 200px;
       &--showcase {
         top: 260px;
 
-        left: calc(50vw - 96px);
+        left: calc(50vw - 120px);
+        height: 360px;
         &::before {
           position: absolute;
           top: -80px;
-          left: -27vw;
+          left: -39px;
           width: max-content;
 
           border-radius: 0;
@@ -165,6 +213,7 @@
 
     #Search {
       padding: 40px;
+
       text-align: center;
       form {
         flex-direction: column;
@@ -180,8 +229,9 @@
     }
     .display {
       flex-direction: column;
-      .productCard {
-        min-height: 30vh;
+      &__heading {
+        left: -24px;
+        text-align: center;
       }
     }
   }
@@ -190,6 +240,15 @@
     section:not(#Search) {
       min-height: 500px;
     }
+    .display {
+      flex-direction: column;
+      height: auto;
+      &__heading {
+        left: -18px;
+        text-align: center;
+      }
+    }
+
     .productCard {
       &--showcase {
         width: 270px;
@@ -206,6 +265,13 @@
     section:not(#Search) {
       min-height: 600px;
     }
+    .display {
+      flex-direction: row;
+      &__heading {
+        text-align: center;
+      }
+    }
+
     .productCard {
       &--showcase {
         width: 300px;

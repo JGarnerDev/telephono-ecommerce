@@ -12,6 +12,8 @@ import UIMessage from "../../components/UIMessage";
 
 import { Button } from "@material-ui/core";
 
+import "./Login.scss";
+
 const Login = () => {
   const [state, dispatch] = useReducer(loginReducer, loginInitialState);
   const { Email, Password, Error, RenderError, Loading, Success } = state;
@@ -52,7 +54,7 @@ const Login = () => {
 
   const renderForm = () => {
     return (
-      <form action="">
+      <form id="Login__wrapper__form">
         {[
           ["Email", Email, true],
           ["Password", Password, true],
@@ -74,7 +76,7 @@ const Login = () => {
           );
         })}
         <Button variant="contained" color="primary" onClick={submit}>
-          Submit
+          Log in
         </Button>
         {Loading ? <p>FICK</p> : null}
         {RenderError ? <UIMessage message={Error} type="error" /> : null}
@@ -82,7 +84,19 @@ const Login = () => {
       </form>
     );
   };
-  return <Layout title="Log in">{renderForm()}</Layout>;
+  return (
+    <Layout title="Log in" description="Welcome back!" page="Login">
+      <div id="Login__wrapper">
+        {renderForm()}
+        <p id="Login__wrapper__onboard">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo ex quod
+          ipsam ut enim et reiciendis molestias voluptates, sunt molestiae,
+          atque porro assumenda repellat delectus deleniti, a laudantium.
+          Beatae, nihil?
+        </p>
+      </div>
+    </Layout>
+  );
 };
 
 export default Login;
