@@ -9,6 +9,10 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 html,
 body,
 #App {
@@ -31,7 +35,8 @@ h1,
 h2,
 h3,
 h4,
-p {
+p,
+a {
   font-family: "Roboto", sans-serif;
 }
 
@@ -54,4 +59,8 @@ ul {
 
 .accent {
   color: $primary-color;
+}
+
+section {
+  padding: 10px;
 }

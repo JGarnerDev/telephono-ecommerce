@@ -72,8 +72,10 @@ const Nav = React.memo(() => {
             setOpenNav(!openNav);
           }}
         >
-          <ListItemIcon>{linkData[0]}</ListItemIcon>
-          <Link to={linkData[1]}>{linkData[2]}</Link>
+          <Link to={linkData[1]}>
+            <ListItemIcon>{linkData[0]}</ListItemIcon>
+            {linkData[2]}
+          </Link>
         </ListItem>
       ) : (
         <ListItem
@@ -83,20 +85,20 @@ const Nav = React.memo(() => {
             logOut();
           }}
         >
-          <ListItemIcon>{linkData[0]}</ListItemIcon>
-          <Link to={linkData[1]}>{linkData[2]}</Link>
+          <Link to={linkData[1]}>
+            <ListItemIcon>{linkData[0]}</ListItemIcon>
+            {linkData[2]}
+          </Link>
         </ListItem>
       );
     });
 
   return (
     <nav id="Nav">
-      <Link to="/shop">
-        <ViewCarousel />
-      </Link>
-      <p>{countProductsInCart()}</p>
+      <Link to="/shop">Products</Link>
+
       <Link to={CLIENT_CART_URL}>
-        <ShoppingBasket />
+        <p>My cart</p>
       </Link>
       <Button
         onClick={() => {
@@ -111,7 +113,7 @@ const Nav = React.memo(() => {
         onOpen={() => setOpenNav(true)}
         onClose={() => setOpenNav(false)}
       >
-        <List>{renderList()}</List>
+        <List id="Nav__list">{renderList()}</List>
       </SwipeableDrawer>
     </nav>
   );

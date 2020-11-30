@@ -1,10 +1,28 @@
 @import "../../styles/variables.scss";
 
 .banner {
+  width: 100%;
+}
+
+#Home__banner {
   display: flex;
   h2 {
     position: relative;
     top: 38px;
     left: 10px;
+  }
+}
+
+.banner:not(#Home__banner) {
+  background: $secondary-color;
+
+  @media only screen and (max-width: $tablet) {
+    h1 {
+      font-size: 2.4em;
+    }
+  }
+  @media only screen and (min-width: $tablet) {
+  }
+  @media only screen and (min-width: $desktop) {
   }
 }

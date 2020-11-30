@@ -10,7 +10,9 @@ import {
 
 import Layout from "../../hoc/Layout";
 
-import { Details,  AdminLinks } from "../../components/Account";
+import { Details, AdminLinks } from "../../components/Account";
+
+import "./UserAccount.scss";
 
 const UserAccount = () => {
   const {
@@ -20,17 +22,15 @@ const UserAccount = () => {
   role ? (description = "Administrator") : (description = "Client");
 
   return (
-    <Layout title={name} description={description}>
-      <aside>
-        <p>Something not correct here? </p>
+    <Layout title={name} description={description} page="Account">
+      <Details name={name} email={email} _id={_id} createdAt={createdAt} />
+      <section id="Account__options">
+        <h3>Need to update your information? </h3>
         <Link to={role ? ADMIN_ACCOUNT_UPDATE_URL : CLIENT_ACCOUNT_UPDATE_URL}>
           Update account
         </Link>
-      </aside>
-      {role ? <AdminLinks /> : null}
-      <hr />
-      <Details name={name} email={email} _id={_id} createdAt={createdAt} />
-      <hr />
+        {role ? <AdminLinks /> : null}
+      </section>
     </Layout>
   );
 };

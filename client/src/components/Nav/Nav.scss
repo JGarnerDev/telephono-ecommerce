@@ -1,6 +1,7 @@
 @import "../../styles/variables.scss";
 
 #Nav {
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 5;
@@ -16,12 +17,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: black;
-    height: 30px;
-    width: 30px;
-    margin: 0px 10px;
-    background: rgb(255, 255, 255);
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
     padding: 10px;
-    border-radius: 50%;
+  }
+  &__list {
+    height: 100%;
+
+    background: $secondary-color;
+    li {
+      margin-bottom: 20px;
+      background: $neutral-color;
+      a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        font-family: "Roboto", sans-serif;
+        color: rgb(87, 87, 87);
+      }
+    }
   }
 }

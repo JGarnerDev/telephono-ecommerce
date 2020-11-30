@@ -55,7 +55,7 @@ const Home = () => {
   const renderNewestProducts = () => {
     return (
       <section id="newest_products" className="display">
-        <h3 className="display__heading">Most recent</h3>
+        <h3 className="display__heading">Newest</h3>
         {productsByDate.map((product, i) => {
           return <ProductCard product={product} key={i} />;
         })}
@@ -70,9 +70,11 @@ const Home = () => {
       description="Reach out, get connected"
       id="Home"
     >
+      <div id="oval"></div>
       {productsByDate[0] && (
         <ProductCard product={productsByDate[0]} modifierClass="--showcase" />
       )}
+
       <Search />
 
       {renderNewestProducts()}

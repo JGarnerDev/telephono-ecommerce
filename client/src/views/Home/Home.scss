@@ -6,16 +6,46 @@
     height: auto;
     padding: 10px;
   }
+
   section:not(#Search) {
   }
+
   section:nth-child(odd) {
     background: $secondary-color;
+  }
+  section:nth-child(even) {
+    background: $neutral-color;
+  }
+
+  #oval {
+    position: absolute;
+
+    top: 300px;
+    right: 2%;
+    height: 240px;
+    width: 600px;
+    border-radius: 50% /50%;
+    transform: rotate(-30deg) skewX(45deg);
+    background: white;
   }
 
   &__banner {
     height: 75vh !important;
-    min-height: 600px !important;
+    min-height: 700px !important;
     padding: 40px 10px 10px 40px !important;
+    h1 {
+      background-image: -webkit-linear-gradient(
+        left,
+        #252525 0%,
+        #252525 20%,
+        #252525 40%,
+        $primary-color 40%,
+        $primary-color 80%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
     h2 {
       position: relative;
       transform: translate(-105%, 6%);
@@ -26,20 +56,47 @@
 
   .productCard {
     width: 30vw;
-    max-width: 300px;
-    height: 40vw;
+    max-width: 220px;
+    height: 30vh;
     max-height: 400px;
     &--showcase {
-      @include productCard;
       position: absolute;
       top: 240px;
+      max-width: 240px;
       min-height: 300px;
       height: 45vh;
+
+      &::before {
+        position: absolute;
+        background: $primary-color;
+        padding: 10px 20px;
+        border-radius: 20px;
+        right: 40vw;
+        width: 240px;
+        font-family: "Roboto", sans-serif;
+        font-size: 2em;
+        content: "Canada's most trusted fictitious mobile phone retailer";
+      }
     }
   }
 
   #Search {
-    padding-bottom: 40px;
+    form {
+      width: 60%;
+    }
+    .display {
+      height: auto;
+      margin-top: 40px;
+      width: 60%;
+      min-width: 240px;
+      background: white;
+      border-radius: 20px;
+      flex-direction: column;
+      .productCard {
+        min-height: 400px;
+        min-width: 300px;
+      }
+    }
   }
 
   .display {
@@ -49,11 +106,12 @@
     padding: 30px;
     .productCard {
       flex-grow: 1;
-      max-height: 300px;
+      max-height: 360px;
       margin: 20px;
     }
     &__heading {
       position: relative;
+      left: 10px;
       min-width: 15vw;
     }
   }
@@ -62,9 +120,18 @@
     section:not(#Search) {
       min-height: 480px;
     }
+    #oval {
+      display: none;
+      height: 300px;
+      width: 300px;
+      transform: unset;
+      right: 3%;
+      top: 180px;
+    }
     &__banner {
       padding: 0 !important;
-      min-height: 500px !important;
+      min-height: 600px !important;
+      max-height: 500px !important;
       h1,
       h2 {
         transform: scale(0.8) translate(-20px, -40px);
@@ -74,13 +141,41 @@
         top: 55px;
       }
     }
+
     .productCard {
       height: 300px;
       width: 200px;
       &--showcase {
-        top: 200px;
+        top: 260px;
 
         left: calc(50vw - 96px);
+        &::before {
+          position: absolute;
+          top: -80px;
+          left: -27vw;
+          width: max-content;
+
+          border-radius: 0;
+          font-size: 0.8em;
+
+          text-align: center;
+        }
+      }
+    }
+
+    #Search {
+      padding: 40px;
+      text-align: center;
+      form {
+        flex-direction: column;
+        justify-content: space-between;
+        height: 160px;
+        width: 90%;
+        & > * {
+          flex-grow: unset;
+          height: 40px;
+          width: 100%;
+        }
       }
     }
     .display {
@@ -100,6 +195,10 @@
         width: 270px;
         height: 360px;
         right: 16vw;
+        &::before {
+          width: 160px;
+          font-size: 1.2em;
+        }
       }
     }
   }
@@ -111,6 +210,12 @@
       &--showcase {
         width: 300px;
         height: 400px;
+        &::before {
+          padding: 10px 20px;
+          right: 40vw;
+          width: 240px;
+          font-size: 2em;
+        }
       }
     }
   }

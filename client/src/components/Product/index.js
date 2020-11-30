@@ -108,13 +108,15 @@ export const ProductCard = ({
     );
   };
 
+  modifierClass = modifierClass ? " productCard" + modifierClass : "";
+
   return inCart ? (
-    <div className={"productCard " + " productCard" + modifierClass}>
+    <div className={"productCard " + modifierClass}>
       {renderBasicProductInfo(product)}
       {renderInCartOptions(product)}
     </div>
   ) : (
-    <div className={"productCard " + "productCard" + modifierClass}>
+    <div className={"productCard " + modifierClass}>
       {renderBasicProductInfo(product)}
       {renderInShopOptions(product._id)}
     </div>

@@ -117,3 +117,7 @@ To test the user model CRUD operations (in the same directory):
 - ~Product management view can really just be one component. The biggest difference is between adding and updating, which can be managed with conditional rendering.~
 - Refactor the drop down selections you animal
 - offer reformating for images that are too big (and etc.)
+
+## Images
+
+- ratio 5:4 por favor!

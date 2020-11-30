@@ -38,9 +38,9 @@ const Search = () => {
     };
 
     const query = queryString.stringify(searchCriteria);
-    console.log(query);
+
     axios.get(SEARCH_PRODUCTS_ROUTE + `?${query}`, {}).then((res) => {
-      setData({ ...data, products: res.data });
+      setData({ ...data, products: res.data, searched: true });
     });
   };
 
@@ -86,11 +86,14 @@ const Search = () => {
           return <ProductCard product={product} key={i} />;
         })}
       </div>
+    ) : searched ? (
+      <h3>Sorry! No results for "{searchString}"</h3>
     ) : null;
   };
 
   return (
     <section id="Search">
+      <h2>Looking for something in particular?</h2>
       {renderSearchForm()}
       {renderProducts()}
     </section>

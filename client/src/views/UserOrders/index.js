@@ -8,6 +8,8 @@ import { isAuth } from "../../auth";
 
 import { GET_USER_ORDERS_ROUTE } from "../../config";
 
+import "./UserOrders.scss";
+
 const Orders = () => {
   const [orders, setOrders] = useState([]);
 
@@ -29,19 +31,17 @@ const Orders = () => {
   //user, status, _id, products, createdAt
 
   const renderProducts = (products) => (
-    <div>
-      {products.map(
-        ({ _id: productId, quantity, name, description, price }) => (
-          <div>
-            <p>Name: {name} </p>
-            <p>Product id: {productId} </p>
-            <p>Quantity: {quantity} </p>
-            <p>Price: ${price} </p>
-            <p>Description: {description} </p>
-          </div>
-        )
-      )}
-    </div>
+    <ul className="order__products">
+      <h2>Products ordered</h2>
+      {products.map(({ _id: productId, quantity, name, price }) => (
+        <li className="order__products__product">
+          <p>Name: {name} </p>
+          <p>Id: {productId} </p>
+          <p>Quantity: {quantity} </p>
+          <p>Price per unit: ${price} </p>
+        </li>
+      ))}
+    </ul>
   );
 
   const renderOrder = ({
@@ -54,18 +54,17 @@ const Orders = () => {
     createdAt,
     updatedAt,
   }) => (
-    <div>
-      <p>
-        Order status: {status} (last updated at: ${updatedAt} )
-      </p>
+    <section className="order">
+      <h2>Order information</h2>
+      <p>Your id: {userId}</p>
       <p>Order id: {orderId}</p>
-      <p>Date of order: {createdAt}</p>
-      <p>Your user id: {userId}</p>
-      <p>Amount charged: {amount}</p>
       <p>Shipped to: {address}</p>
+      <p>Order status: {status} </p>
+      <p>Date of order: {createdAt}</p>
+      <p>Last updated at: {updatedAt} </p>
+      <p>Amount charged: ${amount}</p>
       {renderProducts(products)}
-      <hr />
-    </div>
+    </section>
   );
 
   const renderOrders = () => (
@@ -78,7 +77,15 @@ const Orders = () => {
     </>
   );
 
-  return <Layout title="Your order history">{renderOrders()}</Layout>;
+  return (
+    <Layout
+      title="Your order history"
+      description="Here's all the details"
+      page="UserOrders"
+    >
+      {renderOrders()}
+    </Layout>
+  );
 };
 
 export default Orders;

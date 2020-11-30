@@ -3,15 +3,17 @@
   flex-direction: column;
   align-items: center;
   form {
+    display: flex;
+    align-items: center;
     height: 100%;
-    input,
-    select {
-      height: 30px;
-    }
-    button {
-      position: relative;
-      top: 7px;
-      height: 30px;
+    & > * {
+      flex-grow: 1;
+      margin: 10px;
+
+      height: 40px;
+      &:not(button) {
+        padding: 10px;
+      }
     }
   }
 }

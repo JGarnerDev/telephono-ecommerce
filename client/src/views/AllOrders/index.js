@@ -12,6 +12,8 @@ import {
   UPDATE_SHIPPING_STATUS_ROUTE,
 } from "../../config";
 
+import "./AllOrders.scss";
+
 const AllOrders = () => {
   const [orders, setOrders] = useState([]);
   const [shippingStatusOptions, setShippingStatusOptions] = useState([]);
@@ -46,27 +48,60 @@ const AllOrders = () => {
   }, []);
 
   //user, status, _id, products, createdAt
-  const renderProductsInTransaction = (products) =>
-    products.map(({ _id, name, quantity, description, price }) => (
-      <div>
-        <Link to={`/product/${_id}`}>
-          <h3>{name}</h3>
-        </Link>
-        <div>Product description: {description}</div>
-        <div>Price per unit: ${price}</div>
-        <div>Quantity sold: {quantity}</div>
-        <div>Product id: {_id}</div>
-        <hr />
-      </div>
-    ));
+  const renderProductsInTransaction = (products) => {
+    // <Link to={`/product/${_id}`}>
+    // <h3>{name}</h3>
+    // </Link>
+
+    // name price description quantity _id
+    return (
+      <>
+        <section className="order__productsInfo">
+          <h2>Products</h2>
+          {products.map(({ _id, name, price, quantity }) => {
+            return (
+              <div className="order__productsInfo__product">
+                <Link to={`/product/${_id}`}>
+                  <h3>{name}</h3>
+                </Link>
+                <p>Product id: {_id}</p>
+                <p>Price per unit: ${price}</p>
+                <p>Quantity: {quantity}</p>
+              </div>
+            );
+          })}
+        </section>
+      </>
+    );
+  };
 
   const renderClientInfo = ({ name, _id, email }) => (
-    <div>
+    <section className="order__clientInfo">
       <h2>Client</h2>
-      <div>Name: {name}</div>
-      <div>Email: {email}</div>
-      <div>Client id: {_id}</div>
-    </div>
+      <p>Client id: {_id}</p>
+      <p>Name: {name}</p>
+      <p>Email: {email}</p>
+    </section>
+  );
+  const renderOrderInfo = (address, _id, createdAt, amount) => (
+    <section className="order__orderInfo">
+      <h2>Order</h2>
+      <p>Order id: {_id}</p>
+      <p>Shipping address: {address}</p>
+      <p>Total cost: ${amount}</p>
+      <p>Time stamp: {createdAt}</p>
+      <div className="order__orderInfo__status">
+        <p>Order status:</p>
+        <select
+          onChange={(event) => handleShippingStatusChange(event, _id)}
+          value={currentShippingStatusValues[_id]}
+        >
+          {shippingStatusOptions.map((statusOption) => {
+            return <option value={statusOption}>{statusOption}</option>;
+          })}
+        </select>
+      </div>
+    </section>
   );
 
   const handleShippingStatusChange = (event, orderId) => {
@@ -84,30 +119,23 @@ const AllOrders = () => {
 
   const renderOrders = () =>
     orders.map(({ address, _id, products, createdAt, amount, clientData }) => (
-      <div>
+      <div className="order">
+        {renderOrderInfo(address, _id, createdAt, amount)}
         {renderClientInfo(clientData)}
-        <h2>Order</h2>
-        <div>Shipping address: {address}</div>
-        <div>Order status:</div>
-        <select
-          onChange={(event) => handleShippingStatusChange(event, _id)}
-          value={currentShippingStatusValues[_id]}
-        >
-          {shippingStatusOptions.map((statusOption) => {
-            return <option value={statusOption}>{statusOption}</option>;
-          })}
-        </select>
-        <div>Order id: {_id}</div>
-        <hr />
-        <h2>Products</h2>
+
         {renderProductsInTransaction(products)}
-        <div>Time stamp: {createdAt}</div>
-        <div>Total cost: ${amount}</div>
-        <hr />
       </div>
     ));
 
-  return <Layout title="Orders">{renderOrders()}</Layout>;
+  return (
+    <Layout
+      title="All Orders"
+      description="View order information and adjust it's shipping status"
+      page="AllOrders"
+    >
+      {renderOrders()}
+    </Layout>
+  );
 };
 
 export default AllOrders;
