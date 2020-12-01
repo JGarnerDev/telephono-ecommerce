@@ -1,0 +1,78 @@
+@import "../../styles/variables.scss";
+#ProductEditor {
+  #wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 800px;
+      > * {
+        margin: 10px;
+      }
+      label::first-letter {
+        text-transform: uppercase;
+      }
+      #selectors {
+        > * {
+          display: flex;
+          justify-content: space-between;
+          margin: 10px 0;
+          width: 100%;
+        }
+      }
+      #imgUpdater {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        input {
+          display: none;
+        }
+        label {
+          padding: 10px;
+          background: $secondary-color;
+        }
+      }
+      button {
+        width: 200px;
+        margin: 20px auto;
+      }
+    }
+    #images {
+      display: flex;
+
+      #img-current,
+      #img-updated {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-grow: 1;
+        max-width: 50%;
+        .productCard__image {
+          min-height: 200px;
+          max-height: 200px;
+        }
+        h2 {
+          width: 240px;
+          text-align: center;
+        }
+      }
+    }
+  }
+  #wrapper.Update {
+  }
+  #wrapper.Add {
+    #img-updated {
+      max-width: 50vw !important;
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet) {
+  #wrapper {
+    font-size: 0.7em;
+  }
+}

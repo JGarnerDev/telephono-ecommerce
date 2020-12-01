@@ -19,6 +19,10 @@ import Layout from "../../hoc/Layout";
 import { ProductImage } from "../../components/Product";
 import FormField from "../../components/FormField";
 
+import { Button } from "@material-ui/core";
+
+import "./ProductEditor.scss";
+
 const ProductEditor = ({ mode }) => {
   const [state, dispatch] = useReducer(productEditorReducer, {
     ...productEditorInitialState,
@@ -64,17 +68,31 @@ const ProductEditor = ({ mode }) => {
     }
   };
 
-  const renderCurrentProductImage = () => <ProductImage _id={productId} />;
+  const renderCurrentProductImage = () => (
+    <div id="img-current">
+      <h2>Current image</h2>
+      <ProductImage _id={productId} />
+    </div>
+  );
 
-  const renderImageInput = () => (
-    <>
+  const renderProductImagePreview = () => (
+    <div id="img-updated">
+      <h2>Selected image</h2>
       <ProductImage
         image={product.img && URL.createObjectURL(product.img)}
         isPreview={true}
       />
+    </div>
+  );
+
+  const renderImageInput = () => (
+    <div id="imgUpdater">
+      <h3>Change product image?</h3>
+      <label for="img">Upload new image</label>
       <input
         type="file"
         accept="image/*"
+        id="img"
         onChange={(e) => {
           dispatch({
             type: "fieldChange",
@@ -83,7 +101,7 @@ const ProductEditor = ({ mode }) => {
           });
         }}
       />
-    </>
+    </div>
   );
 
   const renderFieldsForUpdating = (forUpdate) =>
@@ -113,50 +131,56 @@ const ProductEditor = ({ mode }) => {
     });
 
   const renderSelectors = () => (
-    <>
-      <select
-        name="category"
-        value={product.category}
-        onChange={(e) => {
-          e.preventDefault();
-          dispatch({
-            type: "fieldChange",
-            field: "category",
-            value: e.target.value,
-          });
-        }}
-      >
-        <option value="">None</option>
-        {categories.map((category, i) => {
-          return (
-            <option value={category._id} key={i}>
-              {category.name}
-            </option>
-          );
-        })}
-      </select>
-      <select
-        name="shipping"
-        value={product.shipping}
-        onChange={(e) => {
-          e.preventDefault();
-          dispatch({
-            type: "fieldChange",
-            field: "shipping",
-            value: e.target.value,
-          });
-        }}
-      >
-        <option value={1}>Yes</option>
-        <option value={0}>No</option>
-      </select>
-    </>
+    <div id="selectors">
+      <div>
+        <h3>Product category:</h3>
+        <select
+          name="category"
+          value={product.category}
+          onChange={(e) => {
+            e.preventDefault();
+            dispatch({
+              type: "fieldChange",
+              field: "category",
+              value: e.target.value,
+            });
+          }}
+        >
+          <option value="">None</option>
+          {categories.map((category, i) => {
+            return (
+              <option value={category._id} key={i}>
+                {category.name}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+      <div>
+        <h3>Shipping?</h3>
+        <select
+          name="shipping"
+          value={product.shipping}
+          onChange={(e) => {
+            e.preventDefault();
+            dispatch({
+              type: "fieldChange",
+              field: "shipping",
+              value: e.target.value,
+            });
+          }}
+        >
+          <option value={1}>Shipping allowed</option>
+          <option value={0}>Shipping disabled</option>
+        </select>
+      </div>
+    </div>
   );
 
   const renderAddProductForm = () => {
     return (
       <>
-        {renderImageInput()}
+        <h2>Enter product information</h2>
         {renderFieldsForUpdating(false)}
         {renderSelectors()}
       </>
@@ -166,8 +190,7 @@ const ProductEditor = ({ mode }) => {
   const renderUpdateProductForm = () => {
     return (
       <>
-        {renderCurrentProductImage()}
-        {renderImageInput()}
+        <h2>Update current information</h2>
         {renderFieldsForUpdating(true)}
         {renderSelectors()}
       </>
@@ -175,11 +198,42 @@ const ProductEditor = ({ mode }) => {
   };
 
   return (
-    <Layout title={`${mode} product`}>
-      <form action="">
-        {mode === "Update" ? renderUpdateProductForm() : renderAddProductForm()}
-      </form>
-      <button onClick={submit}>{`${mode} this product`}</button>
+    <Layout
+      title={`${mode} product`}
+      page="ProductEditor"
+      description={`Change the details of ${product.name}`}
+    >
+      <div id="wrapper" className={`${mode}`}>
+        {/* {mode === "Update" ? renderCurrentProductImage() : null}
+        {renderImageInput()}
+        <form id="form" className={mode}>
+          {mode === "Update"
+            ? renderUpdateProductForm()
+            : renderAddProductForm()}
+          <Button
+            id="ProductEditor__wrapper__button"
+            onClick={submit}
+            variant="contained"
+            color="primary"
+          >{`${mode} this product`}</Button>
+        </form> */}
+        <div id="images">
+          {mode === "Update" ? renderCurrentProductImage() : null}
+          {renderProductImagePreview()}
+        </div>
+        <form>
+          {mode === "Update"
+            ? renderUpdateProductForm()
+            : renderAddProductForm()}
+          {renderImageInput()}
+          <Button
+            id="ProductEditor__wrapper__button"
+            onClick={submit}
+            variant="contained"
+            color="primary"
+          >{`${mode} this product`}</Button>
+        </form>
+      </div>
     </Layout>
   );
 };

@@ -15,6 +15,8 @@ import UIMessage from "../../../components/UIMessage";
 
 import { Button } from "@material-ui/core";
 
+import "./Add.scss";
+
 const AddCategory = () => {
   const [state, dispatch] = useReducer(
     addCategoryReducer,
@@ -56,9 +58,9 @@ const AddCategory = () => {
 
   const renderForm = () => {
     return (
-      <form action="">
+      <form id="AddCategory__wrapper__form">
         <FormField
-          label="Name"
+          label="Category name"
           value={Name}
           required={true}
           changeHandler={(e) =>
@@ -70,7 +72,7 @@ const AddCategory = () => {
           }
         />
         <Button variant="contained" color="primary" onClick={submit}>
-          Submit
+          Add new category
         </Button>
         {Loading ? <p>FICK</p> : null}
         {RenderError ? <UIMessage message={Error} type="error" /> : null}
@@ -79,7 +81,15 @@ const AddCategory = () => {
     );
   };
 
-  return <Layout title="Add a Product Category">{renderForm()}</Layout>;
+  return (
+    <Layout
+      title="Add a Product Category"
+      description="Pick a category name for new products"
+      page="AddCategory"
+    >
+      <div id="AddCategory__wrapper">{renderForm()}</div>
+    </Layout>
+  );
 };
 
 export default AddCategory;

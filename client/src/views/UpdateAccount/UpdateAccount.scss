@@ -1,0 +1,41 @@
+@import "../../styles/variables.scss";
+
+#UpdateAccount {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 80px;
+    width: 70vw;
+    max-width: 600px;
+    &__form {
+      display: flex;
+      flex-direction: column;
+
+      flex-grow: 1;
+      .MuiFormControlLabel-root {
+        margin: 20px auto;
+      }
+      button {
+        margin: 40px 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet) {
+  #UpdateAccount {
+    &__wrapper {
+      flex-direction: column;
+      align-items: center;
+      width: 90vw;
+      margin: 20px;
+      &__form {
+        width: 90%;
+      }
+    }
+  }
+}

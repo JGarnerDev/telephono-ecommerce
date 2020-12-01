@@ -14,7 +14,11 @@ import "./Product.scss";
 
 export const ProductImage = ({ _id, isPreview, image }) => {
   return isPreview ? (
-    <img src={image} className="productCard__image"></img>
+    <img
+      src={image}
+      className="productCard__image"
+      id="ProductEditor__wrapper__imgPreview"
+    ></img>
   ) : (
     <div className="img-wrapper">
       <LazyLoadImage

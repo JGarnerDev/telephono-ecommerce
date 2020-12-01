@@ -1,0 +1,50 @@
+@import "../../styles/variables.scss";
+
+#CategoryManagement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  background: white;
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 80px;
+    width: 70vw;
+    max-width: 600px;
+    &__add {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      a {
+        position: relative;
+        top: 4px;
+        left: 10px;
+      }
+    }
+    .category {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 20px;
+      margin: 10px 0;
+      background: $neutral-color;
+      h2 {
+        max-width: 120px;
+      }
+      button {
+        max-width: 80px;
+      }
+      button:first-of-type {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $tablet) {
+  .category {
+    flex-direction: column;
+    height: 300px;
+  }
+}

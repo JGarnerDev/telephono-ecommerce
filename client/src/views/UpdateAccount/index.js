@@ -9,8 +9,10 @@ import { UPDATE_USER_ACCOUNT_ROUTE } from "../../config";
 import Layout from "../../hoc/Layout";
 import FormField from "../../components/FormField";
 
-import { FormControlLabel, Checkbox } from "@material-ui/core";
+import { FormControlLabel, Checkbox, Button } from "@material-ui/core";
 import { Build, BuildOutlined } from "@material-ui/icons";
+
+import "./UpdateAccount.scss";
 
 const UpdateAccount = () => {
   const [userProfile, setUserProfile] = useState(isAuth().user);
@@ -78,16 +80,18 @@ const UpdateAccount = () => {
   );
 
   const renderUserUpdateForm = () => (
-    <form>
+    <form id="UpdateAccount__wrapper__form">
       {renderFormFieldOptions()}
       {renderAdminToggle()}
-      <button
+      <Button
         onClick={(e) => {
           submit(e);
         }}
+        variant="contained"
+        color="primary"
       >
         Submit
-      </button>
+      </Button>
     </form>
   );
 
@@ -97,8 +101,14 @@ const UpdateAccount = () => {
     : (description = `${name} (Client)`);
 
   return (
-    <Layout title="Update Account Information" description={description}>
-      <div className="">{userProfile && renderUserUpdateForm()}</div>
+    <Layout
+      title="Update Account Information"
+      description={description}
+      page="UpdateAccount"
+    >
+      <div id="UpdateAccount__wrapper">
+        {userProfile && renderUserUpdateForm()}
+      </div>
     </Layout>
   );
 };
