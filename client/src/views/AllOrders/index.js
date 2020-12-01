@@ -47,13 +47,7 @@ const AllOrders = () => {
       });
   }, []);
 
-  //user, status, _id, products, createdAt
   const renderProductsInTransaction = (products) => {
-    // <Link to={`/product/${_id}`}>
-    // <h3>{name}</h3>
-    // </Link>
-
-    // name price description quantity _id
     return (
       <>
         <section className="order__productsInfo">
@@ -130,7 +124,7 @@ const AllOrders = () => {
   return (
     <Layout
       title="All Orders"
-      description="View order information and adjust it's shipping status"
+      description="Update the order status!"
       page="AllOrders"
     >
       {renderOrders()}

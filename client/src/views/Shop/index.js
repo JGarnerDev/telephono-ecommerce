@@ -97,12 +97,8 @@ const Shop = () => {
   };
 
   return (
-    <Layout
-      title="Shop"
-      description="Find something right for you!"
-      page="Shop"
-    >
-      <div id="content-wrapper">
+    <Layout title="Shop" description="Find something right" page="Shop">
+      <div className="content-wrapper">
         <section id="Shop__filter">
           <CategorySelector
             availableCategories={availableCategories}

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+
+import { Button } from "@material-ui/core";
 
 import { GET_PRODUCTS_ROUTE } from "../../config";
 import {
@@ -38,7 +40,7 @@ export const ProductCard = ({
   inCart,
   setUpdate = (f) => f,
   update = undefined,
-  modifierClass = "",
+  showcase,
 }) => {
   const [quantity, setQuantity] = useState(product.quantity);
   const addProductToCart = () => {
@@ -71,35 +73,38 @@ export const ProductCard = ({
       description = description.slice(0, 75) + "...";
     }
     return (
-      <>
+      <div className="product-details">
         <ProductImage _id={_id} name={name} />
         <div className="productCard__info">
           <h3>{name}</h3>
           <p>{description}</p>
           <p>${price}</p>
         </div>
-      </>
+      </div>
     );
   };
 
   const renderInCartOptions = ({ _id, maxQuantity }) => {
     return (
-      <>
-        <p>Units available: {maxQuantity}</p>
+      <div className="product-cartOptions">
+        <p className="units-available"> {maxQuantity} available</p>
         <input
+          className="quantity-adjuster"
           type="number"
           value={quantity}
           onChange={handleChange(_id, maxQuantity)}
         />
-        <button
+        <Button
           onClick={() => {
             removeProductFromCart(_id);
             setUpdate(!update);
           }}
+          variant="contained"
+          color="secondary"
         >
-          Remove from cart
-        </button>
-      </>
+          Remove
+        </Button>
+      </div>
     );
   };
 
@@ -112,15 +117,13 @@ export const ProductCard = ({
     );
   };
 
-  modifierClass = modifierClass ? " productCard" + modifierClass : "";
-
   return inCart ? (
-    <div className={"productCard " + modifierClass}>
+    <div className="productCard cart">
       {renderBasicProductInfo(product)}
       {renderInCartOptions(product)}
     </div>
   ) : (
-    <div className={"productCard " + modifierClass}>
+    <div className="productCard" id={showcase && "showcase"}>
       {renderBasicProductInfo(product)}
       {renderInShopOptions(product._id)}
     </div>

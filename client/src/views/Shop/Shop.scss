@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: flex-start;
 
-  #content-wrapper {
+  .content-wrapper {
     display: flex;
     flex-grow: 1;
   }
@@ -56,7 +56,13 @@
 
 @media only screen and (max-width: $tablet) {
   #Shop {
+    .content-wrapper {
+      width: 100%;
+      flex-direction: column;
+    }
+
     &__filter {
+      width: 100%;
       .categories,
       .priceRanges {
         &__option {
@@ -66,6 +72,11 @@
     }
     &__products {
       flex-direction: column;
+      align-items: center;
+      width: 100%;
+      .productCard {
+        margin: 20px 10px;
+      }
     }
   }
 }

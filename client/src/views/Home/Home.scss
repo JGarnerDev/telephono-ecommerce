@@ -95,7 +95,7 @@
     min-width: 240px;
     width: 240px;
     height: 360px;
-    &--showcase {
+    &#showcase {
       position: absolute;
       top: 240px;
       max-width: 240px;
@@ -132,7 +132,7 @@
 
       .productCard {
         min-height: 400px;
-        min-width: 300px;
+        min-width: 260px;
       }
     }
   }
@@ -193,7 +193,7 @@
     }
 
     .productCard {
-      &--showcase {
+      &#showcase {
         top: 260px;
 
         left: calc(50vw - 120px);
@@ -251,7 +251,7 @@
     }
 
     .productCard {
-      &--showcase {
+      &#showcase {
         width: 270px;
         height: 360px;
         right: 16vw;
@@ -274,7 +274,7 @@
     }
 
     .productCard {
-      &--showcase {
+      &#showcase {
         width: 300px;
         height: 400px;
         &::before {

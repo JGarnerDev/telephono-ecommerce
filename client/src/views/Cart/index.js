@@ -6,6 +6,8 @@ import Checkout from "../../components/Checkout";
 
 import { getProductsFromCart, emptyCart } from "./utils";
 
+import "./Cart.scss";
+
 const Cart = () => {
   const [cartProducts, setCartProducts] = useState([]);
   const [update, setUpdate] = useState(false);
@@ -15,22 +17,23 @@ const Cart = () => {
   }, [update]);
 
   return (
-    <Layout title="Cart">
+    <Layout title="Cart" description="Confirm order details" page="Cart">
       {cartProducts.length ? (
-        <>
-          {cartProducts.map((product) => (
-            <ProductCard
-              product={product}
-              inCart={true}
-              setUpdate={setUpdate}
-              update={update}
-            />
-          ))}
-
+        <div className="content-wrapper">
+          <div id="products">
+            {cartProducts.map((product) => (
+              <ProductCard
+                product={product}
+                inCart={true}
+                setUpdate={setUpdate}
+                update={update}
+              />
+            ))}
+          </div>
           <Checkout products={cartProducts} emptyCart={emptyCart} />
-        </>
+        </div>
       ) : (
-        <h2>There's no products currently in your cart</h2>
+        <h2>There are no products currently in your cart</h2>
       )}
     </Layout>
   );

@@ -75,7 +75,7 @@ const Home = () => {
     >
       <div id="oval"></div>
       {productsByDate[0] && (
-        <ProductCard product={productsByDate[0]} modifierClass="--showcase" />
+        <ProductCard product={productsByDate[0]} showcase={true} />
       )}
 
       <Search />

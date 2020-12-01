@@ -8,6 +8,10 @@ import UIMessage from "../UIMessage";
 import { isAuth } from "../../auth";
 import { getPaymentToken, processPayment, saveOrderData } from "./utils";
 
+import { Button } from "@material-ui/core";
+
+import "./Checkout.scss";
+
 const Checkout = ({ products, emptyCart }) => {
   const [data, setData] = useState({
     success: false,
@@ -74,15 +78,14 @@ const Checkout = ({ products, emptyCart }) => {
 
   const renderDropIn = () => {
     return data.paymentToken && products.length ? (
-      <div onBlur={() => setData({ ...data, error: "" })}>
-        <div>
-          <label></label>
-          <textarea
-            onChange={handleAddress}
-            value={data.address}
-            placeholder="Shipping address"
-          ></textarea>
-        </div>
+      <div onBlur={() => setData({ ...data, error: "" })} id="checkout-dropin">
+        <textarea
+          id="address"
+          onChange={handleAddress}
+          value={data.address}
+          placeholder="Shipping address"
+        ></textarea>
+
         <BrainTreeDropIn
           options={{
             authorization: data.paymentToken,
@@ -92,7 +95,9 @@ const Checkout = ({ products, emptyCart }) => {
             setData({ ...data, instance });
           }}
         />
-        <button onClick={confirmPurchase}>Check out</button>
+        <Button variant="contained" color="primary" onClick={confirmPurchase}>
+          Check out
+        </Button>
       </div>
     ) : null;
   };
@@ -123,8 +128,8 @@ const Checkout = ({ products, emptyCart }) => {
   };
 
   return (
-    <div>
-      <h2>Total cost: ${totalCostOfCart()}</h2>
+    <div id="Checkout">
+      <h2 id="total-cost">Total cost: ${totalCostOfCart()}</h2>
       {enableCheckout()}
       {renderError()}
     </div>
