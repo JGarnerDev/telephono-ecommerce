@@ -102,19 +102,21 @@ const Shop = () => {
       description="Find something right for you!"
       page="Shop"
     >
-      <section id="Shop__filter">
-        <CategorySelector
-          availableCategories={availableCategories}
-          handleChange={handleCategoryToggle}
-        />
-        <PriceRangeSelector
-          priceRanges={priceRanges}
-          handleChange={handlePriceRangeToggle}
-        />
-      </section>
+      <div id="content-wrapper">
+        <section id="Shop__filter">
+          <CategorySelector
+            availableCategories={availableCategories}
+            handleChange={handleCategoryToggle}
+          />
+          <PriceRangeSelector
+            priceRanges={priceRanges}
+            handleChange={handlePriceRangeToggle}
+          />
+        </section>
 
-      {renderProducts()}
-      {renderLoadMoreButton()}
+        {renderProducts()}
+        {renderLoadMoreButton()}
+      </div>
     </Layout>
   );
 };

@@ -103,8 +103,9 @@ To test the user model CRUD operations (in the same directory):
 
 ## Todos (client):
 
+- BEM, as far as I understand it, isn't having the organizational impact that I would like. Write a short essay on it, and clean it up in favor of more legible SASS.
 - Error messages at Login aren't working (due to the server-side error handling)
-- Use react memo to prevent needless rerendering
+- Research and use react memo to prevent needless rerendering
 - Cart Product count (in the nav) doesn't rerender when cart is updated
 - Make sure the 'load more' feature is working correctly with 7+ products
 - Refactor product rendering at Home view and Search component

@@ -12,10 +12,10 @@ const Layout = ({
 }) => {
   return (
     <div id={page} className="page">
-      <section id={page + "__banner"} className="banner">
+      <div id={page + "__banner"} className="banner">
         <h1>{title}</h1>
         <h2>{description}</h2>
-      </section>
+      </div>
       <React.Fragment>{children}</React.Fragment>
     </div>
   );

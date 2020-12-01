@@ -4,7 +4,7 @@ const CategorySelector = ({ availableCategories, handleChange }) => {
   return (
     <>
       <ul className="categories">
-        <h2>Product Categories </h2>
+        <h2>Category </h2>
         {availableCategories.map((availableCategory, i) => {
           return (
             <li className="categories__option" key={i}>

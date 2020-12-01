@@ -10,6 +10,7 @@
   section:not(#Search) {
   }
 
+  .banner,
   section:nth-child(odd) {
     background: $secondary-color;
   }

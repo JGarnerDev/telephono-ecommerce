@@ -2,36 +2,44 @@
 #Shop {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+
+  #content-wrapper {
+    display: flex;
+    flex-grow: 1;
+  }
 
   &__filter {
     display: flex;
-    width: 100%;
+    flex-direction: column;
+    width: 200px;
+    min-width: 200px;
     background: $neutral-color;
-  }
-  .categories,
-  .priceRanges {
-    margin: 10px;
-
-    background: white;
-    h2 {
+    .categories,
+    .priceRanges {
+      background: white;
       margin-bottom: 10px;
-      width: 100%;
-      padding: 0 10px;
-      background: $secondary-color-light;
-    }
-    &__option {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 10px;
-      font-size: 20px;
+      h2 {
+        margin-bottom: 6px;
+        padding: 2px 4px;
+        width: 100%;
+        font-size: 1.2em;
+        background: $secondary-color-light;
+      }
+      &__option {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2px 4px;
+      }
     }
   }
+
   &__products {
     display: flex;
+
     flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-start;
     width: 90%;
     &::after {
       content: "";
@@ -41,7 +49,6 @@
       min-width: 240px;
       width: 240px;
       height: 360px;
-
       margin: 40px;
     }
   }
@@ -54,7 +61,6 @@
       .priceRanges {
         &__option {
           font-size: 14px;
-          padding: 3px 10px;
         }
       }
     }

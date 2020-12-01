@@ -6,7 +6,7 @@ const PriceRangeSelector = ({ priceRanges, handleChange }) => {
   return (
     <>
       <ul className="priceRanges">
-        <h2>Price Ranges</h2>
+        <h2>Price </h2>
         {priceRanges.map((priceRange, i) => {
           return (
             <li className="priceRanges__option" key={i}>
