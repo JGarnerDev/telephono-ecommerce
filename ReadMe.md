@@ -28,7 +28,7 @@ As a user, I would like to...
 - [x] Be able to search for a phone to purchase by name
 - [x] Be able to search for a phone to purchase by category
 - [x] Be able to add a product to my cart
-- [] Be informed if this product is or isn't in stock before they can add it to their cart
+- [ ] Be informed if this product is or isn't in stock before they can add it to their cart
 - [x] Be able to pay by credit card
 - [x] Be able to have an account so that I...
   - [x] can review my cart when I last visited the website if I didn't confirm a purchase
