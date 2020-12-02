@@ -106,9 +106,9 @@ To test the user model CRUD operations (in the same directory):
 
 ### Big
 
-- [] Each model and service should have their own tests
-- [] Routes, though working, feel a bit messy / non-uniform. Refactor after test coverage.
-- [] Error Handling: while the server works if as intended if it recieves ideal conditions, the responses it gives when requests are lacking are unclear and are not conducive for user experience. Fix that.
+- [ ] Each model and service should have their own tests
+- [ ] Routes, though working, feel a bit messy / non-uniform. Refactor after test coverage.
+- [ ] Error Handling: while the server works if as intended if it recieves ideal conditions, the responses it gives when requests are lacking are unclear and are not conducive for user experience. Fix that.
 
 ### Small
 
@@ -127,16 +127,16 @@ To test the user model CRUD operations (in the same directory):
 
 ### Big
 
-- [] BEM, as far as I understand it, isn't having the organizational impact that I would like. Write a short essay on it, and clean it up in favor of more legible SASS.
-- [] Error messages at Login aren't working (due to the server-side error handling). Fix all of it by revising error handling server-side.
-- [] Research and use react memo to prevent needless rerendering
-- [] Test coverage
-- [] Refactor the drop down selections into a reusable component, you animal
-- [] offer reformating for images that are too big (and etc.)
+- [ ] BEM, as far as I understand it, isn't having the organizational impact that I would like. Write a short essay on it, and clean it up in favor of more legible SASS.
+- [ ] Error messages at Login aren't working (due to the server-side error handling). Fix all of it by revising error handling server-side.
+- [ ] Research and use react memo to prevent needless rerendering
+- [ ] Test coverage
+- [ ] Refactor the drop down selections into a reusable component, you animal
+- [ ] offer reformating for images that are too big (and etc.)
 
 ### Small
 
-- [] Mobile: 'administrative control' should be center-aligned;
-- [] Make sure the 'load more' feature is working correctly with 7+ products
-- [] Make address manditory in validation for checkout
-- [] Utility function for those brutal timestrings
+- [ ] Mobile: 'administrative control' should be center-aligned;
+- [ ] Make sure the 'load more' feature is working correctly with 7+ products
+- [ ] Make address manditory in validation for checkout
+- [ ] Utility function for those brutal timestrings
