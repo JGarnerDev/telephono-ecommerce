@@ -46,7 +46,7 @@ export const ADMIN_UPDATE_CATEGORY_URL = "/Administrator/categories/update";
 export const ADMIN_VIEW_ORDERS_URL = "/Administrator/orders";
 
 //// Server routes
-export const API_URL = process.env.REACT_APP_API_ROOT_URL;
+export const API_URL = process.env.REACT_APP_API_ROOT_URL + "/api";
 
 // Auth
 export const USER_SIGNUP_ROUTE = API_URL + "/auth/signup";
