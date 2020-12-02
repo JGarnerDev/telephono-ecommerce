@@ -2,44 +2,44 @@
 
 An original app, a popular concept. HUA!
 
+The current version is live! [Check it out here](https://telephono.netlify.app/)
+
 ## Summary
 
-To show how far along I've come with learning, it's time to create a complete e-commerce project with the MERN stack. Mongo, Express, React, and Node are all familiar territory for me, so the challenges with pulling it all together will be refreshing feather in my cap.
+Hey there! This is TelePhono.
 
-I firmly beleive that test-driven development - while not always a viable option for companies - is a great means for ensuring a stable product. It's in my interest as a developer to implement it, despite it being time consuming. It will be used during this project for both the Node and Express server, as well as the React front end.
+This project is a full-stack eCommerce website from scratch; the directory contains both a React client application and a Node server.
 
-Phones are a ubiquitous and visually interesting product, so I will pick them as a subject matter.
+Why did I make it? While I feel versed with each of the elemental parts of web development when it comes to fetching and rendering, it is absolutely important to have first-hand knowledge of the challenges of combining all the necessary constituents that make a modern application that needs to connect to a database. There's logistics, planning, coordination, and problem solving unique to doing a project like this that can only be understood in the doing of it.
 
 ## Objectives
 
-- Try as best as possible to use TDD. When you're not sure how something can be properly tested, but manual testing returns green, put it in the todos list.
+- Construct an API using Node and Express that will handle CRUD operations for users, products, categories, and orders with our MongoDB database. Use a sandbox payment system, send emails to the user on order confirmation.
 
-- Construct an API using Node and Express that will handle CRUD operations for users and products with our MongoDB database. Use Mongoose for Schematization. User validation will be done with JSON Web Tokens.
+- Construct a React client that will provide an interface for users to sign up, log in, view products, and purchase products through our API. Allow for administrators to create, update, and delete relevant material. Have two levels of private routes; one for administrators, one for registered users.
 
-- Construct a React client that will provide an interface for users to sign up, log in, view products, and purchase products through our API. This will be a good opportunity to practice React Hooks.
-
-- Once a first version is completed, add to the primary features
+- Once a first version is completed, review todo's for obvious improvements and bugs to fix
 
 ## Primary features
 
 As a user, I would like to...
 
-- See a collection of phones for purchase
-- Be able to search for a phone to purchase by name
-- Be able to search for a phone to purchase by category
-- Be able to add a product to my cart
-- Be informed if this product is or isn't in stock
-- Be able to pay by credit card
-- Be able to have an account so that I...
-  - can review my cart when I last visited the website if I didn't confirm a purchase
-  - be alerted of new inventory
-  - can confirm the details of my purchase once made
+- [x] See a collection of phones for purchase
+- [x] Be able to search for a phone to purchase by name
+- [x] Be able to search for a phone to purchase by category
+- [x] Be able to add a product to my cart
+- [] Be informed if this product is or isn't in stock before they can add it to their cart
+- [x] Be able to pay by credit card
+- [x] Be able to have an account so that I...
+  - [x] can review my cart when I last visited the website if I didn't confirm a purchase
+  - [x] be alerted of new inventory
+  - [x] can confirm the details of my purchase once made
 
 ## Installation
 
 ### Server
 
-To get the server up and running after pulling the root directory, change directories to the server by the client command:
+To get the Node server up and running after pulling the root directory, change directories to the server by the client command:
 
 > cd ./server
 
@@ -51,14 +51,21 @@ I used nodemon for development, which is initiated by the following command:
 
 > npm start
 
-**Note**: Since it's good practice to hide your API keys and sensitive data, my personal .env file is excluded from the repository. It is necessary to create your own to have it run locally. To do so, follow these steps:
+### Client
 
-    1. Create a file named '.env' in the server directory
-    2. Write in this file 'PORT=<some number>' ex: PORT=3210
-    3. Make a remote database on www.mongodb.com, and retain the user name and password for your collection for steps 4 and 5
-    4. In the .env file, write 'DB_USER=<username>'  ex: DB_USER=FooBar
-    5. In the .env file, write 'DB_PASS=<password>'  ex: DB_USER=sWJSRkdhX92ctOTD
-    6. Good to go!
+The client is done with React and has some modules to install. From the root directory, get into the client folder with this command:
+
+> cd ./client
+
+Then install the required modules:
+
+> npm install
+
+React will run the development version with this command:
+
+> npm start
+
+**Note** The environmental variables are not included in this repository, so local development will attempt requests to an undefined address. To get a full experience, [check it out live here](https://telephono.netlify.app/). Otherwise, send me a message and I'll explain to you how to get these missing values through a process of subscriptions and setups.
 
 ## Testing
 
@@ -95,31 +102,41 @@ To test the user model CRUD operations (in the same directory):
 
 ## Todos (server):
 
-- Broaden current services tests
-- Broaden endpoint tests
-- Routes, though working, feel a bit messy / non-uniform. Refactor after test coverage.
-- Error Handling
-  - Response to duplicate email when signing up is directly from Mongo. Stop that, clean it up
+### Done
+
+### Big
+
+- [] Each model and service should have their own tests
+- [] Routes, though working, feel a bit messy / non-uniform. Refactor after test coverage.
+- [] Error Handling: while the server works if as intended if it recieves ideal conditions, the responses it gives when requests are lacking are unclear and are not conducive for user experience. Fix that.
+
+### Small
+
+- [] Endpoints need to have their tests
 
 ## Todos (client):
 
-- BEM, as far as I understand it, isn't having the organizational impact that I would like. Write a short essay on it, and clean it up in favor of more legible SASS.
-- Error messages at Login aren't working (due to the server-side error handling)
-- Research and use react memo to prevent needless rerendering
-- Cart Product count (in the nav) doesn't rerender when cart is updated
-- Make sure the 'load more' feature is working correctly with 7+ products
-- Refactor product rendering at Home view and Search component
-- ~Code update user account view~
-- ~Code single product full display component~
-- Test coverage
-- Product filter doesn't do the do when there's an empty string input
-- Make adress manditory in validation for checkout
-- Make an order component for order history
-- Utility function for those brutal timestrings
-- ~Product management view can really just be one component. The biggest difference is between adding and updating, which can be managed with conditional rendering.~
-- Refactor the drop down selections you animal
-- offer reformating for images that are too big (and etc.)
+### Done
 
-## Images
+- [x] Code update user account view
+- [x] Code single product full display component
+- [x] Product management view can really just be one component. The biggest difference is between adding and updating, which can be managed with conditional rendering.
+- [x] Make an order component for order history
+- [x] Product filter doesn't do the do when there's an empty string input. Make it bring products regardless.
+- [x] Refactor product rendering at Home view and Search component
 
-- ratio 5:4 por favor!
+### Big
+
+- [] BEM, as far as I understand it, isn't having the organizational impact that I would like. Write a short essay on it, and clean it up in favor of more legible SASS.
+- [] Error messages at Login aren't working (due to the server-side error handling). Fix all of it by revising error handling server-side.
+- [] Research and use react memo to prevent needless rerendering
+- [] Test coverage
+- [] Refactor the drop down selections into a reusable component, you animal
+- [] offer reformating for images that are too big (and etc.)
+
+### Small
+
+- [] Mobile: 'administrative control' should be center-aligned;
+- [] Make sure the 'load more' feature is working correctly with 7+ products
+- [] Make address manditory in validation for checkout
+- [] Utility function for those brutal timestrings
