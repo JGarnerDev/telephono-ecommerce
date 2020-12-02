@@ -112,7 +112,7 @@ To test the user model CRUD operations (in the same directory):
 
 ### Small
 
-- [] Endpoints need to have their tests
+- [ ] Endpoints need to have their tests
 
 ## Todos (client):
 
