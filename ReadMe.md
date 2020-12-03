@@ -81,13 +81,15 @@ As an administrator, I would like to...
 
 - [x] Product card: text block moves and varies in size depending on content. Change it so that it always has the same size and positioning.
 - [x] Make address manditory in validation for checkout
+- [ ] Reroute to 'my orders' page when an order is made (user)
+- [ ] Reroute to home page when a new product is made (admin)
+- [ ] Reroute to categories page when a new category is made (admin)
 - [ ] Buttons: make a reusable component and use only that one (including styling)
 - [ ] Selectors: make a reusable component and use only that one (including styling)
 - [ ] Success/error messages need their styling finished
 - [ ] There's no option to delete existing products
 - [ ] There's no error message when a new product form is lacking information, or when the image is above 1 MB in size
-- [ ] Reroute to home page when a new product is made (admin)
-- [ ] Reroute to categories page when a new category is made (admin)
+
 - [ ] Research and use react memo to prevent needless rerendering
 - [ ] Desktop: CTA above seach should be aligned with the input field
 - [ ] Mobile: 'administrative control' should be center-aligned
