@@ -7,12 +7,11 @@
     align-items: center;
     margin: 20px auto;
     padding: 0 20px;
-
     max-width: 800px;
     height: auto;
     #product-display {
       display: flex;
-      margin-bottom: 20px;
+      margin-bottom: 40px;
       .img-wrapper {
         min-width: 28vw;
         max-width: 40%;
@@ -45,11 +44,13 @@
 
   #related-products {
     height: 400px;
+    h2 {
+      text-align: center;
+    }
     #products {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-evenly;
 
-      max-height: 80%;
       margin: 20px 0;
       > * {
         max-width: 30%;
@@ -89,8 +90,7 @@
         align-items: center;
         > * {
           min-width: 200px;
-          max-width: 40%;
-          min-height: 300px;
+
           margin: 20px 0;
         }
       }

@@ -2,11 +2,11 @@
 
 export const priceRanges = [
   { _id: 0, name: "All", range: [0, 1000000] },
-  { _id: 1, name: "$0  to $9", range: [0, 9] },
-  { _id: 2, name: "$10 to $19", range: [10, 19] },
-  { _id: 3, name: "$20 to $29", range: [20, 29] },
-  { _id: 4, name: "$30 to $39", range: [30, 39] },
-  { _id: 5, name: "$40+", range: [40, 1000000] },
+  { _id: 1, name: "$0  to $99", range: [0, 99] },
+  { _id: 2, name: "$100 to $299", range: [100, 299] },
+  { _id: 3, name: "$300 to $499", range: [300, 499] },
+  { _id: 4, name: "$500 to $799", range: [500, 799] },
+  { _id: 5, name: "$800+", range: [800, 1000000] },
 ];
 
 //////// Navigation and Routes

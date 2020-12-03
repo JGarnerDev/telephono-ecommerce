@@ -2,8 +2,8 @@
 
 .UIMessage {
   display: flex;
-
-  width: 100%;
+  align-items: center;
+  width: max-content;
   padding: 10px 10px;
   @include slide-in-bottom;
 
@@ -15,5 +15,10 @@
     color: rgb(206, 0, 0);
     border: 1px solid rgb(206, 0, 0);
     background: rgb(255, 180, 180);
+  }
+  &.success {
+    color: rgb(30, 104, 20);
+    border: 1px solid rgb(30, 104, 20);
+    background: rgb(146, 204, 139);
   }
 }

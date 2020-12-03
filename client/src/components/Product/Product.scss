@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
+  min-height: 360px;
   padding-bottom: 10px;
   border-radius: 14px;
   box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.3);
@@ -22,14 +22,17 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 40px 12px 0px 12px;
-    height: 38%;
+    margin-top: 30px;
+    padding: 0 12px;
+    height: 50%;
     p:first-of-type {
       padding-top: 5px;
-      flex-grow: 1;
+      height: 60px;
       font-size: 0.9em;
     }
     p:last-of-type {
+      position: relative;
+      bottom: 0;
       text-align: right;
       font-size: 1.4em;
     }
@@ -72,7 +75,6 @@
   }
 
   .img-wrapper {
-    height: 50%;
-    max-height: 50%;
+    height: 140px;
   }
 }

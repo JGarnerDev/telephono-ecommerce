@@ -69,12 +69,16 @@ export const ProductCard = ({
   };
 
   const renderBasicProductInfo = ({ name, price, description, _id }) => {
+    if (name.length > 20) {
+      name = name.slice(0, 20) + "...";
+    }
     if (description.length > 75) {
       description = description.slice(0, 75) + "...";
     }
+
     return (
       <div className="product-details">
-        <ProductImage _id={_id} name={name} />
+        <ProductImage _id={_id} />
         <div className="productCard__info">
           <h3>{name}</h3>
           <p>{description}</p>

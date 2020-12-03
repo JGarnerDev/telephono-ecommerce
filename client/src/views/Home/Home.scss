@@ -129,11 +129,6 @@
       background: white;
       border-radius: 20px;
       flex-direction: column;
-
-      .productCard {
-        min-height: 400px;
-        min-width: 260px;
-      }
     }
   }
 
@@ -275,8 +270,6 @@
 
     .productCard {
       &#showcase {
-        width: 300px;
-        height: 400px;
         &::before {
           padding: 10px 20px;
           right: 40vw;

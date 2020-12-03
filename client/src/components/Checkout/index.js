@@ -42,6 +42,10 @@ const Checkout = ({ products, emptyCart }) => {
   };
 
   const confirmPurchase = () => {
+    if (!data.address) {
+      setData({ ...data, error: "We need some sort of fake address!" });
+      return;
+    }
     let nonce;
     let getNonce = data.instance
       .requestPaymentMethod()
@@ -122,7 +126,10 @@ const Checkout = ({ products, emptyCart }) => {
     }
     if (data.success) {
       return (
-        <UIMessage message={"Purchase confirmed - thank you!"} type="success" />
+        <UIMessage
+          message={"Purchase confirmed and an email will be sent - thank you!"}
+          type="success"
+        />
       );
     }
   };
