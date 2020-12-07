@@ -20,10 +20,6 @@ If a user successfully confirms a purchase throught their cart checkout, the ord
 
 If the administrator successfully adds a new product, it will appear in the front page, and will be able to found by the search features of the application.   
 
-## Installation
-
-**Note** Sensitive material such as passwords and keys to the APIs that I use are omitted. If you want to run the full application in development mode, you will need to make accounts with the variety of services used. If this is in your interest, let me know and I will happily help set you up in your local environment. If you're here to see it being implemented, [check it out live here](https://telephono.netlify.app/). 
-
 ## Dependancies
 
 ### Client
@@ -54,8 +50,14 @@ If the administrator successfully adds a new product, it will appear in the fron
 - jsonwebtoken
 - braintree
 - sendgrid
+- jest
 - sinon
 - supertest
+
+## Installation
+
+**Note** Sensitive material such as passwords and keys to the APIs that I use are omitted. If you want to run the full application in development mode, you will need to make accounts with the variety of services used. If this is in your interest, let me know and I will happily help set you up in your local environment. If you're here to see it being implemented, [check it out live here](https://telephono.netlify.app/). 
+
 
 ### Server
 
