@@ -1,4 +1,4 @@
-# MERN Ecommerce Project
+# MERN eCommerce Project - TelePhono
 
 An original app, a popular concept. HUA!
 
