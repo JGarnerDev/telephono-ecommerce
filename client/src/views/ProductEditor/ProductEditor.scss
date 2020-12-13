@@ -5,6 +5,7 @@
     flex-direction: column;
     align-items: center;
     margin: 20px;
+    overflow-x: hidden;
     form {
       display: flex;
       flex-direction: column;
@@ -43,14 +44,15 @@
     }
     #images {
       display: flex;
-
+      justify-content: space-around;
+      max-width: 100%;
       #img-current,
       #img-updated {
         display: flex;
         flex-direction: column;
         align-items: center;
         flex-grow: 1;
-        max-width: 50%;
+        max-width: 45%;
         .productCard__image {
           min-height: 200px;
           max-height: 200px;

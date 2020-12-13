@@ -204,28 +204,16 @@ const ProductEditor = ({ mode }) => {
       description={`Change the details of ${product.name}`}
     >
       <div id="wrapper" className={`${mode}`}>
-        {/* {mode === "Update" ? renderCurrentProductImage() : null}
-        {renderImageInput()}
-        <form id="form" className={mode}>
-          {mode === "Update"
-            ? renderUpdateProductForm()
-            : renderAddProductForm()}
-          <Button
-            id="ProductEditor__wrapper__button"
-            onClick={submit}
-            variant="contained"
-            color="primary"
-          >{`${mode} this product`}</Button>
-        </form> */}
         <div id="images">
           {mode === "Update" ? renderCurrentProductImage() : null}
           {renderProductImagePreview()}
         </div>
         <form>
+          {renderImageInput()}
           {mode === "Update"
             ? renderUpdateProductForm()
             : renderAddProductForm()}
-          {renderImageInput()}
+
           <Button
             id="ProductEditor__wrapper__button"
             onClick={submit}
