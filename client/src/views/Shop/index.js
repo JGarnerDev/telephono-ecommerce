@@ -81,9 +81,11 @@ const Shop = () => {
   };
 
   const renderLoadMoreButton = () => {
-    if (listLength - 6 - skip > 0) {
-      return <button onClick={() => loadMore()}>Load more</button>;
-    }
+    return (
+      <button id="loadMore" onClick={() => loadMore()}>
+        Load more
+      </button>
+    );
   };
 
   const renderProducts = () => {
