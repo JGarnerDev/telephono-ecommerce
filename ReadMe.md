@@ -81,6 +81,7 @@ As an administrator, I would like to...
 
 - [x] Product card: text block moves and varies in size depending on content. Change it so that it always has the same size and positioning.
 - [x] Make address manditory in validation for checkout
+- [ ] Search filter checkboxes are hard to use on mobile - make them a little bit larger and add a margin to the container (triggers swipeable nav)
 - [ ] Reroute to 'my orders' page when an order is made (user)
 - [ ] Reroute to home page when a new product is made (admin)
 - [ ] Reroute to categories page when a new category is made (admin)
