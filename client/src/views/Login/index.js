@@ -78,7 +78,7 @@ const Login = () => {
         <Button variant="contained" color="primary" onClick={submit}>
           Log in
         </Button>
-        {Loading ? <p>FICK</p> : null}
+        {Loading ? <p></p> : null}
         {RenderError ? <UIMessage message={Error} type="error" /> : null}
         {Success ? <UIMessage message={Success} type="success" /> : null}
       </form>
@@ -88,12 +88,7 @@ const Login = () => {
     <Layout title="Log in" description="Welcome back!" page="Login">
       <div id="Login__wrapper">
         {renderForm()}
-        <p id="Login__wrapper__onboard">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo ex quod
-          ipsam ut enim et reiciendis molestias voluptates, sunt molestiae,
-          atque porro assumenda repellat delectus deleniti, a laudantium.
-          Beatae, nihil?
-        </p>
+        <p id="Login__wrapper__onboard">Welcome back!</p>
       </div>
     </Layout>
   );
