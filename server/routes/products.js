@@ -35,7 +35,7 @@ router.route("/search").get(async (req, res, next) => {
     const query = {};
     let products;
     let searchString = req.query.search || "";
-    console.log(searchString);
+
     if (req.query.search) {
       query.name = { $regex: searchString, $options: "i" };
       if (req.query.category && req.query.category != "All") {
@@ -81,14 +81,17 @@ router.route("/filter").post(async (req, res, next) => {
     const filters = req.body.filters;
 
     const sorting = order + sortBy;
-    const products = await ProductService.listByFilter(
+    const productData = await ProductService.listByFilter(
       sorting,
       limit,
       skip,
       filters
     );
 
-    res.json({ listLength: products.length, products });
+    res.json({
+      matchLength: productData.matchLength,
+      products: productData.products,
+    });
   } catch (error) {
     error.message = "We couldn't find the product :(";
     next(error.message);

@@ -42,7 +42,7 @@ const listRelatedProducts = (Product) => (_id, category, limit) => {
     .populate("category", "_id name");
 };
 
-const listByFilter = (Product) => (sorting, limit, skip, filters) => {
+const listByFilter = (Product) => async (sorting, limit, skip, filters) => {
   let searchParams = {};
   for (let key in filters) {
     if (filters[key].length > 0) {
@@ -56,12 +56,15 @@ const listByFilter = (Product) => (sorting, limit, skip, filters) => {
       }
     }
   }
-  return Product.find(searchParams)
+  const products = await Product.find(searchParams)
     .select(["-img"])
     .populate("category")
     .sort(sorting)
     .skip(skip)
     .limit(limit);
+
+  const totalMatchAmount = await Product.find(searchParams).sort(sorting);
+  return { products, matchLength: totalMatchAmount.length };
 };
 
 const listBySearchString = (Product) => (query) => {

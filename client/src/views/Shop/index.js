@@ -39,8 +39,8 @@ const Shop = () => {
   }, []);
 
   useEffect(() => {
-    filterProductsBySelection();
     dispatch({ type: "setQuerySkip", value: 0 });
+    filterProductsBySelection();
   }, [JSON.stringify(activeCategories), priceRange]);
 
   const handleCategoryToggle = (_id) => {
@@ -61,10 +61,12 @@ const Shop = () => {
     const category = activeCategories;
     const price = priceRange;
     const filters = { category, price };
-    axios.post(FILTER_PRODUCTS_ROUTE, { skip, limit, filters }).then((res) => {
-      dispatch({ type: "setProducts", value: res.data.products });
-      dispatch({ type: "setListLength", value: res.data.listLength });
-    });
+    axios
+      .post(FILTER_PRODUCTS_ROUTE, { skip: 0, limit, filters })
+      .then((res) => {
+        dispatch({ type: "setProducts", value: res.data.products });
+        dispatch({ type: "setListLength", value: res.data.matchLength });
+      });
   };
 
   const loadMore = () => {
@@ -72,20 +74,25 @@ const Shop = () => {
     const price = priceRange;
     const filters = { category, price };
     dispatch({ type: "setQuerySkip", value: skip + limit });
-    axios.post(FILTER_PRODUCTS_ROUTE, { skip, limit, filters }).then((res) => {
-      dispatch({
-        type: "loadMoreProducts",
-        value: res.data.products,
+
+    axios
+      .post(FILTER_PRODUCTS_ROUTE, { skip: skip + 6, limit, filters })
+      .then((res) => {
+        dispatch({
+          type: "loadMoreProducts",
+          value: res.data.products,
+        });
       });
-    });
   };
 
   const renderLoadMoreButton = () => {
-    return (
-      <button id="loadMore" onClick={() => loadMore()}>
-        Load more
-      </button>
-    );
+    if (listLength > products.length) {
+      return (
+        <button id="loadMore" onClick={() => loadMore()}>
+          Load more
+        </button>
+      );
+    }
   };
 
   const renderProducts = () => {
