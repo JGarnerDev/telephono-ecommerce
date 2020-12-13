@@ -1,16 +1,91 @@
-# MERN Ecommerce Project
+# MERN eCommerce Project - TelePhono
 
-An original app, a popular concept. HUA!
+TelePhono is a mock eCommerce website designed to provide a shop interface for users to purchase phones. Users can browse new or popular phones, or search the database for products based on category, price range, or name. Once signed up, they can add products to their cart and confirm a purchase by Visa or Paypal with BrainTree's sandbox implementation, and they receive a confirmation email to their registered address after the database has confirmed their order. 
+
+Futhermore, a user can sign up to be an administrator. This allows them to manage products (adding new products or updating current products), product categories, and updating current order statuses.  
 
 The current version is live! [Check it out here](https://telephono.netlify.app/)
 
-## Summary
+## How to use
 
-Hey there! This is TelePhono.
+### Browsing products
 
-This project is a full-stack eCommerce website from scratch; the directory contains both a React client application and a Node server.
+When the application is running in the browser, the user is presented with the site description and the most recently added product in the splash page. Immediately below is a search bar, where the user can immediately search by keywords and categories. At the bottom of the main page are two lists of the top three most popular (most purchased) and most recent products. 
 
-Why did I make it? While I feel versed with each of the elemental parts of web development when it comes to fetching and rendering, it is absolutely important to have first-hand knowledge of the challenges of combining all the necessary constituents that make a modern application that needs to connect to a database. There's logistics, planning, coordination, and problem solving unique to doing a project like this that can only be understood in the doing of it.
+At the top of the navigation is easy access to a 'shop' page, where products are filtered (by price and category) and listed by user input. Next to it is a 'Cart' link, which shows the user what products they have added to their cart, or redirects them to sign up if they haven't done so already. 
+
+Last in the top navigation bar is the button which reveals more options. These options are presented depending on the state of user authentication - not signed in, signed in, or administrator. A signed-in user will have the options of reviewing their account details, reviewing their order details, and logging out. An administrator will have access to an administrative page, where they can manage and update products, product categories, and current order statuses. 
+
+If a user successfully confirms a purchase throught their cart checkout, the order will be saved to the database and made visible to administrators to be updated. The user (and myself, personally) will recieve an email from the server with a 'thank you!' their order details.  
+
+If the administrator successfully adds a new product, it will appear in the front page, and will be able to found by the search features of the application.   
+
+## Dependancies
+
+### Client
+
+- react
+- react-dom
+- react-router-dom
+- react-lazy-load-image-component
+- jest
+- axios
+- material-ui
+- braintree
+- node-sass
+- query-string
+
+### Server
+
+- express
+- express-jwt
+- express-validator
+- mongoose
+- crypto
+- bcryptjs
+- cookie-parser
+- body-parser
+- uuid
+- formidable
+- jsonwebtoken
+- braintree
+- sendgrid
+- jest
+- sinon
+- supertest
+
+## Installation
+
+**Note** Sensitive material such as passwords and keys to the APIs that I use are omitted. If you want to run the full application in development mode, you will need to make accounts with the variety of services used. If this is in your interest, let me know and I will happily help set you up in your local environment. If you're here to see it being implemented, [check it out live here](https://telephono.netlify.app/). 
+
+
+### Server
+
+To get the Node server up and running after pulling the root directory, change directories to the server by the client command:
+
+> cd ./server
+
+Then install the required modules:
+
+> npm install
+
+I used nodemon for development, which is initiated by the following command:
+
+> npm start
+
+### Client
+
+The client is done with React and has some modules to install. From the root directory, get into the client folder with this command:
+
+> cd ./client
+
+Then install the required modules:
+
+> npm install
+
+React will run the development version with this command:
+
+> npm start
 
 ## Objectives
 
@@ -20,7 +95,7 @@ Why did I make it? While I feel versed with each of the elemental parts of web d
 
 - Once a first version is completed, review todo's for obvious improvements and bugs to fix
 
-## Primary features
+## User stories
 
 As a user, I would like to...
 
@@ -100,39 +175,9 @@ As an administrator, I would like to...
 ### Bugs
 
 - [x] The category filter in the shop page isn't functioning properly (inverted?)
-- [ ] The 'load more' feature doesn't work
+- [ ] The 'load more' feature doesn't wor
 
-## Installation
 
-### Server
-
-To get the Node server up and running after pulling the root directory, change directories to the server by the client command:
-
-> cd ./server
-
-Then install the required modules:
-
-> npm install
-
-I used nodemon for development, which is initiated by the following command:
-
-> npm start
-
-### Client
-
-The client is done with React and has some modules to install. From the root directory, get into the client folder with this command:
-
-> cd ./client
-
-Then install the required modules:
-
-> npm install
-
-React will run the development version with this command:
-
-> npm start
-
-**Note** The environmental variables are not included in this repository, so local development will attempt requests to an undefined address. To get a full experience, [check it out live here](https://telephono.netlify.app/). Otherwise, send me a message and I'll explain to you how to get these missing values through a process of subscriptions and setups.
 
 ## Testing
 
