@@ -10,10 +10,10 @@ import {
   CLIENT_ACCOUNT_URL,
   ADMIN_ACCOUNT_URL,
   ADMIN_VIEW_ORDERS_URL,
+  ADMIN_PRODUCT_MANAGEMENT_URL,
+  ADMIN_CATEGORY_MANAGEMENT_URL,
   CLIENT_ORDER_HISTORY_URL,
 } from "../../config";
-
-import { countProductsInCart } from "../../views/Cart/utils";
 
 import {
   Button,
@@ -30,10 +30,11 @@ import {
   ExitToApp,
   MeetingRoom,
   AccountCircle,
-  ShoppingBasket,
-  ViewCarousel,
   Build,
   LocalShipping,
+  AssignmentTurnedIn,
+  CameraRear,
+  Category,
 } from "@material-ui/icons";
 
 import "./Nav.scss";
@@ -48,13 +49,16 @@ const Nav = React.memo(() => {
       ? (links = [
           [<Home />, "/", "Home"],
           [<Build />, ADMIN_ACCOUNT_URL, "My account (Admin)"],
+          [<AssignmentTurnedIn />, CLIENT_ORDER_HISTORY_URL, "My orders"],
           [<LocalShipping />, ADMIN_VIEW_ORDERS_URL, "All orders"],
-          [<LocalShipping />, CLIENT_ORDER_HISTORY_URL, "My orders"],
+          [<CameraRear />, ADMIN_PRODUCT_MANAGEMENT_URL, "Add/edit products"],
+          [<Category />, ADMIN_CATEGORY_MANAGEMENT_URL, "Add/edit categories"],
           [<MeetingRoom />, "/", "Log out"],
         ])
       : (links = [
           [<Home />, "/", "Home"],
           [<AccountCircle />, CLIENT_ACCOUNT_URL, "My account"],
+          [<LocalShipping />, CLIENT_ORDER_HISTORY_URL, "My orders"],
           [<MeetingRoom />, "/", "Log out"],
         ])
     : (links = [

@@ -10,13 +10,13 @@ import {
 
 import Layout from "../../hoc/Layout";
 
-import { Details, AdminLinks } from "../../components/Account";
+import { Details } from "../../components/Account";
 
 import "./UserAccount.scss";
 
 const UserAccount = () => {
   const {
-    user: { role, history, email, name, _id, createdAt },
+    user: { role, email, name, _id, createdAt },
   } = isAuth();
   let description;
   role ? (description = "Administrator") : (description = "Client");
@@ -29,7 +29,6 @@ const UserAccount = () => {
         <Link to={role ? ADMIN_ACCOUNT_UPDATE_URL : CLIENT_ACCOUNT_UPDATE_URL}>
           Update account
         </Link>
-        {role ? <AdminLinks /> : null}
       </section>
     </Layout>
   );
